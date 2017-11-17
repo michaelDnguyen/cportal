@@ -828,12 +828,12 @@ int id toolbar 0x7f060078
 int id top 0x7f060025
 int id topPanel 0x7f06004a
 int id touch_outside 0x7f06007b
+int id tvLogin 0x7f060089
 int id txtMessage 0x7f060076
 int id up 0x7f060009
 int id useLogo 0x7f060014
 int id view_container 0x7f060085
 int id view_offset_helper 0x7f06000a
-int id website 0x7f060089
 int id withText 0x7f060023
 int id wrap_content 0x7f06001b
 int integer abc_config_activityDefaultDur 0x7f0b0000

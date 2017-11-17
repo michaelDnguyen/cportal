@@ -10,6 +10,7 @@ import android.content.ComponentCallbacks2;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 public class CPortalApplication extends Application {
 
@@ -67,8 +68,10 @@ public class CPortalApplication extends Application {
 			 * TRIM_MEMORY_COMPLETE, the process will be one of the first to be
 			 * terminated.
 			 */
-			new AlertDialog.Builder(this).setTitle(R.string.low_memory).setMessage(R.string.low_memory_message).create()
-					.show();
+			// new
+			// AlertDialog.Builder(this).setTitle(R.string.low_memory).setMessage(R.string.low_memory_message).create()
+			// .show();
+			Toast.makeText(this, R.string.low_memory_message, 2000).show();
 			break;
 		default:
 			/*

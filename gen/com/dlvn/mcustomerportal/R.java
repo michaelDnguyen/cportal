@@ -2792,12 +2792,12 @@ containing a value of this type.
         public static final int top=0x7f060025;
         public static final int topPanel=0x7f06004a;
         public static final int touch_outside=0x7f06007b;
+        public static final int tvLogin=0x7f060089;
         public static final int txtMessage=0x7f060076;
         public static final int up=0x7f060009;
         public static final int useLogo=0x7f060014;
         public static final int view_container=0x7f060085;
         public static final int view_offset_helper=0x7f06000a;
-        public static final int website=0x7f060089;
         public static final int withText=0x7f060023;
         public static final int wrap_content=0x7f06001b;
     }
