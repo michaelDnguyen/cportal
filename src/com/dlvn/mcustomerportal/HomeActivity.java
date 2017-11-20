@@ -7,10 +7,14 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.dlvn.mcustomerportal.afragment.HomeFragment;
-import com.dlvn.mcustomerportal.afragment.MoviesFragment;
+import com.dlvn.mcustomerportal.afragment.InfoContractFragment;
+import com.dlvn.mcustomerportal.afragment.InfoGeneralFragment;
 import com.dlvn.mcustomerportal.afragment.NotificationsFragment;
-import com.dlvn.mcustomerportal.afragment.PhotosFragment;
+import com.dlvn.mcustomerportal.afragment.PaymentOnlineFragment;
+import com.dlvn.mcustomerportal.afragment.BonusProgramFragment;
+import com.dlvn.mcustomerportal.afragment.FundUnitPriceFragment;
 import com.dlvn.mcustomerportal.afragment.SettingsFragment;
+import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.utils.myLog;
 
 import android.content.Intent;
@@ -55,11 +59,15 @@ public class HomeActivity extends AppCompatActivity {
 	public static int navItemIndex = 0;
 
 	// tags used to attach the fragments
-	private static final String TAG_HOME = "home";
-	private static final String TAG_PHOTOS = "photos";
-	private static final String TAG_MOVIES = "movies";
-	private static final String TAG_NOTIFICATIONS = "notifications";
-	private static final String TAG_SETTINGS = "settings";
+	private static final String TAG_HOME = "Trang chủ";
+	private static final String TAG_TTCHUNG = "Thông tin chung ";
+	private static final String TAG_TTHOPDONG = "Thông tin hợp đồng ";
+	private static final String TAG_CTDIEMTHUONG = "Chương trình điểm thưởng ";
+	private static final String TAG_GIADONVIQUY = "Giá đơn vị quỹ ";
+	private static final String TAG_TTTRUCTUYEN = "Thanh toán trực tuyến ";
+	private static final String TAG_NOTIFICATIONS = "Thông báo ";
+	private static final String TAG_SETTINGS = "Cấu hình ";
+
 	public static String CURRENT_TAG = TAG_HOME;
 
 	// toolbar titles respected to selected nav menu item
@@ -129,8 +137,13 @@ public class HomeActivity extends AppCompatActivity {
 	 */
 	private void loadNavHeader() {
 		// name, website
-		txtName.setText("Guest");
-		txtWebsite.setText("Login");
+		if (cPortalPref.haveLogin(this)) {
+			txtName.setText(cPortalPref.getUserName(this));
+			txtWebsite.setVisibility(View.GONE);
+		}else {
+			txtName.setText("Guest");
+			txtWebsite.setText("Login");
+		}
 
 		// Glide.with(this).load(urlNavHeaderBg)
 		// .crossFade()
@@ -247,19 +260,26 @@ public class HomeActivity extends AppCompatActivity {
 			HomeFragment homeFragment = new HomeFragment();
 			return homeFragment;
 		case 1:
-			// photos
-			PhotosFragment photosFragment = new PhotosFragment();
-			return photosFragment;
+			InfoGeneralFragment infoGeneralFragment = new InfoGeneralFragment();
+			return infoGeneralFragment;
 		case 2:
-			// movies fragment
-			MoviesFragment moviesFragment = new MoviesFragment();
-			return moviesFragment;
+			InfoContractFragment infoContractFragment = new InfoContractFragment();
+			return infoContractFragment;
 		case 3:
+			BonusProgramFragment bonusProgramFragment = new BonusProgramFragment();
+			return bonusProgramFragment;
+		case 4:
+			FundUnitPriceFragment photosFragment = new FundUnitPriceFragment();
+			return photosFragment;
+		case 5:
+			PaymentOnlineFragment paymentFragment = new PaymentOnlineFragment();
+			return paymentFragment;
+		case 6:
 			// notifications fragment
 			NotificationsFragment notificationsFragment = new NotificationsFragment();
 			return notificationsFragment;
 
-		case 4:
+		case 7:
 			// settings fragment
 			SettingsFragment settingsFragment = new SettingsFragment();
 			return settingsFragment;
@@ -294,20 +314,32 @@ public class HomeActivity extends AppCompatActivity {
 					navItemIndex = 0;
 					CURRENT_TAG = TAG_HOME;
 					break;
-				case R.id.nav_photos:
+				case R.id.nav_infoGeneral:
 					navItemIndex = 1;
-					CURRENT_TAG = TAG_PHOTOS;
+					CURRENT_TAG = TAG_TTCHUNG;
 					break;
-				case R.id.nav_movies:
+				case R.id.nav_infoContract:
 					navItemIndex = 2;
-					CURRENT_TAG = TAG_MOVIES;
+					CURRENT_TAG = TAG_TTHOPDONG;
+					break;
+				case R.id.nav_bonusProgram:
+					navItemIndex = 3;
+					CURRENT_TAG = TAG_CTDIEMTHUONG;
+					break;
+				case R.id.nav_fundPrice:
+					navItemIndex = 4;
+					CURRENT_TAG = TAG_GIADONVIQUY;
+					break;
+				case R.id.nav_payment:
+					navItemIndex = 5;
+					CURRENT_TAG = TAG_TTTRUCTUYEN;
 					break;
 				case R.id.nav_notifications:
-					navItemIndex = 3;
+					navItemIndex = 6;
 					CURRENT_TAG = TAG_NOTIFICATIONS;
 					break;
 				case R.id.nav_settings:
-					navItemIndex = 4;
+					navItemIndex = 7;
 					CURRENT_TAG = TAG_SETTINGS;
 					break;
 				case R.id.nav_about_us:

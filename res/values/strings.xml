@@ -7,18 +7,24 @@
     <string name="closeDrawer">close_drawer</string>
 
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Home</string>
-    <string name="nav_photos">Photos</string>
-    <string name="nav_movies">Movies</string>
+    <string name="nav_home">Trang chủ </string>
+    <string name="nav_infoGeneral">Thông tin chung </string>
+    <string name="nav_infoContract">Thông tin hợp đồng </string>
+    <string name="nav_bonusProgram">Chương trình điểm thưởng </string>
+    <string name="nav_fundPrice">Giá đơn vị quỹ </string>
+    <string name="nav_paymentOnline">Thanh toán trực tuyến </string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_about_us">About Us</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
-        <item>Home</item>
-        <item>Photos</item>
-        <item>Movies</item>
+        <item>Trang chủ</item>
+        <item>Thông tin chung</item>
+        <item>Thông tin hợp đồng</item>
+        <item>Chương trình điểm thưởng</item>
+        <item>Giá đơn vị quỹ</item>
+        <item>Thanh toán trực tuyến</item>
         <item>Notifications</item>
         <item>Settings</item>
     </string-array>

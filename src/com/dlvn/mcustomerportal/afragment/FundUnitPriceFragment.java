@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class PhotosFragment extends Fragment {
+public class FundUnitPriceFragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -22,7 +22,7 @@ public class PhotosFragment extends Fragment {
 
 	private OnFragmentInteractionListener mListener;
 
-	public PhotosFragment() {
+	public FundUnitPriceFragment() {
 		// Required empty public constructor
 	}
 
@@ -37,8 +37,8 @@ public class PhotosFragment extends Fragment {
 	 * @return A new instance of fragment PhotosFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static PhotosFragment newInstance(String param1, String param2) {
-		PhotosFragment fragment = new PhotosFragment();
+	public static FundUnitPriceFragment newInstance(String param1, String param2) {
+		FundUnitPriceFragment fragment = new FundUnitPriceFragment();
 		Bundle args = new Bundle();
 		args.putString(ARG_PARAM1, param1);
 		args.putString(ARG_PARAM2, param2);

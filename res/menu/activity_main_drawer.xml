@@ -7,13 +7,26 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/nav_home" />
         <item
-            android:id="@+id/nav_photos"
-            android:icon="@drawable/ic_photo_library_black_24dp"
-            android:title="@string/nav_photos" />
+            android:id="@+id/nav_infoGeneral"
+            android:icon="@drawable/ic_description_black_24dp"
+            android:title="@string/nav_infoGeneral" />
         <item
-            android:id="@+id/nav_movies"
-            android:icon="@drawable/ic_local_movies_black_24dp"
-            android:title="@string/nav_movies" />
+            android:id="@+id/nav_infoContract"
+            android:icon="@drawable/ic_contacts_black_24dp"
+            android:title="@string/nav_infoContract" />
+        <item
+            android:id="@+id/nav_bonusProgram"
+            android:icon="@drawable/ic_view_carousel_black_24dp"
+            android:title="@string/nav_bonusProgram" />
+        <item
+            android:id="@+id/nav_fundPrice"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/nav_fundPrice" />
+        
+        <item
+            android:id="@+id/nav_payment"
+            android:icon="@drawable/ic_monetization_on_black_24dp"
+            android:title="@string/nav_paymentOnline" />
 
         <item
             android:id="@+id/nav_notifications"
