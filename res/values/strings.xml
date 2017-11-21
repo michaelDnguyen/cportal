@@ -1,18 +1,18 @@
 <resources>
-    <string name="app_name">Customer Portal</string>
 
+    <string name="app_name">Customer Portal</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Trang chủ </string>
-    <string name="nav_infoGeneral">Thông tin chung </string>
-    <string name="nav_infoContract">Thông tin hợp đồng </string>
-    <string name="nav_bonusProgram">Chương trình điểm thưởng </string>
-    <string name="nav_fundPrice">Giá đơn vị quỹ </string>
-    <string name="nav_paymentOnline">Thanh toán trực tuyến </string>
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_infoGeneral">Thông tin chung</string>
+    <string name="nav_infoContract">Thông tin hợp đồng</string>
+    <string name="nav_bonusProgram">Chương trình điểm thưởng</string>
+    <string name="nav_fundPrice">Giá đơn vị quỹ</string>
+    <string name="nav_paymentOnline">Thanh toán trực tuyến</string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_about_us">About Us</string>
@@ -35,13 +35,33 @@
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
     <string name="privacy_policy">Privacy Policy</string>
-    
     <string name="confirm_yes">Yes</string>
     <string name="confirm_no">No</string>
     <string name="confirm_ok">Ok</string>
-    
     <string name="message_error_username_login">Username or password is invalid.</string>
     <string name="message_error_date">Date is invalid.</string>
     <string name="low_memory_message">App is low memory, image loader maybe slow.</string>
     <string name="low_memory">Low memory</string>
+    
+    <string name="message_alert_login_to_using_function">Anh/chị cần phải đăng nhập để sử dụng chức năng này.</string>
+    
+    <string name="home_welcom_article"><![CDATA[<strong><b>CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI "CỔNG THÔNG TIN KHÁCH HÀNG" !</b></strong> <br>
+
+Với mục tiêu phát triển mối quan hệ gắn kết với Khách hàng tham gia bảo hiểm thông qua việc cập nhật thường xuyên cho Khách hàng tất cả những thông tin về hợp đồng bảo hiểm của mình, Dai-ichi Life Việt Nam trân trọng giới thiệu đến toàn thể Quý Khách hàng trang thông tin trực tuyến dành cho Khách hàng <strong><b>"Cổng thông tin Khách hàng"</b></strong><br>
+
+Thông qua <strong><b>"Cổng thông tin Khách hàng"</b></strong>, dù đang ở bất kỳ nơi đâu, Quý khách đều có thể nhanh chóng và dễ dàng tra cứu những thông tin về hợp đồng bảo hiểm nhân thọ của mình: các sản phẩm bảo hiểm, ngày đáo hạn hợp đồng, ngày đến hạn nộp phí, phí bảo hiểm định kỳ phải nộp, phí bảo hiểm đã nộp, các giá trị của hợp đồng như lãi tích lũy, tiền mặt định kỳ, giá trị hoàn lại … Bên cạnh đó, Quý khách còn có thể tra cứu và sử dụng điểm thưởng tích lũy của chương trình tích lũy điểm thưởng "Gắn bó dài lâu".<br>
+
+Chúng tôi tin rằng <strong><b>"Cổng thông tin Khách hàng"</b></strong> này không chỉ mang lại nhiều tiện ích cho Quý khách hàng trong suốt thời gian tham gia bảo hiểm mà còn là cầu nối mang Dai-ichi Life Việt Nam đến gần Quý Khách hàng hơn.<br>
+
+Quý khách cần trao đổi thêm thông tin, xin vui lòng liên hệ với bất kỳ Văn phòng và Trung tâm Dịch vụ khách hàng, hoặc Tổng đài Dịch vụ khách hàng Dai-ichi Life Việt Nam, điện thoại: (028) 3810 0888, bấm phím số 1. Chúng tôi luôn sẵn sàng phục vụ Quý khách.<br>
+
+Kính chúc Quý khách cùng gia đình thật nhiều sức khỏe, hạnh phúc và thành công.<br>
+
+Trân trọng kính chào,<br>
+
+<strong><b>Dai-ichi Life Việt Nam</b></strong>]]></string>
+
+    
+    
+
 </resources>

@@ -24,9 +24,14 @@
     <color name="grey">#9E9E9E</color>
     <color name="grey_light">#BDBDBD</color>
     <color name="grey_dark">#616161</color>
+    <color name="gray">#D4D4D4</color>
     
     <color name="orange">#FF5722</color>
     <color name="orange_dark">#E64A19</color>
     <color name="orange_light">#F57C00</color>
+    
+    <color name="light_grey">#F0F0F0</color>
+    <color name="dark_grey">#464545</color>
+    <color name="medium_grey">#B3B3B3</color>
 
 </resources>

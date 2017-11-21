@@ -1,18 +1,25 @@
 package com.dlvn.mcustomerportal.afragment;
 
+import com.bumptech.glide.Glide;
 import com.dlvn.mcustomerportal.R;
+import com.dlvn.mcustomerportal.utils.myLog;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+	private static final String TAG = "HomeFragment";
 	private static final String ARG_PARAM1 = "param1";
 	private static final String ARG_PARAM2 = "param2";
 
@@ -21,6 +28,10 @@ public class HomeFragment extends Fragment {
 	private String mParam2;
 
 	private OnFragmentInteractionListener mListener;
+
+	View view;
+	ImageView imvAds;
+	TextView tvArticle;
 
 	public HomeFragment() {
 		// Required empty public constructor
@@ -38,6 +49,8 @@ public class HomeFragment extends Fragment {
 	 */
 	// TODO: Rename and change types and number of parameters
 	public static HomeFragment newInstance(String param1, String param2) {
+		myLog.E(TAG, "newInstance");
+		
 		HomeFragment fragment = new HomeFragment();
 		Bundle args = new Bundle();
 		args.putString(ARG_PARAM1, param1);
@@ -49,6 +62,7 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		myLog.E(TAG, "onCreate");
 		if (getArguments() != null) {
 			mParam1 = getArguments().getString(ARG_PARAM1);
 			mParam2 = getArguments().getString(ARG_PARAM2);
@@ -58,7 +72,22 @@ public class HomeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_home, container, false);
+		myLog.E(TAG, "onCreateView");
+		
+		if (view == null) {
+			view = inflater.inflate(R.layout.fragment_home, container, false);
+
+			imvAds = (ImageView) view.findViewById(R.id.imv_ads);
+			Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
+
+			tvArticle = (TextView) view.findViewById(R.id.tv_article);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+				tvArticle.setText(Html.fromHtml(getString(R.string.home_welcom_article), Html.FROM_HTML_MODE_COMPACT));
+			else
+				tvArticle.setText(Html.fromHtml(getString(R.string.home_welcom_article)));
+
+		}
+		return view;
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event
@@ -71,6 +100,7 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
+		myLog.E(TAG, "onAttach");
 		// if (context instanceof OnFragmentInteractionListener) {
 		// mListener = (OnFragmentInteractionListener) context;
 		// } else {
@@ -82,6 +112,7 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onDetach() {
 		super.onDetach();
+		myLog.E(TAG, "onDetach");
 		mListener = null;
 	}
 

@@ -4,9 +4,11 @@ import com.dlvn.mcustomerportal.base.BaseActivity;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.services.ServicesGenerator;
 import com.dlvn.mcustomerportal.services.ServicesRequest;
+import com.dlvn.mcustomerportal.services.model.User;
 import com.dlvn.mcustomerportal.utils.DialogUtils;
 import com.dlvn.mcustomerportal.utils.Utilities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -57,7 +59,7 @@ public class LoginActivity extends BaseActivity {
 				String password = edtPassword.getText().toString();
 
 				if (validateLogin(loginName, password)) {
-//					doApprovalLogin(loginName, password);
+					doApprovalLogin(loginName, password);
 				}
 			}
 		});
@@ -77,78 +79,101 @@ public class LoginActivity extends BaseActivity {
 		return true;
 	}
 
-//	private void doApprovalLogin(final String userID, final String password) {
-//		showProgressDialog("Login...");
-//
-//		ApprovalLoginRequest masterData = new ApprovalLoginRequest();
-//		masterData.setUserID(userID);
-//		masterData.setPassword(password);
-//		masterData.setAPIToken(ePaymentPref.getAPIToken(LoginActivity.this));
-//		masterData.setDeviceID(Utilities.getDeviceID(LoginActivity.this));
-//		masterData.setDeviceName(Utilities.getDeviceName());
-//		masterData.setSystemType("");
-//
-//		BaseRequest request = new BaseRequest();
-//		request.setJsonDataInput(masterData);
-//
-//		Call<ApprovalLoginResponse> call = ePaymentApplication.getServicesRequest().ApprovalLogin(request);
-//
-//		call.enqueue(new Callback<ApprovalLoginResponse>() {
-//
-//			@Override
-//			public void onResponse(Call<ApprovalLoginResponse> call, Response<ApprovalLoginResponse> response) {
-//				if (response.isSuccessful()) {
-//					ApprovalLoginResponse result = response.body();
-//					if (result != null) {
-//						if (!TextUtils.isEmpty(result.getApprovalLoginResult().getResult())) {
-//
-//							if (result.getApprovalLoginResult().getResult().equals("true")) {
-//
-//								User user = new User();
-//								user.setUserID(userID);
-//								user.setPassword("");
-//								user.setUserName(result.getApprovalLoginResult().getMessage());
-//								user.setAPIToken(result.getApprovalLoginResult().getNewAPIToken());
-//
-//								ePaymentPref.saveUserLogin(LoginActivity.this, user);
-//								ePaymentPref.setLogin(LoginActivity.this, true);
-//								ePaymentPref.setRefreshing(LoginActivity.this, true);
-//
-//								Intent i = new Intent(getBaseContext(), DashboardActivity.class);
-//								startActivity(i);
-//								finish();
-//							} else if (!TextUtils.isEmpty(result.getApprovalLoginResult().getMessage())) {
-//
-//								if (result.getApprovalLoginResult().getMessage().equals("Login Fail")) {
-//									DialogUtils.showAlertDialog(LoginActivity.this,
-//											getString(R.string.message_error_loginfailed));
-//								} else
-//									DialogUtils.showAlertDialog(LoginActivity.this,
-//											result.getApprovalLoginResult().getMessage());
-//							} else
-//								DialogUtils.showAlertDialog(LoginActivity.this,
-//										getString(R.string.message_error_loginfailed));
-//						}
-//					}
-//				} else if (!TextUtils.isEmpty(response.message())) {
-//					DialogUtils.showAlertCustomDialog(LoginActivity.this, response.message());
-//				}
-//				hideProgressDialog();
-//			}
-//
-//			@Override
-//			public void onFailure(Call<ApprovalLoginResponse> arg0, Throwable t) {
-//				if (!TextUtils.isEmpty(t.getMessage())) {
-//					eLog.E("error " + t.getMessage());
-//
-//					if (t.getMessage().equals(BaseResponse.NO_INTERNET))
-//						DialogUtils.showAlertDialog(LoginActivity.this, getString(R.string.message_error_no_internet));
-//					else
-//						DialogUtils.showAlertDialog(LoginActivity.this,
-//								getString(R.string.message_error_connect_service));
-//				}
-//				hideProgressDialog();
-//			}
-//		});
-//	}
+	private void doApprovalLogin(final String userID, final String password) {
+		// showProgressDialog("Login...");
+
+		User user = new User();
+		user.setUserID(userID);
+		user.setPassword("");
+		user.setUserName(userID);
+		user.setAPIToken("dadsa8d7as89");
+
+		cPortalPref.saveUserLogin(LoginActivity.this, user);
+		cPortalPref.setLogin(LoginActivity.this, true);
+		cPortalPref.setRefreshing(LoginActivity.this, true);
+
+		Intent i = new Intent(getBaseContext(), HomeActivity.class);
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(i);
+		finish();
+
+		// ApprovalLoginRequest masterData = new ApprovalLoginRequest();
+		// masterData.setUserID(userID);
+		// masterData.setPassword(password);
+		// masterData.setAPIToken(ePaymentPref.getAPIToken(LoginActivity.this));
+		// masterData.setDeviceID(Utilities.getDeviceID(LoginActivity.this));
+		// masterData.setDeviceName(Utilities.getDeviceName());
+		// masterData.setSystemType("");
+		//
+		// BaseRequest request = new BaseRequest();
+		// request.setJsonDataInput(masterData);
+		//
+		// Call<ApprovalLoginResponse> call =
+		// ePaymentApplication.getServicesRequest().ApprovalLogin(request);
+		//
+		// call.enqueue(new Callback<ApprovalLoginResponse>() {
+		//
+		// @Override
+		// public void onResponse(Call<ApprovalLoginResponse> call,
+		// Response<ApprovalLoginResponse> response) {
+		// if (response.isSuccessful()) {
+		// ApprovalLoginResponse result = response.body();
+		// if (result != null) {
+		// if (!TextUtils.isEmpty(result.getApprovalLoginResult().getResult()))
+		// {
+		//
+		// if (result.getApprovalLoginResult().getResult().equals("true")) {
+		//
+		// User user = new User();
+		// user.setUserID(userID);
+		// user.setPassword("");
+		// user.setUserName(result.getApprovalLoginResult().getMessage());
+		// user.setAPIToken(result.getApprovalLoginResult().getNewAPIToken());
+		//
+		// ePaymentPref.saveUserLogin(LoginActivity.this, user);
+		// ePaymentPref.setLogin(LoginActivity.this, true);
+		// ePaymentPref.setRefreshing(LoginActivity.this, true);
+		//
+		// Intent i = new Intent(getBaseContext(), DashboardActivity.class);
+		// startActivity(i);
+		// finish();
+		// } else if
+		// (!TextUtils.isEmpty(result.getApprovalLoginResult().getMessage())) {
+		//
+		// if (result.getApprovalLoginResult().getMessage().equals("Login
+		// Fail")) {
+		// DialogUtils.showAlertDialog(LoginActivity.this,
+		// getString(R.string.message_error_loginfailed));
+		// } else
+		// DialogUtils.showAlertDialog(LoginActivity.this,
+		// result.getApprovalLoginResult().getMessage());
+		// } else
+		// DialogUtils.showAlertDialog(LoginActivity.this,
+		// getString(R.string.message_error_loginfailed));
+		// }
+		// }
+		// } else if (!TextUtils.isEmpty(response.message())) {
+		// DialogUtils.showAlertCustomDialog(LoginActivity.this,
+		// response.message());
+		// }
+		// hideProgressDialog();
+		// }
+		//
+		// @Override
+		// public void onFailure(Call<ApprovalLoginResponse> arg0, Throwable t)
+		// {
+		// if (!TextUtils.isEmpty(t.getMessage())) {
+		// eLog.E("error " + t.getMessage());
+		//
+		// if (t.getMessage().equals(BaseResponse.NO_INTERNET))
+		// DialogUtils.showAlertDialog(LoginActivity.this,
+		// getString(R.string.message_error_no_internet));
+		// else
+		// DialogUtils.showAlertDialog(LoginActivity.this,
+		// getString(R.string.message_error_connect_service));
+		// }
+		// hideProgressDialog();
+		// }
+		// });
+	}
 }

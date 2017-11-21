@@ -6,17 +6,19 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.dlvn.mcustomerportal.afragment.BonusProgramFragment;
+import com.dlvn.mcustomerportal.afragment.FundUnitPriceFragment;
 import com.dlvn.mcustomerportal.afragment.HomeFragment;
 import com.dlvn.mcustomerportal.afragment.InfoContractFragment;
 import com.dlvn.mcustomerportal.afragment.InfoGeneralFragment;
 import com.dlvn.mcustomerportal.afragment.NotificationsFragment;
 import com.dlvn.mcustomerportal.afragment.PaymentOnlineFragment;
-import com.dlvn.mcustomerportal.afragment.BonusProgramFragment;
-import com.dlvn.mcustomerportal.afragment.FundUnitPriceFragment;
 import com.dlvn.mcustomerportal.afragment.SettingsFragment;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.utils.myLog;
+import com.dlvn.mcustomerportal.view.MyCustomDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -36,18 +38,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
+	private static final String TAG = "HomeActivity";
+
 	private NavigationView navigationView;
 	private DrawerLayout drawer;
 	private View navHeader;
 	private ImageView imgNavHeaderBg, imgProfile;
-	private TextView txtName, txtWebsite;
+	private TextView txtName, txtLogin;
 	private Toolbar toolbar;
 	private FloatingActionButton fab;
+	private LinearLayout lloProfile;
 
 	// urls to load navigation header background image
 	// and profile image
@@ -59,15 +65,14 @@ public class HomeActivity extends AppCompatActivity {
 	public static int navItemIndex = 0;
 
 	// tags used to attach the fragments
-	private static final String TAG_HOME = "Trang chủ";
-	private static final String TAG_TTCHUNG = "Thông tin chung ";
-	private static final String TAG_TTHOPDONG = "Thông tin hợp đồng ";
-	private static final String TAG_CTDIEMTHUONG = "Chương trình điểm thưởng ";
-	private static final String TAG_GIADONVIQUY = "Giá đơn vị quỹ ";
-	private static final String TAG_TTTRUCTUYEN = "Thanh toán trực tuyến ";
-	private static final String TAG_NOTIFICATIONS = "Thông báo ";
-	private static final String TAG_SETTINGS = "Cấu hình ";
-
+	private static final String TAG_HOME = "home";
+	private static final String TAG_TTCHUNG = "InfoGeneral";
+	private static final String TAG_TTHOPDONG = "InfoContract";
+	private static final String TAG_CTDIEMTHUONG = "BonusProgram";
+	private static final String TAG_GIA_DV_QUY = "FundPrice";
+	private static final String TAG_TT_TRUCTUYEN = "movies";
+	private static final String TAG_NOTIFICATIONS = "notifications";
+	private static final String TAG_SETTINGS = "settings";
 	public static String CURRENT_TAG = TAG_HOME;
 
 	// toolbar titles respected to selected nav menu item
@@ -94,9 +99,10 @@ public class HomeActivity extends AppCompatActivity {
 		// Navigation view header
 		navHeader = navigationView.getHeaderView(0);
 		txtName = (TextView) navHeader.findViewById(R.id.name);
-		txtWebsite = (TextView) navHeader.findViewById(R.id.tvLogin);
+		txtLogin = (TextView) navHeader.findViewById(R.id.tvLogin);
 		imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
 		imgProfile = (ImageView) navHeader.findViewById(R.id.img_profile);
+		lloProfile = (LinearLayout) navHeader.findViewById(R.id.lloProfile);
 
 		// load toolbar titles from string resources
 		activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
@@ -109,7 +115,7 @@ public class HomeActivity extends AppCompatActivity {
 			}
 		});
 
-		txtWebsite.setOnClickListener(new OnClickListener() {
+		txtLogin.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -139,10 +145,12 @@ public class HomeActivity extends AppCompatActivity {
 		// name, website
 		if (cPortalPref.haveLogin(this)) {
 			txtName.setText(cPortalPref.getUserName(this));
-			txtWebsite.setVisibility(View.GONE);
-		}else {
+			txtLogin.setVisibility(View.GONE);
+			lloProfile.setVisibility(View.VISIBLE);
+		} else {
 			txtName.setText("Guest");
-			txtWebsite.setText("Login");
+			txtLogin.setText("Login");
+			lloProfile.setVisibility(View.GONE);
 		}
 
 		// Glide.with(this).load(urlNavHeaderBg)
@@ -199,7 +207,7 @@ public class HomeActivity extends AppCompatActivity {
 				}).into(imgProfile);
 
 		// showing dot next to notifications label
-		navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
+		navigationView.getMenu().getItem(6).setActionView(R.layout.menu_dot);
 	}
 
 	/***
@@ -229,12 +237,15 @@ public class HomeActivity extends AppCompatActivity {
 		Runnable mPendingRunnable = new Runnable() {
 			@Override
 			public void run() {
+				myLog.E(TAG, "loadHomeFragment mPendingRunnable");
 				// update the main content by replacing fragments
 				Fragment fragment = getHomeFragment();
-				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-				fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-				fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-				fragmentTransaction.commitAllowingStateLoss();
+				if (fragment != null) {
+					FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+					fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+					fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+					fragmentTransaction.commitAllowingStateLoss();
+				}
 			}
 		};
 
@@ -254,6 +265,7 @@ public class HomeActivity extends AppCompatActivity {
 	}
 
 	private Fragment getHomeFragment() {
+		myLog.E(TAG, "getHomeFragment navItemIndex = " + navItemIndex);
 		switch (navItemIndex) {
 		case 0:
 			// home
@@ -266,11 +278,11 @@ public class HomeActivity extends AppCompatActivity {
 			InfoContractFragment infoContractFragment = new InfoContractFragment();
 			return infoContractFragment;
 		case 3:
-			BonusProgramFragment bonusProgramFragment = new BonusProgramFragment();
-			return bonusProgramFragment;
+			BonusProgramFragment bonusFragment = new BonusProgramFragment();
+			return bonusFragment;
 		case 4:
-			FundUnitPriceFragment photosFragment = new FundUnitPriceFragment();
-			return photosFragment;
+			FundUnitPriceFragment fundFragment = new FundUnitPriceFragment();
+			return fundFragment;
 		case 5:
 			PaymentOnlineFragment paymentFragment = new PaymentOnlineFragment();
 			return paymentFragment;
@@ -319,21 +331,37 @@ public class HomeActivity extends AppCompatActivity {
 					CURRENT_TAG = TAG_TTCHUNG;
 					break;
 				case R.id.nav_infoContract:
-					navItemIndex = 2;
-					CURRENT_TAG = TAG_TTHOPDONG;
-					break;
+
+					if (cPortalPref.haveLogin(HomeActivity.this)) {
+						navItemIndex = 2;
+						CURRENT_TAG = TAG_TTHOPDONG;
+						break;
+					} else {
+						MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
+						builder.setMessage(getString(R.string.message_alert_login_to_using_function))
+								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								});
+						builder.create().show();
+						return false;
+					}
+
 				case R.id.nav_bonusProgram:
 					navItemIndex = 3;
 					CURRENT_TAG = TAG_CTDIEMTHUONG;
 					break;
 				case R.id.nav_fundPrice:
 					navItemIndex = 4;
-					CURRENT_TAG = TAG_GIADONVIQUY;
+					CURRENT_TAG = TAG_GIA_DV_QUY;
 					break;
 				case R.id.nav_payment:
 					navItemIndex = 5;
-					CURRENT_TAG = TAG_TTTRUCTUYEN;
+					CURRENT_TAG = TAG_TT_TRUCTUYEN;
 					break;
+
 				case R.id.nav_notifications:
 					navItemIndex = 6;
 					CURRENT_TAG = TAG_NOTIFICATIONS;
@@ -354,6 +382,7 @@ public class HomeActivity extends AppCompatActivity {
 					return true;
 				default:
 					navItemIndex = 0;
+					CURRENT_TAG = TAG_HOME;
 				}
 
 				// Checking if the item is in checked state or not, if not make
@@ -431,7 +460,7 @@ public class HomeActivity extends AppCompatActivity {
 
 		// when fragment is notifications, load the menu created for
 		// notifications
-		if (navItemIndex == 3) {
+		if (navItemIndex == 6) {
 			getMenuInflater().inflate(R.menu.notifications, menu);
 		}
 		return true;
