@@ -67,13 +67,13 @@
                 android:layout_weight="0.3" >
 
                 <TextView
-                    android:id="@+id/tvPosts"
+                    android:id="@+id/tvHopDong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_alignParentRight="true"
                     android:text="250"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
@@ -81,15 +81,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@id/tvPosts"
-                    android:text="Posts"
+                    android:layout_below="@id/tvHopDong"
+                    android:text="Hợp đồng "
                     android:textSize="12sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/white" />
+                android:background="@color/gray" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/tvFollowers"
+                    android:id="@+id/tvTongGiaTri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -106,23 +106,23 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="2dp"
                     android:text="300"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/labelFollowers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvFollowers"
+                    android:layout_below="@id/tvTongGiaTri"
                     android:layout_centerHorizontal="true"
-                    android:text="Followers"
+                    android:text="GTHĐ "
                     android:textSize="12sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/white" />
+                android:background="@color/gray" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -131,20 +131,20 @@
                 android:layout_weight="0.3" >
 
                 <TextView
-                    android:id="@+id/tvFollowing"
+                    android:id="@+id/tvPoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="400"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/labelFollolwing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvFollowing"
-                    android:text="Following"
+                    android:layout_below="@id/tvPoint"
+                    android:text="Điểm"
                     android:textSize="12sp" />
             </RelativeLayout>
         </LinearLayout>

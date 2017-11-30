@@ -1,5 +1,9 @@
 package com.dlvn.mcustomerportal;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Random;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -21,6 +25,7 @@ import com.dlvn.mcustomerportal.view.MyCustomDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -50,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 	private DrawerLayout drawer;
 	private View navHeader;
 	private ImageView imgNavHeaderBg, imgProfile;
-	private TextView txtName, txtLogin;
+	private TextView txtName, txtLogin, tvHopDong, tvGTHD, tvPoint;
 	private Toolbar toolbar;
 	private FloatingActionButton fab;
 	private LinearLayout lloProfile;
@@ -100,6 +105,10 @@ public class HomeActivity extends AppCompatActivity {
 		navHeader = navigationView.getHeaderView(0);
 		txtName = (TextView) navHeader.findViewById(R.id.name);
 		txtLogin = (TextView) navHeader.findViewById(R.id.tvLogin);
+		tvHopDong = (TextView) navHeader.findViewById(R.id.tvHopDong);
+		tvGTHD = (TextView) navHeader.findViewById(R.id.tvTongGiaTri);
+		tvPoint = (TextView) navHeader.findViewById(R.id.tvPoint);
+		
 		imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
 		imgProfile = (ImageView) navHeader.findViewById(R.id.img_profile);
 		lloProfile = (LinearLayout) navHeader.findViewById(R.id.lloProfile);
@@ -147,6 +156,18 @@ public class HomeActivity extends AppCompatActivity {
 			txtName.setText(cPortalPref.getUserName(this));
 			txtLogin.setVisibility(View.GONE);
 			lloProfile.setVisibility(View.VISIBLE);
+			
+			//random value demo
+			int nhd = 0, tgt = 0, point = 0;
+			Random rand = new Random();
+			nhd = rand.nextInt(10)%10;
+			tgt = (rand.nextInt(1000)%1000)*10000;
+			point = rand.nextInt(10000);
+			
+			tvHopDong.setText(nhd + "");
+			tvGTHD.setText(NumberFormat.getNumberInstance(Locale.US).format(tgt) + " đ");
+			tvPoint.setText(point + "");
+			
 		} else {
 			txtName.setText("Guest");
 			txtLogin.setText("Login");
@@ -203,7 +224,6 @@ public class HomeActivity extends AppCompatActivity {
 						myLog.E("Load Image Ready!");
 						return false;
 					}
-
 				}).into(imgProfile);
 
 		// showing dot next to notifications label
