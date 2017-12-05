@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<lint>
-    <issue id="NewApi">
-        <ignore path="src/com/nnt/seekbarruler/view/kUISeekBar.java" />
-        <ignore path="src/com/nnt/seekbarruler/view/kUISeekBar_2.java" />
-        <ignore path="src/com/nnt/seekbarrulerview/view/kUISeekBar.java" />
-    </issue>
-</lint>

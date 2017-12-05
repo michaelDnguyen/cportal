@@ -24,8 +24,8 @@ import com.dlvn.mcustomerportal.view.MyCustomDialog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 	// and profile image
 	private static final String urlNavHeaderBg = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
 	private static final String urlProfileImg = "https://lh3.googleusercontent.com/eCtE_G34M9ygdkmOpYvCag1vBARCmZwnVS6rS5t4JLzJ6QgQSBquM0nuTsCpLhYbKljoyS-txg";
-	private static final String urlProfile = "https://i.stack.imgur.com/9xu4H.png";
+	private static final String urlProfile = "https://thumbs.dreamstime.com/b/faceless-businessman-avatar-man-suit-blue-tie-human-profile-userpic-face-features-web-picture-gentlemen-85824471.jpg";
 
 	// index to identify current nav menu item
 	public static int navItemIndex = 0;
@@ -78,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
 	private static final String TAG_TT_TRUCTUYEN = "movies";
 	private static final String TAG_NOTIFICATIONS = "notifications";
 	private static final String TAG_SETTINGS = "settings";
+	private static final String TAG_LOGOUT = "logout";
 	public static String CURRENT_TAG = TAG_HOME;
 
 	// toolbar titles respected to selected nav menu item
@@ -108,7 +109,7 @@ public class HomeActivity extends AppCompatActivity {
 		tvHopDong = (TextView) navHeader.findViewById(R.id.tvHopDong);
 		tvGTHD = (TextView) navHeader.findViewById(R.id.tvTongGiaTri);
 		tvPoint = (TextView) navHeader.findViewById(R.id.tvPoint);
-		
+
 		imgNavHeaderBg = (ImageView) navHeader.findViewById(R.id.img_header_bg);
 		imgProfile = (ImageView) navHeader.findViewById(R.id.img_profile);
 		lloProfile = (LinearLayout) navHeader.findViewById(R.id.lloProfile);
@@ -156,18 +157,18 @@ public class HomeActivity extends AppCompatActivity {
 			txtName.setText(cPortalPref.getUserName(this));
 			txtLogin.setVisibility(View.GONE);
 			lloProfile.setVisibility(View.VISIBLE);
-			
-			//random value demo
+
+			// random value demo
 			int nhd = 0, tgt = 0, point = 0;
 			Random rand = new Random();
-			nhd = rand.nextInt(10)%10;
-			tgt = (rand.nextInt(1000)%1000)*10000;
+			nhd = rand.nextInt(10) % 10;
+			tgt = (rand.nextInt(1000) % 1000) * 10000;
 			point = rand.nextInt(10000);
-			
+
 			tvHopDong.setText(nhd + "");
-			tvGTHD.setText(NumberFormat.getNumberInstance(Locale.US).format(tgt) + " đ");
+			tvGTHD.setText(NumberFormat.getNumberInstance(Locale.US).format(tgt) + " vnđ");
 			tvPoint.setText(point + "");
-			
+
 		} else {
 			txtName.setText("Guest");
 			txtLogin.setText("Login");
@@ -188,23 +189,21 @@ public class HomeActivity extends AppCompatActivity {
 		// .into(imgProfile);
 
 		// loading header background image
-		Glide.with(this).load(urlNavHeaderBg).listener(new RequestListener<Drawable>() {
-
-			@Override
-			public boolean onLoadFailed(GlideException arg0, Object arg1, Target<Drawable> arg2, boolean arg3) {
-				// progress.setVisibility(View.GONE);
-				myLog.E("Load Image Failed!");
-				return false;
-			}
-
-			@Override
-			public boolean onResourceReady(Drawable arg0, Object arg1, Target<Drawable> arg2, DataSource arg3,
-					boolean arg4) {
-				// progress.setVisibility(View.GONE);
-				myLog.E("Load Image Ready!");
-				return false;
-			}
-		}).into(imgNavHeaderBg);
+		/*
+		 * Glide.with(this).load(urlNavHeaderBg).listener(new
+		 * RequestListener<Drawable>() {
+		 * 
+		 * @Override public boolean onLoadFailed(GlideException arg0, Object
+		 * arg1, Target<Drawable> arg2, boolean arg3) { //
+		 * progress.setVisibility(View.GONE); myLog.E("Load Image Failed!");
+		 * return false; }
+		 * 
+		 * @Override public boolean onResourceReady(Drawable arg0, Object arg1,
+		 * Target<Drawable> arg2, DataSource arg3, boolean arg4) { //
+		 * progress.setVisibility(View.GONE); myLog.E("Load Image Ready!");
+		 * return false; } }).into(imgNavHeaderBg);
+		 */
+		imgNavHeaderBg.setBackgroundColor(Color.parseColor("#d32f2f"));
 
 		// Loading profile image
 		Glide.with(this).load(urlProfile).thumbnail(0.5f).apply(RequestOptions.circleCropTransform())
@@ -315,6 +314,32 @@ public class HomeActivity extends AppCompatActivity {
 			// settings fragment
 			SettingsFragment settingsFragment = new SettingsFragment();
 			return settingsFragment;
+		case 8:
+			//Logout
+			MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
+			builder.setMessage(getString(R.string.message_alert_logout))
+					.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							cPortalPref.clearUserLogin(HomeActivity.this);
+							cPortalPref.setLogin(getBaseContext(), false);
+							Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+							startActivity(intent);
+							finish();
+						}
+					}).setNegativeButton("Không", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			builder.create().show();
+			
+			return null;
+			
 		default:
 			return new HomeFragment();
 		}
@@ -359,7 +384,7 @@ public class HomeActivity extends AppCompatActivity {
 					} else {
 						MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
 						builder.setMessage(getString(R.string.message_alert_login_to_using_function))
-								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+								.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										dialog.dismiss();
@@ -389,6 +414,10 @@ public class HomeActivity extends AppCompatActivity {
 				case R.id.nav_settings:
 					navItemIndex = 7;
 					CURRENT_TAG = TAG_SETTINGS;
+					break;
+				case R.id.nav_logout:
+					navItemIndex = 8;
+					CURRENT_TAG = TAG_LOGOUT;
 					break;
 				case R.id.nav_about_us:
 					// launch new intent instead of loading fragment
@@ -474,9 +503,9 @@ public class HomeActivity extends AppCompatActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 
 		// show menu only when home fragment is selected
-		if (navItemIndex == 0) {
-			getMenuInflater().inflate(R.menu.main, menu);
-		}
+//		if (navItemIndex == 0) {
+//			getMenuInflater().inflate(R.menu.main, menu);
+//		}
 
 		// when fragment is notifications, load the menu created for
 		// notifications

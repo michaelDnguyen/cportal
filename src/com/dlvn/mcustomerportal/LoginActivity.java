@@ -11,6 +11,7 @@ import com.dlvn.mcustomerportal.utils.Utilities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -63,6 +64,23 @@ public class LoginActivity extends BaseActivity {
 				}
 			}
 		});
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		View v = getCurrentFocus();
+		if (v != null && (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE)
+				&& v instanceof EditText) {
+			int scrcoords[] = new int[2];
+			v.getLocationOnScreen(scrcoords);
+			float x = ev.getRawX() + v.getLeft() - scrcoords[0];
+			float y = ev.getRawY() + v.getTop() - scrcoords[1];
+
+			if (x < v.getLeft() || x > v.getRight() || y < v.getTop() || y > v.getBottom())
+				Utilities.hideSoftInputKeyboard(this, v);
+		}
+
+		return super.dispatchTouchEvent(ev);
 	}
 
 	private boolean validateLogin(String userName, String password) {

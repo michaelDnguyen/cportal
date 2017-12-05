@@ -3,18 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="info.androidhive.navigationdrawer.fragment.HomeFragment" >
+    tools:context="com.dlvn.mcustomerportal.afragment.HomeFragment" >
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_marginBottom="20dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="5dp" >
 
             <ImageView
                 android:id="@+id/imv_ads"
@@ -29,5 +30,11 @@
                 android:padding="5dp" />
         </LinearLayout>
     </ScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
 
 </LinearLayout>
