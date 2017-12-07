@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Customer Portal</string>
@@ -13,9 +14,9 @@
     <string name="nav_bonusProgram">Chương trình điểm thưởng</string>
     <string name="nav_fundPrice">Giá đơn vị quỹ</string>
     <string name="nav_paymentOnline">Thanh toán trực tuyến</string>
-    <string name="nav_notifications">Notifications</string>
-    <string name="nav_settings">Settings</string>
-    <string name="nav_logout">Logout</string>
+    <string name="nav_notifications">Thông báo</string>
+    <string name="nav_settings">cài đặt</string>
+    <string name="nav_logout">Đăng xuất</string>
     <string name="nav_about_us">About Us</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->
@@ -26,9 +27,9 @@
         <item>Chương trình điểm thưởng</item>
         <item>Giá đơn vị quỹ</item>
         <item>Thanh toán trực tuyến</item>
-        <item>Notifications</item>
-        <item>Settings</item>
-        <item>Logout</item>
+        <item>Thông báo</item>
+        <item>Cài đặt</item>
+        <item>Đăng xuất</item>
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
@@ -37,6 +38,13 @@
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
     <string name="privacy_policy">Privacy Policy</string>
+
+    <!-- Request Permission -->
+    <string name="permission_info">Ứng dụng cần cấp quyền truy cập bộ nhớ máy.</string>
+    <string name="permission_force">Ứng dụng cần cấp quyền xem hình ảnh của bạn. Chọn Settings và đi đến mục Permissions để cấp quyền.</string>
+    <string name="permission_ok">OK</string>
+    <string name="permission_settings">Settings</string>
+    <string name="permission_package">package</string>
     <string name="confirm_yes">Yes</string>
     <string name="confirm_no">No</string>
     <string name="confirm_ok">Ok</string>
@@ -44,12 +52,11 @@
     <string name="message_error_date">Date is invalid.</string>
     <string name="low_memory_message">App is low memory, image loader maybe slow.</string>
     <string name="low_memory">Low memory</string>
-    
     <string name="message_alert_login_to_using_function">Anh/chị cần phải đăng nhập để sử dụng chức năng này.</string>
-    
     <string name="message_alert_logout">Anh/chị có thật sự muốn thoát khỏi chương trình này không ?.</string>
-    
-    <string name="home_welcom_article"><![CDATA[<strong><b>CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI "CỔNG THÔNG TIN KHÁCH HÀNG" !</b></strong> <br>
+    <string name="alert_input_payment">Anh/chị cần phải nhập số tiền và chọn phương thức thanh toán.</string>
+    <string name="home_welcom_article">
+<![CDATA[<strong><b>CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI "CỔNG THÔNG TIN KHÁCH HÀNG" !</b></strong> <br>
 
 Với mục tiêu phát triển mối quan hệ gắn kết với Khách hàng tham gia bảo hiểm thông qua việc cập nhật thường xuyên cho Khách hàng tất cả những thông tin về hợp đồng bảo hiểm của mình, Dai-ichi Life Việt Nam trân trọng giới thiệu đến toàn thể Quý Khách hàng trang thông tin trực tuyến dành cho Khách hàng <strong><b>"Cổng thông tin Khách hàng"</b></strong><br>
 
@@ -63,9 +70,11 @@ Kính chúc Quý khách cùng gia đình thật nhiều sức khỏe, hạnh ph�
 
 Trân trọng kính chào,<br>
 
-<strong><b>Dai-ichi Life Việt Nam</b></strong>]]></string>
-
-    
-    
+<strong><b>Dai-ichi Life Việt Nam</b></strong>]]>
+    </string>
+    <string name="title_activity_notification">NotificationActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_web_napas">WebNapasActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 </resources>

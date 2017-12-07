@@ -1,14 +1,23 @@
 package com.dlvn.mcustomerportal.afragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.dlvn.mcustomerportal.R;
+import com.dlvn.mcustomerportal.adapter.NotificationListAdapter;
+import com.dlvn.mcustomerportal.adapter.model.NotificationModel;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class NotificationsFragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
@@ -21,6 +30,15 @@ public class NotificationsFragment extends Fragment {
 	private String mParam2;
 
 	private OnFragmentInteractionListener mListener;
+
+	ListView lvNotification;
+	TextView tvNotNoti;
+	SwipeRefreshLayout swipeContainer;
+
+	View view;
+
+	NotificationListAdapter adapter;
+	List<NotificationModel> lstData;
 
 	public NotificationsFragment() {
 		// Required empty public constructor
@@ -58,7 +76,51 @@ public class NotificationsFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_notifications, container, false);
+		if (view == null) {
+			view = inflater.inflate(R.layout.fragment_notifications, container, false);
+
+			swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+			lvNotification = (ListView) view.findViewById(R.id.lvNotification);
+			tvNotNoti = (TextView) view.findViewById(R.id.tvNotNoti);
+
+			initData();
+			setListener();
+		}
+
+		return view;
+	}
+
+	private void initData() {
+
+		if (lstData == null)
+			lstData = new ArrayList<>();
+
+		lstData.add(
+				new NotificationModel("Thông báo gửi tặng điểm thưởng thành công tới hợp đồng 00045213", "25/12/2017"));
+		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/11/2017"));
+		lstData.add(new NotificationModel("Thông báo đến hạn đóng phí hợp đồng 00084562", "25/10/2017"));
+		lstData.add(new NotificationModel("Thông báo mua thẻ cào thành công", "12/10/2017"));
+		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/10/2017"));
+		lstData.add(new NotificationModel("Thông báo đổi phiếu mua hàng siêu thị thành công", "23/09/2017"));
+		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/09/2017"));
+
+		if (adapter == null)
+			adapter = new NotificationListAdapter(getActivity(), R.layout.item_notification, lstData);
+		lvNotification.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+		
+		swipeContainer.setRefreshing(false);
+	}
+
+	private void setListener() {
+		swipeContainer.setOnRefreshListener(new OnRefreshListener() {
+
+			@Override
+			public void onRefresh() {
+				// TODO Auto-generated method stub
+				initData();
+			}
+		});
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

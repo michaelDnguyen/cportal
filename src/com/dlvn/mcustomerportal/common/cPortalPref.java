@@ -48,6 +48,11 @@ public class cPortalPref {
 		CustomPreferences.putString(context, User.USER_ID, user.getUserID());
 		CustomPreferences.putString(context, User.PASSWORD, user.getPassword());
 		CustomPreferences.putString(context, User.TOKEN_LOGIN, user.getAPIToken());
+		
+		CustomPreferences.putInt(context, User.USER_POINT, user.getPoint());
+		CustomPreferences.putInt(context, User.USER_CONTRACT, user.getNumberContract());
+		CustomPreferences.putLong(context, User.USER_AMOUNT, user.getAmountContract());
+		CustomPreferences.putString(context, User.USER_PROPOSAL, user.getProposalNo());
 	}
 
 	/**
@@ -91,6 +96,22 @@ public class cPortalPref {
 
 	public static String getPassword(Context context) {
 		return CustomPreferences.getString(context, User.PASSWORD, "");
+	}
+	
+	public static String getUserProposal(Context context) {
+		return CustomPreferences.getString(context, User.USER_PROPOSAL, "");
+	}
+	
+	public static Long getUserAmount(Context context) {
+		return CustomPreferences.getLong(context, User.USER_AMOUNT, 0);
+	}
+	
+	public static int getUserContract(Context context) {
+		return CustomPreferences.getInt(context, User.USER_CONTRACT, 0);
+	}
+	
+	public static int getUserPoint(Context context) {
+		return CustomPreferences.getInt(context, User.USER_POINT, 0);
 	}
 
 	/**

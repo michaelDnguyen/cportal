@@ -60,11 +60,8 @@ public class HomeActivity extends AppCompatActivity {
 	private FloatingActionButton fab;
 	private LinearLayout lloProfile;
 
-	// urls to load navigation header background image
-	// and profile image
-	private static final String urlNavHeaderBg = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
-	private static final String urlProfileImg = "https://lh3.googleusercontent.com/eCtE_G34M9ygdkmOpYvCag1vBARCmZwnVS6rS5t4JLzJ6QgQSBquM0nuTsCpLhYbKljoyS-txg";
-	private static final String urlProfile = "https://thumbs.dreamstime.com/b/faceless-businessman-avatar-man-suit-blue-tie-human-profile-userpic-face-features-web-picture-gentlemen-85824471.jpg";
+	// urls to load profile image
+	public static final String urlProfile = "https://thumbs.dreamstime.com/b/faceless-businessman-avatar-man-suit-blue-tie-human-profile-userpic-face-features-web-picture-gentlemen-85824471.jpg";
 
 	// index to identify current nav menu item
 	public static int navItemIndex = 0;
@@ -120,7 +117,7 @@ public class HomeActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null)
+				Snackbar.make(view, "Your own action", Snackbar.LENGTH_LONG).setAction("Action", null)
 						.show();
 			}
 		});
@@ -158,35 +155,15 @@ public class HomeActivity extends AppCompatActivity {
 			txtLogin.setVisibility(View.GONE);
 			lloProfile.setVisibility(View.VISIBLE);
 
-			// random value demo
-			int nhd = 0, tgt = 0, point = 0;
-			Random rand = new Random();
-			nhd = rand.nextInt(10) % 10;
-			tgt = (rand.nextInt(1000) % 1000) * 10000;
-			point = rand.nextInt(10000);
-
-			tvHopDong.setText(nhd + "");
-			tvGTHD.setText(NumberFormat.getNumberInstance(Locale.US).format(tgt) + " vnđ");
-			tvPoint.setText(point + "");
+			tvHopDong.setText(cPortalPref.getUserContract(this) + "");
+			tvGTHD.setText(NumberFormat.getNumberInstance(Locale.US).format(cPortalPref.getUserAmount(this)) + " vnđ");
+			tvPoint.setText(cPortalPref.getUserPoint(this) + "");
 
 		} else {
 			txtName.setText("Guest");
 			txtLogin.setText("Login");
 			lloProfile.setVisibility(View.GONE);
 		}
-
-		// Glide.with(this).load(urlNavHeaderBg)
-		// .crossFade()
-		// .diskCacheStrategy(DiskCacheStrategy.ALL)
-		// .into(imgNavHeaderBg);
-		//
-		//// Loading profile image
-		// Glide.with(this).load(urlProfileImg)
-		// .crossFade()
-		// .thumbnail(0.5f)
-		// .bitmapTransform(new CircleTransform(this))
-		// .diskCacheStrategy(DiskCacheStrategy.ALL)
-		// .into(imgProfile);
 
 		// loading header background image
 		/*
@@ -224,6 +201,18 @@ public class HomeActivity extends AppCompatActivity {
 						return false;
 					}
 				}).into(imgProfile);
+		
+		imgProfile.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				if(cPortalPref.haveLogin(getBaseContext())){
+					Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
+					startActivity(intent);
+				}
+			}
+		});
 
 		// showing dot next to notifications label
 		navigationView.getMenu().getItem(6).setActionView(R.layout.menu_dot);
@@ -503,9 +492,9 @@ public class HomeActivity extends AppCompatActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 
 		// show menu only when home fragment is selected
-//		if (navItemIndex == 0) {
-//			getMenuInflater().inflate(R.menu.main, menu);
-//		}
+		if (navItemIndex == 0) {
+			getMenuInflater().inflate(R.menu.main, menu);
+		}
 
 		// when fragment is notifications, load the menu created for
 		// notifications

@@ -1,5 +1,7 @@
 package com.dlvn.mcustomerportal;
 
+import java.util.Random;
+
 import com.dlvn.mcustomerportal.base.BaseActivity;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.services.ServicesGenerator;
@@ -105,6 +107,14 @@ public class LoginActivity extends BaseActivity {
 		user.setPassword("");
 		user.setUserName(userID);
 		user.setAPIToken("dadsa8d7as89");
+
+		// random value demo
+		int nhd = 0, tgt = 0, point = 0;
+		Random rand = new Random();
+		user.setNumberContract(rand.nextInt(10) % 10);
+		user.setAmountContract((rand.nextInt(1000) % 1000) * 10000);
+		user.setPoint(rand.nextInt(10000));
+		user.setProposalNo("000" + rand.nextInt(99999));
 
 		cPortalPref.saveUserLogin(LoginActivity.this, user);
 		cPortalPref.setLogin(LoginActivity.this, true);

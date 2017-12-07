@@ -14,6 +14,11 @@ public class User {
 	public static final String PASSWORD = "PASSWORD";
 	public static final String TOKEN_LOGIN = "TOKEN_LOGIN";
 
+	public static final String USER_CONTRACT = "USER_CONTRACT";
+	public static final String USER_POINT = "USER_POINT";
+	public static final String USER_AMOUNT = "USER_AMOUNT";
+	public static final String USER_PROPOSAL = "USER_PROPOSAL";
+
 	@SerializedName("APIToken")
 	@Expose
 	private String aPIToken;
@@ -56,6 +61,43 @@ public class User {
 
 	private String password;
 
+	private String proposalNo;
+	private int numberContract;
+	private long amountContract;
+	private int point;
+
+	public String getProposalNo() {
+		return proposalNo;
+	}
+
+	public void setProposalNo(String proposalNo) {
+		this.proposalNo = proposalNo;
+	}
+
+	public int getNumberContract() {
+		return numberContract;
+	}
+
+	public void setNumberContract(int numberContract) {
+		this.numberContract = numberContract;
+	}
+
+	public long getAmountContract() {
+		return amountContract;
+	}
+
+	public void setAmountContract(long amountContract) {
+		this.amountContract = amountContract;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -75,7 +117,7 @@ public class User {
 	/**
 	 * 
 	 * @param aPIToken
-	 * The APIToken
+	 *            The APIToken
 	 */
 	public void setAPIToken(String aPIToken) {
 		this.aPIToken = aPIToken;
@@ -92,7 +134,7 @@ public class User {
 	/**
 	 * 
 	 * @param authStatus
-	 * The AuthStatus
+	 *            The AuthStatus
 	 */
 	public void setAuthStatus(String authStatus) {
 		this.authStatus = authStatus;
@@ -109,7 +151,7 @@ public class User {
 	/**
 	 * 
 	 * @param insightURL
-	 * The InsightURL
+	 *            The InsightURL
 	 */
 	public void setInsightURL(String insightURL) {
 		this.insightURL = insightURL;
@@ -126,7 +168,7 @@ public class User {
 	/**
 	 * 
 	 * @param level
-	 * The Level
+	 *            The Level
 	 */
 	public void setLevel(String level) {
 		this.level = level;
@@ -143,7 +185,7 @@ public class User {
 	/**
 	 * 
 	 * @param region
-	 * The Region
+	 *            The Region
 	 */
 	public void setRegion(String region) {
 		this.region = region;
@@ -160,7 +202,7 @@ public class User {
 	/**
 	 * 
 	 * @param responseMsg
-	 * The ResponseMsg
+	 *            The ResponseMsg
 	 */
 	public void setResponseMsg(String responseMsg) {
 		this.responseMsg = responseMsg;
@@ -177,7 +219,7 @@ public class User {
 	/**
 	 * 
 	 * @param teamNo
-	 * The TeamNo
+	 *            The TeamNo
 	 */
 	public void setTeamNo(String teamNo) {
 		this.teamNo = teamNo;
@@ -194,7 +236,7 @@ public class User {
 	/**
 	 * 
 	 * @param userID
-	 * The UserID
+	 *            The UserID
 	 */
 	public void setUserID(String userID) {
 		this.userID = userID;
@@ -211,7 +253,7 @@ public class User {
 	/**
 	 * 
 	 * @param userName
-	 * The UserName
+	 *            The UserName
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -228,7 +270,7 @@ public class User {
 	/**
 	 * 
 	 * @param userStatus
-	 * The UserStatus
+	 *            The UserStatus
 	 */
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
