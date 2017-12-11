@@ -76,5 +76,6 @@ Trân trọng kính chào,<br>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_web_napas">WebNapasActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_contract_detail">ContractDetailActivity</string>
 
 </resources>

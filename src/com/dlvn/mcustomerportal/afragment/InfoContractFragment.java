@@ -40,7 +40,7 @@ public class InfoContractFragment extends Fragment {
 	View view;
 
 	Button btnHDCaNhan, btnHDNhom;
-	ListView lvDataCaNhan, lvDataNhom;
+	ListView lvData;
 	TextView tvNoData;
 	SwipeRefreshLayout swipeContainer;
 
@@ -98,27 +98,39 @@ public class InfoContractFragment extends Fragment {
 	private void getViews(View v) {
 		btnHDCaNhan = (Button) v.findViewById(R.id.btnHDCaNhan);
 		btnHDNhom = (Button) v.findViewById(R.id.btnHDNhom);
-		
+
 		tvNoData = (TextView) v.findViewById(R.id.tvNoData);
 		tvNoData.setVisibility(View.GONE);
-		
+
 		swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
 
-		lvDataCaNhan = (ListView) v.findViewById(R.id.lvDataCaNhan);
-		lvDataNhom = (ListView) v.findViewById(R.id.lvDataNhom);
-		lvDataCaNhan.setDividerHeight(2);
-		lvDataNhom.setDividerHeight(2);
+		lvData = (ListView) v.findViewById(R.id.lvDataCaNhan);
+		lvData.setDividerHeight(2);
 	}
 
 	private void initDatas() {
+
+		initCanhan();
+
+		btnHDCaNhan.setSelected(true);
+		lvData.setAdapter(canhanAdapter);
+		// lvDataNhom.setAdapter(nhomAdapter);
+	}
+
+	private void initCanhan() {
 		List<ContractModel> lst = new ArrayList<>();
 		lst.add(new ContractModel("000048526", "An Tâm Hưng Thịnh", true, 80000000, "12/05/2009", "12/10/2025"));
 		lst.add(new ContractModel("000098574", "An Thịnh Đầu Tư", true, 15000000, "12/05/2009", "12/10/2025"));
 		lst.add(new ContractModel("000015423", "An Phúc Hưng Thịnh", true, 30000000, "12/05/2009", "12/10/2025"));
 		lst.add(new ContractModel("000085632", "An Nhàn Hưu Trí", false, 100000000, "12/05/2009", "12/10/2025"));
 		lst.add(new ContractModel("000075412", "Chăm Sóc Sức Khỏe", false, 120000000, "12/05/2009", "12/10/2025"));
-		canhanAdapter = new ContractListAdapter(getActivity(), lst);
-		
+		if (canhanAdapter == null)
+			canhanAdapter = new ContractListAdapter(getActivity(), lst);
+		else
+			canhanAdapter.reFreshData(lst);
+	}
+	
+	private void initNhom(){
 		List<ContractModel> lst2 = new ArrayList<>();
 		lst2.add(new ContractModel("000047856", "Chăm sóc sức khỏe", true, 80000000, "12/05/2009", "12/10/2025"));
 		lst2.add(new ContractModel("000056458", "An Thịnh Đầu Tư", true, 15000000, "12/05/2009", "12/10/2025"));
@@ -126,11 +138,10 @@ public class InfoContractFragment extends Fragment {
 		lst2.add(new ContractModel("000014536", "An Nhàn Hưu Trí", true, 100000000, "12/05/2009", "12/10/2025"));
 		lst2.add(new ContractModel("000036547", "An Lạc Hưng Thịnh", false, 120000000, "12/05/2009", "12/10/2025"));
 		nhomAdapter = new ContractListAdapter(getActivity(), lst2);
-		
-		btnHDCaNhan.setSelected(true);
-		lvDataNhom.setVisibility(View.GONE);
-		lvDataCaNhan.setAdapter(canhanAdapter);
-		lvDataNhom.setAdapter(nhomAdapter);
+		if (canhanAdapter == null)
+			canhanAdapter = new ContractListAdapter(getActivity(), lst2);
+		else 
+			canhanAdapter.reFreshData(lst2);
 	}
 
 	private void setListener() {
@@ -141,8 +152,7 @@ public class InfoContractFragment extends Fragment {
 				v.setSelected(true);
 				btnHDNhom.setSelected(false);
 				if (!isCanhan) {
-					lvDataNhom.setVisibility(View.GONE);
-					lvDataCaNhan.setVisibility(View.VISIBLE);
+					initCanhan();
 					isCanhan = true;
 				}
 			}
@@ -155,15 +165,14 @@ public class InfoContractFragment extends Fragment {
 				v.setSelected(true);
 				btnHDCaNhan.setSelected(false);
 				if (isCanhan) {
-					lvDataNhom.setVisibility(View.VISIBLE);
-					lvDataCaNhan.setVisibility(View.GONE);
+					initNhom();
 					isCanhan = false;
 				}
 			}
 		});
-		
+
 		swipeContainer.setOnRefreshListener(new OnRefreshListener() {
-			
+
 			@Override
 			public void onRefresh() {
 				swipeContainer.setRefreshing(false);

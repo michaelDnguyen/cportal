@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
 
 	View view;
 	ImageView imvAds;
-	TextView tvArticle;
 
 	RecyclerView rvContent;
 	HomeListAdapter rvAdapter;
@@ -95,12 +94,6 @@ public class HomeFragment extends Fragment {
 
 			imvAds = (ImageView) view.findViewById(R.id.imv_ads);
 			Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
-
-			tvArticle = (TextView) view.findViewById(R.id.tv_article);
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-				tvArticle.setText(Html.fromHtml(getString(R.string.home_welcom_article), Html.FROM_HTML_MODE_COMPACT));
-			else
-				tvArticle.setText(Html.fromHtml(getString(R.string.home_welcom_article)));
 
 			rvContent = (RecyclerView) view.findViewById(R.id.rvContent);
 			RecyclerView.LayoutManager layout = new RecyclerSmoothLayoutManager(getActivity(),

@@ -22,7 +22,8 @@
     <style name="AppTheme2" parent="@style/Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/red_dark</item>
+        <item name="android:windowFullscreen">true</item>
+<!--         <item name="android:statusBarColor">@color/red_dark</item> -->
         <item name="colorPrimary">@color/red</item>
         <!-- darker variant for the status bar and contextual app bars -->
         <item name="colorPrimaryDark">@color/red_dark</item>

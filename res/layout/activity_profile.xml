@@ -21,7 +21,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="centerCrop"
                 android:src="@drawable/nav_menu_header_bg" />
-
+            
             <ImageView
                 android:id="@+id/imvProfile"
                 android:layout_width="150dp"
@@ -39,26 +39,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_cover_image"
                 android:background="#ebca0707"
-                android:elevation="4dp"
+                android:layout_marginBottom="40dp"
                 android:paddingBottom="24dp" >
-
-                <ImageView
-                    android:id="@+id/edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:src="@android:drawable/ic_menu_edit" />
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="50dp"
                     android:textColor="#fff"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -69,8 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvName"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="(Adhyaksh)"
+                    android:layout_marginTop="5dp"
+                    android:text="Mã số khách hàng: 00075634"
                     android:textColor="#fff"
                     android:textSize="18sp" />
             </RelativeLayout>
@@ -78,9 +67,8 @@
             <LinearLayout
                 android:id="@+id/lloFunction"
                 android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_layout"
-                android:layout_marginTop="-30dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -114,10 +102,11 @@
                     android:background="@color/blue_light"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="button 3"
+                    android:text="Thay đổi mật khẩu "
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
+            
         </RelativeLayout>
 
         <LinearLayout

@@ -13,6 +13,7 @@ import com.dlvn.mcustomerportal.utils.myLog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +25,6 @@ public class ProfileActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_profile);
 
 		getViews();

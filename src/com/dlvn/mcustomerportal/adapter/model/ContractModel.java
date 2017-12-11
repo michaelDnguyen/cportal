@@ -1,6 +1,9 @@
 package com.dlvn.mcustomerportal.adapter.model;
 
-public class ContractModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ContractModel implements Parcelable {
 
 	String soHopDong;
 	String tenSanPham;
@@ -18,6 +21,15 @@ public class ContractModel {
 		this.amount = amount;
 		this.activeDate = activeDate;
 		this.endDate = endDate;
+	}
+
+	public ContractModel(Parcel in) {
+		soHopDong = in.readString();
+		tenSanPham = in.readString();
+		isActive = in.readByte() != 0;
+		amount = in.readLong();
+		activeDate = in.readString();
+		endDate = in.readString();
 	}
 
 	public ContractModel() {
@@ -72,5 +84,36 @@ public class ContractModel {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(soHopDong);
+		dest.writeString(tenSanPham);
+		dest.writeByte((byte) (isActive ? 1 : 0));
+		dest.writeLong(amount);
+		dest.writeString(activeDate);
+		dest.writeString(endDate);
+	}
+	
+	public static final Creator<ContractModel> CREATOR = new Creator<ContractModel>() {
+		
+		@Override
+		public ContractModel[] newArray(int size) {
+			// TODO Auto-generated method stub
+			return new ContractModel[size];
+		}
+		
+		@Override
+		public ContractModel createFromParcel(Parcel source) {
+			// TODO Auto-generated method stub
+			return new ContractModel(source);
+		}
+	};
 
 }

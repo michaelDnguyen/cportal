@@ -30,6 +30,10 @@
     <color name="orange_dark">#E64A19</color>
     <color name="orange_light">#F57C00</color>
     
+    <color name="green">#76ff03</color>
+    <color name="green_dark">#32cb00</color>
+    <color name="green_light">#b0ff57</color>
+    
     <color name="light_grey">#F0F0F0</color>
     <color name="dark_grey">#464545</color>
     <color name="medium_grey">#B3B3B3</color>

@@ -1,5 +1,6 @@
 package com.dlvn.mcustomerportal.adapter;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -7,7 +8,6 @@ import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.adapter.model.ContractModel;
 
 import android.content.Context;
-import android.icu.text.NumberFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +48,14 @@ public class ContractListAdapter extends BaseAdapter {
 		if(lstData != data)
 			lstData.addAll(data);
 		notifyDataSetChanged();
+	}
+	
+	public void reFreshData(List<ContractModel> data){
+		if(lstData != data){
+			lstData.clear();
+			lstData.addAll(data);
+			notifyDataSetChanged();
+		}
 	}
 	
 	public List<ContractModel> getData(){
