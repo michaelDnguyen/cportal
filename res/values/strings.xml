@@ -9,7 +9,7 @@
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home">Trang chủ</string>
-    <string name="nav_infoGeneral">Thông tin chung</string>
+    <string name="nav_infoGeneral">Thông tin sản phẩm</string>
     <string name="nav_infoContract">Thông tin hợp đồng</string>
     <string name="nav_bonusProgram">Chương trình điểm thưởng</string>
     <string name="nav_fundPrice">Giá đơn vị quỹ</string>
@@ -22,7 +22,7 @@
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
         <item>Trang chủ</item>
-        <item>Thông tin chung</item>
+        <item>Thông tin sản phẩm</item>
         <item>Thông tin hợp đồng</item>
         <item>Chương trình điểm thưởng</item>
         <item>Giá đơn vị quỹ</item>

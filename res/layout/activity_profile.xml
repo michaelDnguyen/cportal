@@ -21,7 +21,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="centerCrop"
                 android:src="@drawable/nav_menu_header_bg" />
-            
+
             <ImageView
                 android:id="@+id/imvProfile"
                 android:layout_width="150dp"
@@ -38,8 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_cover_image"
-                android:background="#ebca0707"
                 android:layout_marginBottom="40dp"
+                android:background="#ebca0707"
                 android:paddingBottom="24dp" >
 
                 <TextView
@@ -63,12 +63,12 @@
                     android:textColor="#fff"
                     android:textSize="18sp" />
             </RelativeLayout>
-            
+
             <LinearLayout
                 android:id="@+id/lloFunction"
                 android:layout_width="match_parent"
-                android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -106,7 +106,14 @@
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
-            
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/imvBack"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:background="@drawable/ic_back_white" />
         </RelativeLayout>
 
         <LinearLayout

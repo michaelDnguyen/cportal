@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
 
 	// tags used to attach the fragments
 	private static final String TAG_HOME = "home";
-	private static final String TAG_TTCHUNG = "InfoGeneral";
+	private static final String TAG_TTSANPHAM = "InfoGeneral";
 	private static final String TAG_TTHOPDONG = "InfoContract";
 	private static final String TAG_CTDIEMTHUONG = "BonusProgram";
 	private static final String TAG_GIA_DV_QUY = "FundPrice";
@@ -117,8 +117,16 @@ public class HomeActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Snackbar.make(view, "Your own action", Snackbar.LENGTH_LONG).setAction("Action", null)
-						.show();
+//				Snackbar.make(view, "Your own action", Snackbar.LENGTH_LONG).setAction("Action", null)
+//						.show();
+				BonusProgramFragment fragment = new BonusProgramFragment();
+				if (fragment != null) {
+					FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+					fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+					fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+					fragmentTransaction.addToBackStack(CURRENT_TAG);
+					fragmentTransaction.commitAllowingStateLoss();
+				}
 			}
 		});
 
@@ -362,7 +370,7 @@ public class HomeActivity extends AppCompatActivity {
 					break;
 				case R.id.nav_infoGeneral:
 					navItemIndex = 1;
-					CURRENT_TAG = TAG_TTCHUNG;
+					CURRENT_TAG = TAG_TTSANPHAM;
 					break;
 				case R.id.nav_infoContract:
 

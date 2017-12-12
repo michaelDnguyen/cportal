@@ -3,11 +3,13 @@ package com.dlvn.mcustomerportal.afragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dlvn.mcustomerportal.ContractDetailActivity;
 import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.adapter.ContractListAdapter;
 import com.dlvn.mcustomerportal.adapter.model.ContractModel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -105,7 +109,7 @@ public class InfoContractFragment extends Fragment {
 		swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
 
 		lvData = (ListView) v.findViewById(R.id.lvDataCaNhan);
-		lvData.setDividerHeight(2);
+		lvData.setDividerHeight(10);
 	}
 
 	private void initDatas() {
@@ -176,6 +180,17 @@ public class InfoContractFragment extends Fragment {
 			@Override
 			public void onRefresh() {
 				swipeContainer.setRefreshing(false);
+			}
+		});
+		
+		lvData.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				
+				Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
+				startActivity(intent);
+				
 			}
 		});
 	}

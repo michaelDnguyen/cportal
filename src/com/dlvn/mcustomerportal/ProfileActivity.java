@@ -12,15 +12,21 @@ import com.dlvn.mcustomerportal.utils.myLog;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Profile screen
+ * @author nn.tai
+ * @date Dec 11, 2017
+ */
 public class ProfileActivity extends BaseActivity {
 
 	ImageView imvProfile;
 	TextView tvName;
+	ImageView imvBack;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class ProfileActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		imvProfile = (ImageView) findViewById(R.id.imvProfile);
 		tvName = (TextView) findViewById(R.id.tvName);
+		imvBack = (ImageView) findViewById(R.id.imvBack);
 	}
 
 	private void initData() {
@@ -65,6 +72,12 @@ public class ProfileActivity extends BaseActivity {
 
 	private void setListener() {
 		// TODO Auto-generated method stub
-
+		imvBack.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 }
