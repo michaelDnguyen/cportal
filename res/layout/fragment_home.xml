@@ -13,12 +13,62 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:orientation="vertical"
-            android:padding="5dp" >
+            android:orientation="vertical" >
+
+            <!-- Layout header home by Customer template Outsystem -->
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@color/red"
+                    android:orientation="vertical" >
+                    
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="160dp"
+                    android:background="@drawable/st_bg_page_home" >
+
+                    <com.dlvn.mcustomerportal.view.indicator.ScrollerViewPager
+                        android:id="@+id/view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center" />
+
+                    <com.dlvn.mcustomerportal.view.indicator.SpringIndicator
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        app:siIndicatorColor="@color/colorPrimary"
+                        app:siIndicatorColors="@array/indicator_colors"
+                        app:siSelectedTextColor="@android:color/white"
+                        app:siTextColor="@color/colorPrimaryDark"
+                        app:siTextSize="10sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Layout header home origin -->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="5dp" >
 
                 <ImageView
                     android:id="@+id/imv_ads"
@@ -39,8 +89,8 @@
                         android:layout_weight="1"
                         android:background="@color/blue_light_trans"
                         android:gravity="center"
-                        android:paddingTop="7dp"
                         android:paddingBottom="7dp"
+                        android:paddingTop="7dp"
                         android:text="Tin tức "
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -52,8 +102,8 @@
                         android:layout_weight="1"
                         android:background="@color/blue_light_trans"
                         android:gravity="center"
-                        android:paddingTop="7dp"
                         android:paddingBottom="7dp"
+                        android:paddingTop="7dp"
                         android:text="Sản phẩm "
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -65,8 +115,8 @@
                         android:layout_weight="1"
                         android:background="@color/blue_light_trans"
                         android:gravity="center"
-                        android:paddingTop="7dp"
                         android:paddingBottom="7dp"
+                        android:paddingTop="7dp"
                         android:text="Thanh toán "
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -78,8 +128,8 @@
                         android:layout_weight="1"
                         android:background="@color/blue_light_trans"
                         android:gravity="center"
-                        android:paddingTop="7dp"
                         android:paddingBottom="7dp"
+                        android:paddingTop="7dp"
                         android:text="Liên hệ "
                         android:textColor="@color/white"
                         android:textStyle="bold" />

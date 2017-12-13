@@ -6,26 +6,27 @@ import java.util.List;
 import com.bumptech.glide.Glide;
 import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.adapter.HomeListAdapter;
+import com.dlvn.mcustomerportal.adapter.HomePagerAdapter;
 import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewClickListener;
 import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewTouchListener;
 import com.dlvn.mcustomerportal.adapter.model.HomeItemModel;
+import com.dlvn.mcustomerportal.adapter.model.HomePageItemModel;
 import com.dlvn.mcustomerportal.utils.myLog;
 import com.dlvn.mcustomerportal.view.DividerItemDecoration;
 import com.dlvn.mcustomerportal.view.RecyclerSmoothLayoutManager;
+import com.dlvn.mcustomerportal.view.indicator.ScrollerViewPager;
+import com.dlvn.mcustomerportal.view.indicator.SpringIndicator;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
@@ -46,7 +47,12 @@ public class HomeFragment extends Fragment {
 	RecyclerView rvContent;
 	HomeListAdapter rvAdapter;
 
+	ScrollerViewPager viewPager;
+	SpringIndicator springIndicator;
+	HomePagerAdapter pagerAdapter;
+
 	List<HomeItemModel> lstData;
+	List<HomePageItemModel> lstPagerData;
 
 	public HomeFragment() {
 		// Required empty public constructor
@@ -92,6 +98,9 @@ public class HomeFragment extends Fragment {
 		if (view == null) {
 			view = inflater.inflate(R.layout.fragment_home, container, false);
 
+			viewPager = (ScrollerViewPager) view.findViewById(R.id.view_pager);
+			springIndicator = (SpringIndicator) view.findViewById(R.id.indicator);
+
 			imvAds = (ImageView) view.findViewById(R.id.imv_ads);
 			Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
 
@@ -115,7 +124,9 @@ public class HomeFragment extends Fragment {
 		lstData.add(new HomeItemModel("CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI \"CỔNG THÔNG TIN KHÁCH HÀNG\"",
 				"Với mục tiêu phát triển mối quan hệ gắn kết với Khách hàng tham gia bảo hiểm thông qua việc cập nhật thường xuyên cho Khách hàng tất cả những thông tin về hợp đồng bảo hiểm của mình, Dai-ichi Life Việt Nam trân trọng giới thiệu đến toàn thể Quý Khách hàng trang thông tin trực tuyến dành cho Khách hàng \"Cổng thông tin Khách hàng\"",
 				"https://thue.today/media/images/section/brand/168706156912166_dai-ichi-life-viet-nam-cover.png"));
-		lstData.add(new HomeItemModel("BẢN TIN DAI-ICHI-LIFE VIỆT NAM", "Kính mời quý khách hàng xem bản tin Dai-Ichi-Life Việt Nam", "https://viecoi.vn/jobs/jobfullview/userdata/jobs/5273/241216-002.jpg"));
+		lstData.add(new HomeItemModel("BẢN TIN DAI-ICHI-LIFE VIỆT NAM",
+				"Kính mời quý khách hàng xem bản tin Dai-Ichi-Life Việt Nam",
+				"https://viecoi.vn/jobs/jobfullview/userdata/jobs/5273/241216-002.jpg"));
 		lstData.add(new HomeItemModel("HƯỚNG DẪN SỬ DỤNG CỔNG THÔNG TIN DỊCH VỤ KHÁCH HÀNG",
 				"Hướng dẫn sử dụng các chức năng của cổng thông tin khách hàng như đăng nhập, thay đổi mật khẩu, sửa đổi thông tin, thông tin hợp đồng, chương trình điểm thưởng... ",
 				"http://baohiemtuonglai.vn/wp-content/uploads/2017/06/tuyen-nhan-vien-kinh-doanh-luong-cao-2.jpg"));
@@ -128,6 +139,20 @@ public class HomeFragment extends Fragment {
 
 		rvAdapter = new HomeListAdapter(getActivity(), lstData);
 		rvContent.setAdapter(rvAdapter);
+
+		//init viewpager
+		lstPagerData = new ArrayList<>();
+		lstPagerData.add(new HomePageItemModel());
+		lstPagerData.add(new HomePageItemModel());
+		lstPagerData.add(new HomePageItemModel());
+		lstPagerData.add(new HomePageItemModel());
+
+		pagerAdapter = new HomePagerAdapter(getActivity(), lstPagerData);
+		viewPager.setAdapter(pagerAdapter);
+		viewPager.fixScrollSpeed();
+
+		// just set viewPager
+		springIndicator.setViewPager(viewPager);
 	}
 
 	private void setListener() {
@@ -136,12 +161,12 @@ public class HomeFragment extends Fragment {
 
 					@Override
 					public void onLongClick(View view, int position) {
-						
+
 					}
 
 					@Override
 					public void onClick(View view, int position) {
-						
+
 					}
 				}));
 	}

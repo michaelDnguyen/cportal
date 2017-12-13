@@ -33,4 +33,8 @@
     <dimen name="textsize30">30sp</dimen>
     <dimen name="textsize36">36sp</dimen>
 	
+    <!-- Dimension of Indicator -->
+    <dimen name="si_default_text_size">10sp</dimen>
+    <dimen name="si_default_radius_max">4dp</dimen>
+	<dimen name="si_default_radius_min">2dp</dimen>
 </resources>
