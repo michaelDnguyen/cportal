@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.adapter.HomeListAdapter;
 import com.dlvn.mcustomerportal.adapter.HomePagerAdapter;
@@ -11,9 +12,11 @@ import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewClickListener;
 import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewTouchListener;
 import com.dlvn.mcustomerportal.adapter.model.HomeItemModel;
 import com.dlvn.mcustomerportal.adapter.model.HomePageItemModel;
+import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.utils.myLog;
 import com.dlvn.mcustomerportal.view.DividerItemDecoration;
 import com.dlvn.mcustomerportal.view.RecyclerSmoothLayoutManager;
+import com.dlvn.mcustomerportal.view.indicator.CirclePageIndicator;
 import com.dlvn.mcustomerportal.view.indicator.ScrollerViewPager;
 import com.dlvn.mcustomerportal.view.indicator.SpringIndicator;
 
@@ -27,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
@@ -49,7 +53,11 @@ public class HomeFragment extends Fragment {
 
 	ScrollerViewPager viewPager;
 	SpringIndicator springIndicator;
+	CirclePageIndicator circleIndicator;
 	HomePagerAdapter pagerAdapter;
+	
+	ImageView imvProfile;
+	TextView tvWelcome;
 
 	List<HomeItemModel> lstData;
 	List<HomePageItemModel> lstPagerData;
@@ -98,27 +106,54 @@ public class HomeFragment extends Fragment {
 		if (view == null) {
 			view = inflater.inflate(R.layout.fragment_home, container, false);
 
-			viewPager = (ScrollerViewPager) view.findViewById(R.id.view_pager);
-			springIndicator = (SpringIndicator) view.findViewById(R.id.indicator);
-
-			imvAds = (ImageView) view.findViewById(R.id.imv_ads);
-			Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
-
-			rvContent = (RecyclerView) view.findViewById(R.id.rvContent);
-			RecyclerView.LayoutManager layout = new RecyclerSmoothLayoutManager(getActivity(),
-					LinearLayoutManager.VERTICAL, false);
-			rvContent.setLayoutManager(layout);
-
-			DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvContent.getContext());
-			rvContent.addItemDecoration(dividerItemDecoration);
-
+			getViews(view);
 			initData();
 			setListener();
 		}
 		return view;
 	}
+	
+	/**
+	 * get view from layout
+	 * @author nn.tai
+	 * @date Dec 14, 2017
+	 * @param view
+	 */
+	private void getViews(View view){
+		
+		viewPager = (ScrollerViewPager) view.findViewById(R.id.view_pager);
+//		springIndicator = (SpringIndicator) view.findViewById(R.id.indicator);
+		circleIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
+		
+		imvProfile = (ImageView) view.findViewById(R.id.imvProfile);
+		tvWelcome = (TextView) view.findViewById(R.id.tvWelcome);
 
+		imvAds = (ImageView) view.findViewById(R.id.imv_ads);
+		Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
+
+		rvContent = (RecyclerView) view.findViewById(R.id.rvContent);
+		RecyclerView.LayoutManager layout = new RecyclerSmoothLayoutManager(getActivity(),
+				LinearLayoutManager.VERTICAL, false);
+		rvContent.setLayoutManager(layout);
+
+		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvContent.getContext());
+		rvContent.addItemDecoration(dividerItemDecoration);
+		
+		
+		Glide.with(this).load(R.drawable.avatar_user).thumbnail(0.5f).apply(RequestOptions.circleCropTransform()).into(imvProfile);
+	}
+
+	/**
+	 * init data to views
+	 * @author nn.tai
+	 * @date Dec 14, 2017
+	 */
 	private void initData() {
+		
+		if (cPortalPref.haveLogin(getActivity())) {
+			tvWelcome.setText("Chào mừng " + cPortalPref.getUserName(getActivity()));
+		}
+		
 		lstData = new ArrayList<HomeItemModel>();
 
 		lstData.add(new HomeItemModel("CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI \"CỔNG THÔNG TIN KHÁCH HÀNG\"",
@@ -139,22 +174,27 @@ public class HomeFragment extends Fragment {
 
 		rvAdapter = new HomeListAdapter(getActivity(), lstData);
 		rvContent.setAdapter(rvAdapter);
-
+		
 		//init viewpager
 		lstPagerData = new ArrayList<>();
-		lstPagerData.add(new HomePageItemModel());
-		lstPagerData.add(new HomePageItemModel());
-		lstPagerData.add(new HomePageItemModel());
-		lstPagerData.add(new HomePageItemModel());
+		lstPagerData.add(new HomePageItemModel("00078941","236,500,000","3,200,000","23/12/2017","23/01/2018","39"));
+		lstPagerData.add(new HomePageItemModel("001034198","688,105,024","36,215,500","23/10/2017","22/12/2017","8"));
+		lstPagerData.add(new HomePageItemModel("001036845","56,331,000","2,814,400","02/11/2017","01/01/2018","18"));
 
 		pagerAdapter = new HomePagerAdapter(getActivity(), lstPagerData);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.fixScrollSpeed();
 
 		// just set viewPager
-		springIndicator.setViewPager(viewPager);
+//		springIndicator.setViewPager(viewPager);
+		circleIndicator.setViewPager(viewPager);
 	}
 
+	/**
+	 * function set listener for view
+	 * @author nn.tai
+	 * @date Dec 14, 2017
+	 */
 	private void setListener() {
 		rvContent.addOnItemTouchListener(
 				new RecyclerViewTouchListener(getActivity(), rvContent, new RecyclerViewClickListener() {

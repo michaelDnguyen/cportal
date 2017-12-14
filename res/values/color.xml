@@ -12,7 +12,6 @@
     <color name="blue">#2196F3</color>
     <color name="blue_dark">#1976D2</color>
     <color name="blue_light">#42A5F5</color>
-    <color name="blue_light_trans">#D942A5F5</color>
     
     <color name="red_dark">#cc1111</color>
     <color name="red">#ee1111</color>
@@ -46,7 +45,7 @@
     <!-- Colors of indicator -->
     <color name="si_default_text_color">#FF0000</color>
     <color name="si_default_text_color_selected">#FF00FF</color>
-	<color name="si_default_indicator_bg">#ee9999</color>
+	<color name="si_default_indicator_bg">#464545</color>
 	
 	<color name="indicator_1">#55B3C2</color>
     <color name="indicator_2">#64A4A4</color>

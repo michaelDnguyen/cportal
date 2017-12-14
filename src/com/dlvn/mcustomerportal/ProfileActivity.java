@@ -48,7 +48,7 @@ public class ProfileActivity extends BaseActivity {
 	private void initData() {
 		// TODO Auto-generated method stub
 		// Loading profile image
-		Glide.with(this).load(HomeActivity.urlProfile).thumbnail(0.5f).apply(RequestOptions.circleCropTransform())
+		Glide.with(this).load(R.drawable.avatar_user).thumbnail(0.5f).apply(RequestOptions.circleCropTransform())
 				.listener(new RequestListener<Drawable>() {
 
 					@Override

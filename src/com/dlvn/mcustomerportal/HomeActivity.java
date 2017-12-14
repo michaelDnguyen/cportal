@@ -60,9 +60,6 @@ public class HomeActivity extends AppCompatActivity {
 	private FloatingActionButton fab;
 	private LinearLayout lloProfile;
 
-	// urls to load profile image
-	public static final String urlProfile = "https://thumbs.dreamstime.com/b/faceless-businessman-avatar-man-suit-blue-tie-human-profile-userpic-face-features-web-picture-gentlemen-85824471.jpg";
-
 	// index to identify current nav menu item
 	public static int navItemIndex = 0;
 
@@ -191,7 +188,7 @@ public class HomeActivity extends AppCompatActivity {
 		imgNavHeaderBg.setBackgroundColor(Color.parseColor("#d32f2f"));
 
 		// Loading profile image
-		Glide.with(this).load(urlProfile).thumbnail(0.5f).apply(RequestOptions.circleCropTransform())
+		Glide.with(this).load(R.drawable.avatar_user).thumbnail(0.5f).apply(RequestOptions.circleCropTransform())
 				.listener(new RequestListener<Drawable>() {
 
 					@Override
