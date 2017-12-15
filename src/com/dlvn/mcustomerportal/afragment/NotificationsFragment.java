@@ -96,13 +96,13 @@ public class NotificationsFragment extends Fragment {
 			lstData = new ArrayList<>();
 
 		lstData.add(
-				new NotificationModel("Thông báo gửi tặng điểm thưởng thành công tới hợp đồng 00045213", "25/12/2017"));
-		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/11/2017"));
-		lstData.add(new NotificationModel("Thông báo đến hạn đóng phí hợp đồng 00084562", "25/10/2017"));
-		lstData.add(new NotificationModel("Thông báo mua thẻ cào thành công", "12/10/2017"));
-		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/10/2017"));
-		lstData.add(new NotificationModel("Thông báo đổi phiếu mua hàng siêu thị thành công", "23/09/2017"));
-		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/09/2017"));
+				new NotificationModel("Thông báo gửi tặng điểm thưởng thành công tới hợp đồng 00045213", "25/12/2017", true));
+		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/11/2017", true));
+		lstData.add(new NotificationModel("Thông báo đến hạn đóng phí hợp đồng 00084562", "25/10/2017", false));
+		lstData.add(new NotificationModel("Thông báo mua thẻ cào thành công", "12/10/2017", false));
+		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/10/2017", false));
+		lstData.add(new NotificationModel("Thông báo đổi phiếu mua hàng siêu thị thành công", "23/09/2017", false));
+		lstData.add(new NotificationModel("BẢN TIN DAI-ICHI LIFE VIỆT NAM Số 11 năm 2017", "03/09/2017", false));
 
 		if (adapter == null)
 			adapter = new NotificationListAdapter(getActivity(), R.layout.item_notification, lstData);

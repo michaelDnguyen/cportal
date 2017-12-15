@@ -6,6 +6,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
+    
+    <string name="keyMap_Dev">AIzaSyCO77nVxrBDTUPmjzPV9Zw1mUdMB9y3fkU</string>
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home">Trang chủ</string>
@@ -14,8 +16,10 @@
     <string name="nav_bonusProgram">Chương trình điểm thưởng</string>
     <string name="nav_fundPrice">Giá đơn vị quỹ</string>
     <string name="nav_paymentOnline">Thanh toán trực tuyến</string>
+    <string name="nav_electricBill">Hóa đơn điện tử</string>
+    <string name="nav_listOffice">Mạng lưới văn phòng</string>
     <string name="nav_notifications">Thông báo</string>
-    <string name="nav_settings">cài đặt</string>
+    <string name="nav_settings">Cài đặt</string>
     <string name="nav_logout">Đăng xuất</string>
     <string name="nav_about_us">About Us</string>
 
@@ -27,13 +31,17 @@
         <item>Chương trình điểm thưởng</item>
         <item>Giá đơn vị quỹ</item>
         <item>Thanh toán trực tuyến</item>
+        <item>Hóa đơn điện tử</item>
+        <item>Mạng lưới văn phòng</item>
         <item>Thông báo</item>
         <item>Cài đặt</item>
         <item>Đăng xuất</item>
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_list_office">Mạng lưới văn phòng</string>
     <string name="activity_title_privacy_policy">Privacy Policy</string>
+    
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
@@ -55,6 +63,10 @@
     <string name="message_alert_login_to_using_function">Anh/chị cần phải đăng nhập để sử dụng chức năng này.</string>
     <string name="message_alert_logout">Anh/chị có thật sự muốn thoát khỏi chương trình này không ?.</string>
     <string name="alert_input_payment">Anh/chị cần phải nhập số tiền và chọn phương thức thanh toán.</string>
+    
+    <string name="home_welcome_user">Anh/chị có thể dễ dàng tra cứu thông tin hợp đồng bảo hiểm nhân thọ, thông tin điểm thưởng tích lũy của mình.</string>
+    <string name="home_welcome_guest">Đến với cổng thông tin khách hàng của Dai-Ichi-Life Việt Nam, vui lòng đăng nhập để sử dụng đầy đủ chức năng.</string>
+    
     <string name="home_welcom_article">
 <![CDATA[<strong><b>CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI "CỔNG THÔNG TIN KHÁCH HÀNG" !</b></strong> <br>
 
@@ -75,7 +87,7 @@ Trân trọng kính chào,<br>
     <string name="title_activity_notification">NotificationActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_web_napas">WebNapasActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_profile">Thông tin cá nhân</string>
     <string name="title_activity_contract_detail">ContractDetailActivity</string>
 
 </resources>

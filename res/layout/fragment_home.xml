@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context="com.dlvn.mcustomerportal.afragment.HomeFragment" >
 
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_marginBottom="30dp"
         android:layout_height="match_parent" >
 
         <LinearLayout
@@ -48,17 +50,19 @@
                         android:typeface="sans" />
 
                     <TextView
+                        android:id="@+id/tvDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:padding="5dp"
-                        android:text="Anh/chị có thể dễ dàng tra cứu thông tin hợp đồng bảo hiểm nhân thọ, thông tin điểm thưởng tích lũy của mình."
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="@dimen/textsize12" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/lloHopDong"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_alignParentBottom="true"
@@ -88,8 +92,7 @@
                         app:siIndicatorColors="@array/indicator_colors"
                         app:siSelectedTextColor="@android:color/white"
                         app:siTextColor="@color/colorPrimaryDark"
-                        app:siTextSize="10sp" />
-                    -->
+                        app:siTextSize="10sp" />   -->
 
                     <com.dlvn.mcustomerportal.view.indicator.CirclePageIndicator
                         android:id="@+id/indicator"
@@ -149,6 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="40dp"
                         android:capitalize="sentences"
                         android:text="GÓI AN NHÀN HƯU TRÍ"
@@ -224,15 +228,180 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/st_bg_page_home"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ico_transaction" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/red"
+                        android:text="Lịch sử giao dịch" />
+                </LinearLayout>
+
+                <!-- list item -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <!-- item 1 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:padding="5dp"
+                        android:layout_height="50dp" >
+
+                        <ImageView
+                            android:id="@+id/imvIcoTrans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:padding="3dp"
+                            android:background="@drawable/st_bg_white_border_noradius"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ico_transaction" />
+
+                        <TextView
+                            android:id="@+id/tvTransMaGiaoDich"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@id/imvIcoTrans"
+                            android:text="Mã giao dịch 34213"
+                            android:textColor="@color/red" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvTransMaGiaoDich"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@id/imvIcoTrans"
+                            android:text="Mua thẻ cào 50.0 điểm." />
+
+                        <ImageView
+                            android:id="@+id/imvIcoTrans2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="3dp"
+                            android:src="@drawable/ico_arrow_right" />
+                    </RelativeLayout>
+                    
+                    <!-- item 2 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:padding="5dp"
+                        android:layout_height="50dp" >
+
+                        <ImageView
+                            android:id="@+id/imv2IcoTrans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/st_bg_white_border_noradius"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ico_transaction" />
+
+                        <TextView
+                            android:id="@+id/tv2TransMaGiaoDich"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@id/imv2IcoTrans"
+                            android:text="Mã giao dịch 65894"
+                            android:textColor="@color/red" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv2TransMaGiaoDich"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@id/imv2IcoTrans"
+                            android:text="Đổi phiếu khám chữa bênh 100.0 điểm" />
+
+                        <ImageView
+                            android:id="@+id/imv2IcoTrans2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="3dp"
+                            android:src="@drawable/ico_arrow_right" />
+                    </RelativeLayout>
+                    
+                    <!-- item 3 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:padding="5dp"
+                        android:layout_height="50dp" >
+
+                        <ImageView
+                            android:id="@+id/imv3IcoTrans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/st_bg_white_border_noradius"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ico_transaction" />
+
+                        <TextView
+                            android:id="@+id/tv3TransMaGiaoDich"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@id/imv3IcoTrans"
+                            android:text="Mã giao dịch 245876"
+                            android:textColor="@color/red" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv3TransMaGiaoDich"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@id/imv3IcoTrans"
+                            android:text="Đổi phiếu mua hàng siêu thị 200.0 điểm" />
+
+                        <ImageView
+                            android:id="@+id/imv3IcoTrans2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="3dp"
+                            android:src="@drawable/ico_arrow_right" />
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvContent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white" />
         </LinearLayout>
     </ScrollView>
 

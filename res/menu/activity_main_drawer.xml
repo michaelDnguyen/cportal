@@ -27,6 +27,16 @@
             android:id="@+id/nav_payment"
             android:icon="@drawable/ic_monetization_on_black_24dp"
             android:title="@string/nav_paymentOnline" />
+        
+        <item
+            android:id="@+id/nav_electricBill"
+            android:icon="@drawable/ic_monetization_on_black_24dp"
+            android:title="@string/nav_electricBill" />
+        
+        <item
+            android:id="@+id/nav_listOffice"
+            android:icon="@drawable/ic_monetization_on_black_24dp"
+            android:title="@string/nav_listOffice" />
 
         <item
             android:id="@+id/nav_notifications"

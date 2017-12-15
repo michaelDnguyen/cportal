@@ -15,10 +15,11 @@ public class NotificationModel {
 	}
 	
 
-	public NotificationModel(String title, String createDate) {
+	public NotificationModel(String title, String createDate, boolean read) {
 		super();
 		this.title = title;
 		this.createDate = createDate;
+		this.isRead = read;
 	}
 
 

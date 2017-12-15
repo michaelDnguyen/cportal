@@ -39,23 +39,33 @@ public class NotificationListAdapter extends ArrayAdapter<NotificationModel> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		ViewHolder holder;
+		NotificationModel item = data.get(position);
+
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.item_notification, null);
 			holder = new ViewHolder();
+
 			holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
 			holder.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+			holder.tvStatus = (TextView) convertView.findViewById(R.id.tvStatus);
+
 			convertView.setTag(holder);
 		} else
 			holder = (ViewHolder) convertView.getTag();
 
-		holder.tvName.setText(data.get(position).getTitle());
-		holder.tvDate.setText(data.get(position).getCreateDate());
-
+		if (item != null) {
+			holder.tvName.setText(item.getTitle());
+			holder.tvDate.setText(item.getCreateDate());
+			if (item.isRead())
+				holder.tvStatus.setVisibility(View.VISIBLE);
+			else
+				holder.tvStatus.setVisibility(View.GONE);
+		}
 		return convertView;
 	}
 
 	private class ViewHolder {
-		TextView tvName, tvDate;
+		TextView tvName, tvDate, tvStatus;
 	}
 
 }

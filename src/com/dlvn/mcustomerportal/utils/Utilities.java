@@ -3,14 +3,27 @@ package com.dlvn.mcustomerportal.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
+import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.base.CPortalApplication;
+import com.dlvn.mcustomerportal.view.MyCustomDialog;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,8 +43,8 @@ import android.widget.ListView;
 public class Utilities {
 
 	/**
-	 * set Height cho listview item, sau khi set xong sẽ ko cần scrollbar
-	 * cho listview
+	 * set Height cho listview item, sau khi set xong sẽ ko cần scrollbar cho
+	 * listview
 	 * 
 	 * @param listView
 	 * @param padding
@@ -62,8 +75,8 @@ public class Utilities {
 	}
 
 	/**
-	 * set Height cho expand listview item, sau khi set xong sẽ ko cần
-	 * scrollbar cho Expand listview
+	 * set Height cho expand listview item, sau khi set xong sẽ ko cần scrollbar
+	 * cho Expand listview
 	 * 
 	 * @param listView
 	 * @param group
@@ -317,6 +330,140 @@ public class Utilities {
 				}
 			}
 		});
+	}
+
+	/**
+	 * Get location on google map by address
+	 * 
+	 * @param context
+	 * @param strAddress
+	 * @return
+	 */
+	public static LatLng getLocationFromAddress(Context context, String strAddress) {
+
+		Geocoder coder = new Geocoder(context, Locale.getDefault());
+		List<Address> address;
+		LatLng p1 = null;
+
+		try {
+			address = coder.getFromLocationName(strAddress, 5);
+			if (address == null) {
+				return null;
+			}
+			Address location = address.get(0);
+			location.getLatitude();
+			location.getLongitude();
+
+			p1 = new LatLng(location.getLatitude(), location.getLongitude());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return p1;
+	}
+
+	/**
+	 * Display in Google map view a point with lat,long and address
+	 * 
+	 * @param map
+	 * @param point
+	 * @param address
+	 */
+	public static void showMap(GoogleMap map, LatLng point, String address) {
+		if (point != null) {
+			// create marker
+			MarkerOptions marker = new MarkerOptions().position(point).title(address);
+			// adding marker
+			map.addMarker(marker);
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15.0f));
+			// Zoom in, animating the camera.
+			map.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
+		}
+	}
+
+	/**
+	 * Display Setting alert about enable Location Provider, Ex: GPS
+	 * 
+	 * @param context
+	 */
+	public static void showSettingsAlertGPS(final Context context) {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+		alertDialog.setTitle("SETTINGS");
+		alertDialog.setMessage("Anh/chị chưa mở GPS, vui lòng vào Setting để mở GPS!");
+		alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				context.startActivity(intent);
+			}
+		});
+		alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		alertDialog.show();
+	}
+
+	/**
+	 * Show settings storage
+	 * 
+	 * @modify Nov 24, 2017
+	 * @arthor nn.tai
+	 * @param context
+	 */
+	public static void showSettingsAlertStorage(final Context context) {
+		MyCustomDialog.Builder builder = new MyCustomDialog.Builder(context);
+		builder.setMessage(
+				"Bộ nhớ trong trên thiết bị anh chị sắp hết dung lượng. Vui lòng kiểm tra và gỡ những ứng dụng không cần thiết để có thêm dung lượng lưu trữ.")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						Intent intent = new Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS);
+						context.startActivity(intent);
+					}
+				});
+		builder.create().show();
+	}
+
+	public static void showSettingsAlertConnection(final Context context) {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+		alertDialog.setTitle("SETTINGS");
+		alertDialog.setMessage("Anh/chị chưa bật kết nối Internet, vui lòng vào Setting để mở kết nối Internet!");
+		alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+				context.startActivity(intent);
+			}
+		});
+		alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		alertDialog.show();
+	}
+
+	public static void showAlert(final Context context, String message) {
+		if (!((Activity) context).isFinishing()) {
+
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+			alertDialog.setMessage(message);
+			alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			alertDialog.show();
+		}
+	}
+
+	public static void actionCallPhoneNumber(Context context, String number) {
+		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+		context.startActivity(intent);
+	}
+
+	public static boolean checkStringAllNumber(String s) {
+		return s.matches(".*\\d+.*");
 	}
 
 }

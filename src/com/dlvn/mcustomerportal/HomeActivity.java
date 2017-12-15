@@ -11,10 +11,11 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.dlvn.mcustomerportal.afragment.BonusProgramFragment;
+import com.dlvn.mcustomerportal.afragment.ElectricBillFragment;
 import com.dlvn.mcustomerportal.afragment.FundUnitPriceFragment;
 import com.dlvn.mcustomerportal.afragment.HomeFragment;
 import com.dlvn.mcustomerportal.afragment.InfoContractFragment;
-import com.dlvn.mcustomerportal.afragment.InfoGeneralFragment;
+import com.dlvn.mcustomerportal.afragment.ProductInfoFragment;
 import com.dlvn.mcustomerportal.afragment.NotificationsFragment;
 import com.dlvn.mcustomerportal.afragment.PaymentOnlineFragment;
 import com.dlvn.mcustomerportal.afragment.SettingsFragment;
@@ -69,7 +70,9 @@ public class HomeActivity extends AppCompatActivity {
 	private static final String TAG_TTHOPDONG = "InfoContract";
 	private static final String TAG_CTDIEMTHUONG = "BonusProgram";
 	private static final String TAG_GIA_DV_QUY = "FundPrice";
-	private static final String TAG_TT_TRUCTUYEN = "movies";
+	private static final String TAG_TT_TRUCTUYEN = "paymentOnlines";
+	private static final String TAG_HOADONDIENTU = "electricBill";
+	private static final String TAG_MANGLUOI_VP = "listOffices";
 	private static final String TAG_NOTIFICATIONS = "notifications";
 	private static final String TAG_SETTINGS = "settings";
 	private static final String TAG_LOGOUT = "logout";
@@ -114,8 +117,9 @@ public class HomeActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-//				Snackbar.make(view, "Your own action", Snackbar.LENGTH_LONG).setAction("Action", null)
-//						.show();
+				// Snackbar.make(view, "Your own action",
+				// Snackbar.LENGTH_LONG).setAction("Action", null)
+				// .show();
 				BonusProgramFragment fragment = new BonusProgramFragment();
 				if (fragment != null) {
 					FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -206,13 +210,13 @@ public class HomeActivity extends AppCompatActivity {
 						return false;
 					}
 				}).into(imgProfile);
-		
+
 		imgProfile.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				if(cPortalPref.haveLogin(getBaseContext())){
+
+				if (cPortalPref.haveLogin(getBaseContext())) {
 					Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
 					startActivity(intent);
 				}
@@ -220,7 +224,7 @@ public class HomeActivity extends AppCompatActivity {
 		});
 
 		// showing dot next to notifications label
-		navigationView.getMenu().getItem(6).setActionView(R.layout.menu_dot);
+		navigationView.getMenu().getItem(8).setActionView(R.layout.menu_dot);
 	}
 
 	/***
@@ -285,7 +289,7 @@ public class HomeActivity extends AppCompatActivity {
 			HomeFragment homeFragment = new HomeFragment();
 			return homeFragment;
 		case 1:
-			InfoGeneralFragment infoGeneralFragment = new InfoGeneralFragment();
+			ProductInfoFragment infoGeneralFragment = new ProductInfoFragment();
 			return infoGeneralFragment;
 		case 2:
 			InfoContractFragment infoContractFragment = new InfoContractFragment();
@@ -299,17 +303,28 @@ public class HomeActivity extends AppCompatActivity {
 		case 5:
 			PaymentOnlineFragment paymentFragment = new PaymentOnlineFragment();
 			return paymentFragment;
+
 		case 6:
+			// Hóa đơn điện tử
+			ElectricBillFragment billFragment = new ElectricBillFragment();
+			return billFragment;
+
+		case 7:
+			// Mạng lưới văn phòng
+//			ListOfficeActivity listOffice = new ListOfficeActivity();
+			return null;
+
+		case 8:
 			// notifications fragment
 			NotificationsFragment notificationsFragment = new NotificationsFragment();
 			return notificationsFragment;
 
-		case 7:
+		case 9:
 			// settings fragment
 			SettingsFragment settingsFragment = new SettingsFragment();
 			return settingsFragment;
-		case 8:
-			//Logout
+		case 10:
+			// Logout
 			MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
 			builder.setMessage(getString(R.string.message_alert_logout))
 					.setPositiveButton("Có", new DialogInterface.OnClickListener() {
@@ -319,21 +334,21 @@ public class HomeActivity extends AppCompatActivity {
 							cPortalPref.clearUserLogin(HomeActivity.this);
 							cPortalPref.setLogin(getBaseContext(), false);
 							Intent intent = new Intent(getBaseContext(), HomeActivity.class);
-							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 							startActivity(intent);
 							finish();
 						}
 					}).setNegativeButton("Không", new DialogInterface.OnClickListener() {
-						
+
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
 						}
 					});
 			builder.create().show();
-			
+
 			return null;
-			
+
 		default:
 			return new HomeFragment();
 		}
@@ -389,28 +404,81 @@ public class HomeActivity extends AppCompatActivity {
 					}
 
 				case R.id.nav_bonusProgram:
-					navItemIndex = 3;
-					CURRENT_TAG = TAG_CTDIEMTHUONG;
-					break;
+
+					if (cPortalPref.haveLogin(HomeActivity.this)) {
+						navItemIndex = 3;
+						CURRENT_TAG = TAG_CTDIEMTHUONG;
+						break;
+					} else {
+						MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
+						builder.setMessage(getString(R.string.message_alert_login_to_using_function))
+								.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								});
+						builder.create().show();
+						return false;
+					}
 				case R.id.nav_fundPrice:
 					navItemIndex = 4;
 					CURRENT_TAG = TAG_GIA_DV_QUY;
 					break;
 				case R.id.nav_payment:
-					navItemIndex = 5;
-					CURRENT_TAG = TAG_TT_TRUCTUYEN;
-					break;
+					if (cPortalPref.haveLogin(HomeActivity.this)) {
+						navItemIndex = 5;
+						CURRENT_TAG = TAG_TT_TRUCTUYEN;
+						break;
+					} else {
+						MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
+						builder.setMessage(getString(R.string.message_alert_login_to_using_function))
+								.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								});
+						builder.create().show();
+						return false;
+					}
+
+				case R.id.nav_electricBill:
+					if (cPortalPref.haveLogin(HomeActivity.this)) {
+						navItemIndex = 6;
+						CURRENT_TAG = TAG_HOADONDIENTU;
+						break;
+					} else {
+						MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
+						builder.setMessage(getString(R.string.message_alert_login_to_using_function))
+								.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								});
+						builder.create().show();
+						return false;
+					}
+
+				case R.id.nav_listOffice:
+					navItemIndex = 7;
+					CURRENT_TAG = TAG_MANGLUOI_VP;
+					
+					startActivity(new Intent(HomeActivity.this, ListOfficeActivity.class));
+					drawer.closeDrawers();
+					return true;
 
 				case R.id.nav_notifications:
-					navItemIndex = 6;
+					navItemIndex = 8;
 					CURRENT_TAG = TAG_NOTIFICATIONS;
 					break;
 				case R.id.nav_settings:
-					navItemIndex = 7;
+					navItemIndex = 9;
 					CURRENT_TAG = TAG_SETTINGS;
 					break;
 				case R.id.nav_logout:
-					navItemIndex = 8;
+					navItemIndex = 10;
 					CURRENT_TAG = TAG_LOGOUT;
 					break;
 				case R.id.nav_about_us:
@@ -503,7 +571,7 @@ public class HomeActivity extends AppCompatActivity {
 
 		// when fragment is notifications, load the menu created for
 		// notifications
-		if (navItemIndex == 6) {
+		if (navItemIndex == 8) {
 			getMenuInflater().inflate(R.menu.notifications, menu);
 		}
 		return true;

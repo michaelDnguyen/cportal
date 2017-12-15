@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnVanPhong"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/st_btn_nocolor_blue_left"
+            android:text="Văn phòng"
+            android:textColor="@drawable/st_textcolor_red_white"
+            android:textSize="@dimen/textsize14"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:background="@color/blue"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnPhongKham"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/st_btn_nocolor_blue_right"
+            android:text="Phòng khám"
+            android:textColor="@drawable/st_textcolor_red_white"
+            android:textSize="@dimen/textsize14"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

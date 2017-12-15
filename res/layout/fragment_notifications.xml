@@ -6,7 +6,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_margin="10dp" >
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeContainer"
@@ -17,7 +18,8 @@
                 android:id="@+id/lvNotification"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:scrollbars="none" />
 
             <TextView
                 android:id="@+id/tvNotNoti"

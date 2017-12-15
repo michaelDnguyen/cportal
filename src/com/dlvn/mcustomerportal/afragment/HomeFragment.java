@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
@@ -48,16 +49,17 @@ public class HomeFragment extends Fragment {
 	View view;
 	ImageView imvAds;
 
-	RecyclerView rvContent;
-	HomeListAdapter rvAdapter;
+//	RecyclerView rvContent;
+//	HomeListAdapter rvAdapter;
 
+	LinearLayout lloHopDong;
 	ScrollerViewPager viewPager;
 	SpringIndicator springIndicator;
 	CirclePageIndicator circleIndicator;
 	HomePagerAdapter pagerAdapter;
 	
 	ImageView imvProfile;
-	TextView tvWelcome;
+	TextView tvWelcome, tvDescription;
 
 	List<HomeItemModel> lstData;
 	List<HomePageItemModel> lstPagerData;
@@ -121,23 +123,26 @@ public class HomeFragment extends Fragment {
 	 */
 	private void getViews(View view){
 		
+		lloHopDong = (LinearLayout) view.findViewById(R.id.lloHopDong);
+		
 		viewPager = (ScrollerViewPager) view.findViewById(R.id.view_pager);
 //		springIndicator = (SpringIndicator) view.findViewById(R.id.indicator);
 		circleIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
 		
 		imvProfile = (ImageView) view.findViewById(R.id.imvProfile);
 		tvWelcome = (TextView) view.findViewById(R.id.tvWelcome);
+		tvDescription = (TextView) view.findViewById(R.id.tvDescription);
 
 		imvAds = (ImageView) view.findViewById(R.id.imv_ads);
 		Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
 
-		rvContent = (RecyclerView) view.findViewById(R.id.rvContent);
-		RecyclerView.LayoutManager layout = new RecyclerSmoothLayoutManager(getActivity(),
-				LinearLayoutManager.VERTICAL, false);
-		rvContent.setLayoutManager(layout);
-
-		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvContent.getContext());
-		rvContent.addItemDecoration(dividerItemDecoration);
+//		rvContent = (RecyclerView) view.findViewById(R.id.rvContent);
+//		RecyclerView.LayoutManager layout = new RecyclerSmoothLayoutManager(getActivity(),
+//				LinearLayoutManager.VERTICAL, false);
+//		rvContent.setLayoutManager(layout);
+//
+//		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvContent.getContext());
+//		rvContent.addItemDecoration(dividerItemDecoration);
 		
 		
 		Glide.with(this).load(R.drawable.avatar_user).thumbnail(0.5f).apply(RequestOptions.circleCropTransform()).into(imvProfile);
@@ -152,6 +157,13 @@ public class HomeFragment extends Fragment {
 		
 		if (cPortalPref.haveLogin(getActivity())) {
 			tvWelcome.setText("Chào mừng " + cPortalPref.getUserName(getActivity()));
+			tvDescription.setText(getActivity().getString(R.string.home_welcome_user));
+			lloHopDong.setVisibility(View.VISIBLE);
+		} else {
+			tvWelcome.setText("Chào mừng Quý khách");
+			imvProfile.setVisibility(View.GONE);
+			tvDescription.setText(getActivity().getString(R.string.home_welcome_guest));
+			lloHopDong.setVisibility(View.GONE);
 		}
 		
 		lstData = new ArrayList<HomeItemModel>();
@@ -172,8 +184,8 @@ public class HomeFragment extends Fragment {
 				"Cung cấp các loại biểu mẫu cho khách hàng như đăng kí dịch vụ SMS, yêu cầu sử dụng điểm thưởng, giải quyết quyền lợi bảo hiểm, thanh toán quyền lợi hợp đồng bảo hiểm...",
 				"https://dai-ichi-life.com.vn/images/news/165/1701/attribute/74/Outpatient-Healthcare.jpg"));
 
-		rvAdapter = new HomeListAdapter(getActivity(), lstData);
-		rvContent.setAdapter(rvAdapter);
+//		rvAdapter = new HomeListAdapter(getActivity(), lstData);
+//		rvContent.setAdapter(rvAdapter);
 		
 		//init viewpager
 		lstPagerData = new ArrayList<>();
@@ -196,19 +208,19 @@ public class HomeFragment extends Fragment {
 	 * @date Dec 14, 2017
 	 */
 	private void setListener() {
-		rvContent.addOnItemTouchListener(
-				new RecyclerViewTouchListener(getActivity(), rvContent, new RecyclerViewClickListener() {
-
-					@Override
-					public void onLongClick(View view, int position) {
-
-					}
-
-					@Override
-					public void onClick(View view, int position) {
-
-					}
-				}));
+//		rvContent.addOnItemTouchListener(
+//				new RecyclerViewTouchListener(getActivity(), rvContent, new RecyclerViewClickListener() {
+//
+//					@Override
+//					public void onLongClick(View view, int position) {
+//
+//					}
+//
+//					@Override
+//					public void onClick(View view, int position) {
+//
+//					}
+//				}));
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

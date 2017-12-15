@@ -12,6 +12,7 @@ import com.dlvn.mcustomerportal.utils.myLog;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -26,12 +27,12 @@ public class ProfileActivity extends BaseActivity {
 
 	ImageView imvProfile;
 	TextView tvName;
-	ImageView imvBack;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		getViews();
 		initData();
@@ -42,7 +43,6 @@ public class ProfileActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		imvProfile = (ImageView) findViewById(R.id.imvProfile);
 		tvName = (TextView) findViewById(R.id.tvName);
-		imvBack = (ImageView) findViewById(R.id.imvBack);
 	}
 
 	private void initData() {
@@ -71,13 +71,23 @@ public class ProfileActivity extends BaseActivity {
 	}
 
 	private void setListener() {
-		// TODO Auto-generated method stub
-		imvBack.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		// noinspection SimplifiableIfStatement
+		if (id == android.R.id.home) {
+			// finish the activity
+			onBackPressed();
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
 	}
 }

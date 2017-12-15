@@ -106,14 +106,6 @@
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:id="@+id/imvBack"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:background="@drawable/ic_back_white" />
         </RelativeLayout>
 
         <LinearLayout
