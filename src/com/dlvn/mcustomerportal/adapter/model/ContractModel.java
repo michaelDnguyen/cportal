@@ -3,6 +3,11 @@ package com.dlvn.mcustomerportal.adapter.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Model data of Hop Dong BH
+ * @author nn.tai
+ * @date Dec 18, 2017
+ */
 public class ContractModel implements Parcelable {
 
 	String soHopDong;

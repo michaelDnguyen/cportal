@@ -1,14 +1,24 @@
 package com.dlvn.mcustomerportal.afragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.dlvn.mcustomerportal.R;
+import com.dlvn.mcustomerportal.adapter.ElectricBillListAdapter;
+import com.dlvn.mcustomerportal.adapter.model.ElectricBillModel;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class ElectricBillFragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
@@ -21,6 +31,15 @@ public class ElectricBillFragment extends Fragment {
 	private String mParam2;
 
 	private OnFragmentInteractionListener mListener;
+
+	View view;
+
+	ListView lvData;
+	TextView tvNoData;
+	SwipeRefreshLayout swipeContainer;
+	
+	ElectricBillListAdapter adapter;
+	List<ElectricBillModel> lstData;
 
 	public ElectricBillFragment() {
 		// Required empty public constructor
@@ -58,7 +77,57 @@ public class ElectricBillFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_fundprice, container, false);
+		if (view == null) {
+			view = inflater.inflate(R.layout.fragment_electricbill, container, false);
+
+			getView(view);
+			initDatas();
+			setListener();
+		}
+
+		return view;
+	}
+
+	private void getView(View v) {
+		// TODO Auto-generated method stub
+		lvData = (ListView) v.findViewById(R.id.lvData);
+		lvData.setDividerHeight(10);
+		
+		tvNoData = (TextView) v.findViewById(R.id.tvNoData);
+		swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+	}
+
+	private void initDatas() {
+		// TODO Auto-generated method stub
+		if(lstData == null)
+			lstData = new ArrayList<>();
+		
+		lstData.add(new ElectricBillModel("0987873", "Công ty TNHH An Thịnh Phát", "1,500,000,000", "14/11/2017", "", ""));
+		lstData.add(new ElectricBillModel("0254876", "Cty Thành Phát", "900,000,000", "08/11/2017", "", ""));
+		lstData.add(new ElectricBillModel("0154782", "Công ty TNHH Đồng Tâm", "2,650,000,000", "24/10/2017", "", ""));
+		lstData.add(new ElectricBillModel("0548762", "Cửa hàng VLXD Hưng Thịnh", "1,200,000,000", "18/10/2017", "", ""));
+		
+		if(adapter == null)
+			adapter = new ElectricBillListAdapter(getActivity(), lstData);
+		lvData.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+		
+		if(lstData.size() > 0)
+			tvNoData.setVisibility(View.GONE);
+		else
+			tvNoData.setVisibility(View.VISIBLE);
+	}
+
+	private void setListener() {
+		// TODO Auto-generated method stub
+		swipeContainer.setOnRefreshListener(new OnRefreshListener() {
+
+			@Override
+			public void onRefresh() {
+				swipeContainer.setRefreshing(false);
+			}
+		});
+		
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

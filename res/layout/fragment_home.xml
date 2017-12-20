@@ -9,14 +9,22 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:paddingBottom="30dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="vertical" >
+
+            <!-- Layout header home origin -->
+
+            <ImageView
+                android:id="@+id/imv_ads"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
 
             <!-- Layout header home by Customer template Outsystem -->
 
@@ -25,24 +33,21 @@
                 android:layout_height="wrap_content" >
 
                 <LinearLayout
+                    android:id="@+id/llo01"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/red"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:id="@+id/imvProfile"
-                        android:layout_width="@dimen/profile_width"
-                        android:layout_height="@dimen/profile_height"
-                        android:layout_marginTop="20dp"
-                        android:src="@drawable/avatar_user" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="50dp" >
 
                     <TextView
                         android:id="@+id/tvWelcome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
                         android:text="Chào mừng Nguyen Van Nam"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textsize14"
@@ -66,9 +71,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_alignParentBottom="true"
+                    android:layout_below="@id/llo01"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginTop="-40dp"
                     android:background="@drawable/st_bg_page_home"
                     android:orientation="vertical" >
 
@@ -79,21 +85,6 @@
                         android:layout_gravity="center"
                         android:layout_weight="1" />
 
-                    <!--
-                         <com.dlvn.mcustomerportal.view.indicator.SpringIndicator
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/indicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="24dp"
-                        android:layout_marginRight="24dp"
-                        app:siIndicatorColor="@color/colorPrimary"
-                        app:siIndicatorColors="@array/indicator_colors"
-                        app:siSelectedTextColor="@android:color/white"
-                        app:siTextColor="@color/colorPrimaryDark"
-                        app:siTextSize="10sp" />   -->
-
                     <com.dlvn.mcustomerportal.view.indicator.CirclePageIndicator
                         android:id="@+id/indicator"
                         android:layout_width="match_parent"
@@ -103,21 +94,13 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <!-- Layout header home origin -->
-
-            <ImageView
-                android:id="@+id/imv_ads"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
             <!-- layout quảng cáo CTBH -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:orientation="vertical"
                 android:padding="10dp" >
 
@@ -141,21 +124,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:capitalize="sentences"
-                        android:text="PHÍ ĐỊNH KỲ TỪ 499,000/THÁNG"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="@dimen/textsize12"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="10dp"
                         android:capitalize="sentences"
-                        android:text="GÓI AN NHÀN HƯU TRÍ"
+                        android:text="BẢN TIN DAI-ICHI-LIFE VIỆT NAM"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/textsize16"
                         android:textStyle="bold" />
@@ -164,9 +136,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="30dp"
                         android:capitalize="sentences"
-                        android:text="Hãy đăng ký ngay hôm nay. Hỗ trợ tự động đóng phí qua thẻ."
+                        android:text="Tin tức định kỳ phát hành hàng quý chia sẻ cho quý khách hàng về các hoạt động nổi bật cũng như tình hình phát triển của Dai-Ichi-Life Việt Nam."
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/textsize12" />
                 </RelativeLayout>
@@ -174,6 +146,7 @@
                 <!-- QC2 -->
 
                 <RelativeLayout
+                    android:id="@+id/rloThongTinChung"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginBottom="10dp"
@@ -193,20 +166,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:capitalize="sentences"
-                        android:text="CHỈ TỪ 199,000 ĐẾN 399,000 HÀNG THÁNG"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="@dimen/textsize12"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="40dp"
-                        android:capitalize="sentences"
-                        android:text="GÓI CHĂM SÓC SỨC KHỎE Y TẾ"
+                        android:text="GIỚI THIỆU VÀ HƯỚNG DẪN SỬ DỤNG"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/textsize16"
                         android:textStyle="bold" />
@@ -215,9 +177,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="30dp"
                         android:capitalize="sentences"
-                        android:text="Chăm sóc sức khỏe của bạn mỗi ngày.Phòng ngừa mọi nguy cơ bệnh tật."
+                        android:text="Hướng dẫn sử dụng cổng thông tin khách hàng của Dai-Ichi-Life Việt Nam, giới thiệu các chương"
                         android:textColor="@color/dark_grey"
                         android:textSize="@dimen/textsize12" />
                 </RelativeLayout>
@@ -226,11 +188,11 @@
             <!-- layout transaction -->
 
             <LinearLayout
+                android:id="@+id/lloTransaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/st_bg_page_home"
                 android:orientation="vertical"
                 android:padding="10dp" >
@@ -250,9 +212,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textStyle="bold"
+                        android:text="Lịch sử giao dịch"
                         android:textColor="@color/red"
-                        android:text="Lịch sử giao dịch" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <!-- list item -->
@@ -263,20 +225,21 @@
                     android:orientation="vertical" >
 
                     <!-- item 1 -->
+
                     <RelativeLayout
                         android:layout_width="match_parent"
+                        android:layout_height="50dp"
                         android:layout_marginLeft="10dp"
-                        android:padding="5dp"
-                        android:layout_height="50dp" >
+                        android:padding="5dp" >
 
                         <ImageView
                             android:id="@+id/imvIcoTrans"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:padding="3dp"
-                            android:background="@drawable/st_bg_white_border_noradius"
                             android:adjustViewBounds="true"
+                            android:background="@drawable/st_bg_white_border_noradius"
+                            android:padding="3dp"
                             android:src="@drawable/ico_transaction" />
 
                         <TextView
@@ -307,22 +270,23 @@
                             android:padding="3dp"
                             android:src="@drawable/ico_arrow_right" />
                     </RelativeLayout>
-                    
+
                     <!-- item 2 -->
+
                     <RelativeLayout
                         android:layout_width="match_parent"
+                        android:layout_height="50dp"
                         android:layout_marginLeft="10dp"
-                        android:padding="5dp"
-                        android:layout_height="50dp" >
+                        android:padding="5dp" >
 
                         <ImageView
                             android:id="@+id/imv2IcoTrans"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="3dp"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/st_bg_white_border_noradius"
                             android:adjustViewBounds="true"
+                            android:background="@drawable/st_bg_white_border_noradius"
+                            android:padding="3dp"
                             android:src="@drawable/ico_transaction" />
 
                         <TextView
@@ -353,22 +317,23 @@
                             android:padding="3dp"
                             android:src="@drawable/ico_arrow_right" />
                     </RelativeLayout>
-                    
+
                     <!-- item 3 -->
+
                     <RelativeLayout
                         android:layout_width="match_parent"
+                        android:layout_height="50dp"
                         android:layout_marginLeft="10dp"
-                        android:padding="5dp"
-                        android:layout_height="50dp" >
+                        android:padding="5dp" >
 
                         <ImageView
                             android:id="@+id/imv3IcoTrans"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="3dp"
                             android:layout_centerVertical="true"
-                            android:background="@drawable/st_bg_white_border_noradius"
                             android:adjustViewBounds="true"
+                            android:background="@drawable/st_bg_white_border_noradius"
+                            android:padding="3dp"
                             android:src="@drawable/ico_transaction" />
 
                         <TextView
@@ -401,7 +366,6 @@
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

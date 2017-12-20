@@ -15,6 +15,7 @@ import com.dlvn.mcustomerportal.afragment.ElectricBillFragment;
 import com.dlvn.mcustomerportal.afragment.FundUnitPriceFragment;
 import com.dlvn.mcustomerportal.afragment.HomeFragment;
 import com.dlvn.mcustomerportal.afragment.InfoContractFragment;
+import com.dlvn.mcustomerportal.afragment.InfoGeneralFragment;
 import com.dlvn.mcustomerportal.afragment.ProductInfoFragment;
 import com.dlvn.mcustomerportal.afragment.NotificationsFragment;
 import com.dlvn.mcustomerportal.afragment.PaymentOnlineFragment;
@@ -66,7 +67,8 @@ public class HomeActivity extends AppCompatActivity {
 
 	// tags used to attach the fragments
 	private static final String TAG_HOME = "home";
-	private static final String TAG_TTSANPHAM = "InfoGeneral";
+	private static final String TAG_TTCHUNG = "InfoGeneral";
+	private static final String TAG_TTSANPHAM = "InfoProduct";
 	private static final String TAG_TTHOPDONG = "InfoContract";
 	private static final String TAG_CTDIEMTHUONG = "BonusProgram";
 	private static final String TAG_GIA_DV_QUY = "FundPrice";
@@ -224,7 +226,7 @@ public class HomeActivity extends AppCompatActivity {
 		});
 
 		// showing dot next to notifications label
-		navigationView.getMenu().getItem(8).setActionView(R.layout.menu_dot);
+		navigationView.getMenu().getItem(9).setActionView(R.layout.menu_dot);
 	}
 
 	/***
@@ -289,41 +291,44 @@ public class HomeActivity extends AppCompatActivity {
 			HomeFragment homeFragment = new HomeFragment();
 			return homeFragment;
 		case 1:
-			ProductInfoFragment infoGeneralFragment = new ProductInfoFragment();
+			InfoGeneralFragment infoGeneralFragment = new InfoGeneralFragment();
 			return infoGeneralFragment;
 		case 2:
+			ProductInfoFragment productFragment = new ProductInfoFragment();
+			return productFragment;
+		case 3:
 			InfoContractFragment infoContractFragment = new InfoContractFragment();
 			return infoContractFragment;
-		case 3:
+		case 4:
 			BonusProgramFragment bonusFragment = new BonusProgramFragment();
 			return bonusFragment;
-		case 4:
+		case 5:
 			FundUnitPriceFragment fundFragment = new FundUnitPriceFragment();
 			return fundFragment;
-		case 5:
+		case 6:
 			PaymentOnlineFragment paymentFragment = new PaymentOnlineFragment();
 			return paymentFragment;
 
-		case 6:
+		case 7:
 			// Hóa đơn điện tử
 			ElectricBillFragment billFragment = new ElectricBillFragment();
 			return billFragment;
 
-		case 7:
+		case 8:
 			// Mạng lưới văn phòng
-//			ListOfficeActivity listOffice = new ListOfficeActivity();
+			// ListOfficeActivity listOffice = new ListOfficeActivity();
 			return null;
 
-		case 8:
+		case 9:
 			// notifications fragment
 			NotificationsFragment notificationsFragment = new NotificationsFragment();
 			return notificationsFragment;
 
-		case 9:
+		case 10:
 			// settings fragment
 			SettingsFragment settingsFragment = new SettingsFragment();
 			return settingsFragment;
-		case 10:
+		case 11:
 			// Logout
 			MyCustomDialog.Builder builder = new MyCustomDialog.Builder(HomeActivity.this);
 			builder.setMessage(getString(R.string.message_alert_logout))
@@ -382,12 +387,16 @@ public class HomeActivity extends AppCompatActivity {
 					break;
 				case R.id.nav_infoGeneral:
 					navItemIndex = 1;
+					CURRENT_TAG = TAG_TTCHUNG;
+					break;
+				case R.id.nav_infoProduct:
+					navItemIndex = 2;
 					CURRENT_TAG = TAG_TTSANPHAM;
 					break;
 				case R.id.nav_infoContract:
 
 					if (cPortalPref.haveLogin(HomeActivity.this)) {
-						navItemIndex = 2;
+						navItemIndex = 3;
 						CURRENT_TAG = TAG_TTHOPDONG;
 						break;
 					} else {
@@ -406,7 +415,7 @@ public class HomeActivity extends AppCompatActivity {
 				case R.id.nav_bonusProgram:
 
 					if (cPortalPref.haveLogin(HomeActivity.this)) {
-						navItemIndex = 3;
+						navItemIndex = 4;
 						CURRENT_TAG = TAG_CTDIEMTHUONG;
 						break;
 					} else {
@@ -422,12 +431,12 @@ public class HomeActivity extends AppCompatActivity {
 						return false;
 					}
 				case R.id.nav_fundPrice:
-					navItemIndex = 4;
+					navItemIndex = 5;
 					CURRENT_TAG = TAG_GIA_DV_QUY;
 					break;
 				case R.id.nav_payment:
 					if (cPortalPref.haveLogin(HomeActivity.this)) {
-						navItemIndex = 5;
+						navItemIndex = 6;
 						CURRENT_TAG = TAG_TT_TRUCTUYEN;
 						break;
 					} else {
@@ -445,7 +454,7 @@ public class HomeActivity extends AppCompatActivity {
 
 				case R.id.nav_electricBill:
 					if (cPortalPref.haveLogin(HomeActivity.this)) {
-						navItemIndex = 6;
+						navItemIndex = 7;
 						CURRENT_TAG = TAG_HOADONDIENTU;
 						break;
 					} else {
@@ -462,23 +471,23 @@ public class HomeActivity extends AppCompatActivity {
 					}
 
 				case R.id.nav_listOffice:
-					navItemIndex = 7;
+					navItemIndex = 8;
 					CURRENT_TAG = TAG_MANGLUOI_VP;
-					
+
 					startActivity(new Intent(HomeActivity.this, ListOfficeActivity.class));
 					drawer.closeDrawers();
 					return true;
 
 				case R.id.nav_notifications:
-					navItemIndex = 8;
+					navItemIndex = 9;
 					CURRENT_TAG = TAG_NOTIFICATIONS;
 					break;
 				case R.id.nav_settings:
-					navItemIndex = 9;
+					navItemIndex = 10;
 					CURRENT_TAG = TAG_SETTINGS;
 					break;
 				case R.id.nav_logout:
-					navItemIndex = 10;
+					navItemIndex = 11;
 					CURRENT_TAG = TAG_LOGOUT;
 					break;
 				case R.id.nav_about_us:
@@ -571,7 +580,7 @@ public class HomeActivity extends AppCompatActivity {
 
 		// when fragment is notifications, load the menu created for
 		// notifications
-		if (navItemIndex == 8) {
+		if (navItemIndex == 9) {
 			getMenuInflater().inflate(R.menu.notifications, menu);
 		}
 		return true;
@@ -585,8 +594,10 @@ public class HomeActivity extends AppCompatActivity {
 		int id = item.getItemId();
 
 		// noinspection SimplifiableIfStatement
-		if (id == R.id.action_logout) {
-			Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
+		if (id == R.id.action_call) {
+			// Toast.makeText(getApplicationContext(), "Call user!",
+			// Toast.LENGTH_LONG).show();
+			startActivity(new Intent(this, ContactActivity.class));
 			return true;
 		}
 

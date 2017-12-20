@@ -4,7 +4,7 @@ public class Constant {
 
 	/************************** MAIN URL API Services *****************************************/
 	public static final String URL_DEV = "http://10.166.2.119:7800/iibmobile/v1/";
-	public static final String URL_UAT = "";
+	public static final String URL_UAT = "http://magpcmsuat2.dai-ichi-life.com.vn/iibmobile/v1/";
 	public static final String URL_PRD = "";
 
 	/********************* URL PAYMENT NAPAS ************************/
@@ -18,7 +18,7 @@ public class Constant {
 	public static final String URL_NAPAS_RESPONSE_PRD = "http://khuat.dai-ichi-life.com.vn/onlinepayment/vpc_dr.aspx?";
 
 	//URL API
-	public static final String URL = URL_DEV;
+	public static final String URL = URL_UAT;
 	// URL NAPAS
 	public static String URL_PAYMENT = URL_NAPAS_UAT;
 	// URL NAPAS Resonse

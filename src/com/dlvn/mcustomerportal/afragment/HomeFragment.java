@@ -4,18 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.dlvn.mcustomerportal.R;
-import com.dlvn.mcustomerportal.adapter.HomeListAdapter;
 import com.dlvn.mcustomerportal.adapter.HomePagerAdapter;
-import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewClickListener;
-import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewTouchListener;
 import com.dlvn.mcustomerportal.adapter.model.HomeItemModel;
 import com.dlvn.mcustomerportal.adapter.model.HomePageItemModel;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.utils.myLog;
-import com.dlvn.mcustomerportal.view.DividerItemDecoration;
-import com.dlvn.mcustomerportal.view.RecyclerSmoothLayoutManager;
 import com.dlvn.mcustomerportal.view.indicator.CirclePageIndicator;
 import com.dlvn.mcustomerportal.view.indicator.ScrollerViewPager;
 import com.dlvn.mcustomerportal.view.indicator.SpringIndicator;
@@ -24,13 +18,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
@@ -49,16 +44,13 @@ public class HomeFragment extends Fragment {
 	View view;
 	ImageView imvAds;
 
-//	RecyclerView rvContent;
-//	HomeListAdapter rvAdapter;
-
-	LinearLayout lloHopDong;
+	LinearLayout lloHopDong, lloTransaction;
+	RelativeLayout rloThongTinChung;
 	ScrollerViewPager viewPager;
 	SpringIndicator springIndicator;
 	CirclePageIndicator circleIndicator;
 	HomePagerAdapter pagerAdapter;
 	
-	ImageView imvProfile;
 	TextView tvWelcome, tvDescription;
 
 	List<HomeItemModel> lstData;
@@ -123,29 +115,20 @@ public class HomeFragment extends Fragment {
 	 */
 	private void getViews(View view){
 		
+		rloThongTinChung = (RelativeLayout) view.findViewById(R.id.rloThongTinChung);
 		lloHopDong = (LinearLayout) view.findViewById(R.id.lloHopDong);
+		lloTransaction = (LinearLayout) view.findViewById(R.id.lloTransaction);
 		
 		viewPager = (ScrollerViewPager) view.findViewById(R.id.view_pager);
 //		springIndicator = (SpringIndicator) view.findViewById(R.id.indicator);
 		circleIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
 		
-		imvProfile = (ImageView) view.findViewById(R.id.imvProfile);
 		tvWelcome = (TextView) view.findViewById(R.id.tvWelcome);
 		tvDescription = (TextView) view.findViewById(R.id.tvDescription);
 
 		imvAds = (ImageView) view.findViewById(R.id.imv_ads);
 		Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
 
-//		rvContent = (RecyclerView) view.findViewById(R.id.rvContent);
-//		RecyclerView.LayoutManager layout = new RecyclerSmoothLayoutManager(getActivity(),
-//				LinearLayoutManager.VERTICAL, false);
-//		rvContent.setLayoutManager(layout);
-//
-//		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvContent.getContext());
-//		rvContent.addItemDecoration(dividerItemDecoration);
-		
-		
-		Glide.with(this).load(R.drawable.avatar_user).thumbnail(0.5f).apply(RequestOptions.circleCropTransform()).into(imvProfile);
 	}
 
 	/**
@@ -159,33 +142,13 @@ public class HomeFragment extends Fragment {
 			tvWelcome.setText("Chào mừng " + cPortalPref.getUserName(getActivity()));
 			tvDescription.setText(getActivity().getString(R.string.home_welcome_user));
 			lloHopDong.setVisibility(View.VISIBLE);
+			lloTransaction.setVisibility(View.VISIBLE);
 		} else {
 			tvWelcome.setText("Chào mừng Quý khách");
-			imvProfile.setVisibility(View.GONE);
 			tvDescription.setText(getActivity().getString(R.string.home_welcome_guest));
 			lloHopDong.setVisibility(View.GONE);
+			lloTransaction.setVisibility(View.GONE);
 		}
-		
-		lstData = new ArrayList<HomeItemModel>();
-
-		lstData.add(new HomeItemModel("CHÀO MỪNG QUÝ KHÁCH ĐẾN VỚI \"CỔNG THÔNG TIN KHÁCH HÀNG\"",
-				"Với mục tiêu phát triển mối quan hệ gắn kết với Khách hàng tham gia bảo hiểm thông qua việc cập nhật thường xuyên cho Khách hàng tất cả những thông tin về hợp đồng bảo hiểm của mình, Dai-ichi Life Việt Nam trân trọng giới thiệu đến toàn thể Quý Khách hàng trang thông tin trực tuyến dành cho Khách hàng \"Cổng thông tin Khách hàng\"",
-				"https://thue.today/media/images/section/brand/168706156912166_dai-ichi-life-viet-nam-cover.png"));
-		lstData.add(new HomeItemModel("BẢN TIN DAI-ICHI-LIFE VIỆT NAM",
-				"Kính mời quý khách hàng xem bản tin Dai-Ichi-Life Việt Nam",
-				"https://viecoi.vn/jobs/jobfullview/userdata/jobs/5273/241216-002.jpg"));
-		lstData.add(new HomeItemModel("HƯỚNG DẪN SỬ DỤNG CỔNG THÔNG TIN DỊCH VỤ KHÁCH HÀNG",
-				"Hướng dẫn sử dụng các chức năng của cổng thông tin khách hàng như đăng nhập, thay đổi mật khẩu, sửa đổi thông tin, thông tin hợp đồng, chương trình điểm thưởng... ",
-				"http://baohiemtuonglai.vn/wp-content/uploads/2017/06/tuyen-nhan-vien-kinh-doanh-luong-cao-2.jpg"));
-		lstData.add(new HomeItemModel("HƯỚNG DẪN NỘP PHÍ BẢO HIỂM ĐỊNH KỲ",
-				"Để hợp đồng bảo hiểm được duy trì hiệu lực liên tục nhằm đảm bảo các quyền lợi bảo hiểm của mình, Quý khách vui lòng nộp phí bảo hiểm định kỳ đúng hạn và có thể lựa chọn...",
-				"https://www.baohiem-dai-ichi-life.com/wp-content/uploads/2016/05/3phut-tu-van-bao-hiem-nhan-tho-dai-ichi-life-nhat-ban12.png"));
-		lstData.add(new HomeItemModel("CÁC LOẠI BIỂU MẪU",
-				"Cung cấp các loại biểu mẫu cho khách hàng như đăng kí dịch vụ SMS, yêu cầu sử dụng điểm thưởng, giải quyết quyền lợi bảo hiểm, thanh toán quyền lợi hợp đồng bảo hiểm...",
-				"https://dai-ichi-life.com.vn/images/news/165/1701/attribute/74/Outpatient-Healthcare.jpg"));
-
-//		rvAdapter = new HomeListAdapter(getActivity(), lstData);
-//		rvContent.setAdapter(rvAdapter);
 		
 		//init viewpager
 		lstPagerData = new ArrayList<>();
@@ -198,7 +161,6 @@ public class HomeFragment extends Fragment {
 		viewPager.fixScrollSpeed();
 
 		// just set viewPager
-//		springIndicator.setViewPager(viewPager);
 		circleIndicator.setViewPager(viewPager);
 	}
 
@@ -208,19 +170,20 @@ public class HomeFragment extends Fragment {
 	 * @date Dec 14, 2017
 	 */
 	private void setListener() {
-//		rvContent.addOnItemTouchListener(
-//				new RecyclerViewTouchListener(getActivity(), rvContent, new RecyclerViewClickListener() {
-//
-//					@Override
-//					public void onLongClick(View view, int position) {
-//
-//					}
-//
-//					@Override
-//					public void onClick(View view, int position) {
-//
-//					}
-//				}));
+		rloThongTinChung.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				InfoGeneralFragment fragment = new InfoGeneralFragment();
+				if (fragment != null) {
+					FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+					fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+					fragmentTransaction.replace(R.id.frame, fragment, fragment.getClass().getName());
+					fragmentTransaction.commitAllowingStateLoss();
+				}
+			}
+		});
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

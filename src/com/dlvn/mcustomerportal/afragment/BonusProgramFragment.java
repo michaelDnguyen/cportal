@@ -3,6 +3,7 @@ package com.dlvn.mcustomerportal.afragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dlvn.mcustomerportal.Bonus_NopPhiBHActivity;
 import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.adapter.BonusListAdapter;
 import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewClickListener;
@@ -13,6 +14,7 @@ import com.dlvn.mcustomerportal.view.DividerItemDecoration;
 import com.dlvn.mcustomerportal.view.RecyclerSmoothGridLayoutManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -134,7 +136,7 @@ public class BonusProgramFragment extends Fragment {
 
 					@Override
 					public void onClick(View view, int position) {
-
+						startActivity(new Intent(getActivity(), Bonus_NopPhiBHActivity.class));
 					}
 				}));
 	}

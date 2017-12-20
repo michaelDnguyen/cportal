@@ -112,7 +112,7 @@ public class LoginActivity extends BaseActivity {
 		int nhd = 0, tgt = 0, point = 0;
 		Random rand = new Random();
 		user.setNumberContract(rand.nextInt(10) % 10);
-		user.setAmountContract((rand.nextInt(1000) % 1000) * 10000);
+		user.setAmountContract((rand.nextInt(1000) % 1000) * 1000000);
 		user.setPoint(rand.nextInt(10000));
 		user.setProposalNo("000" + rand.nextInt(99999));
 

@@ -2,6 +2,11 @@ package com.dlvn.mcustomerportal.adapter.model;
 
 import com.google.android.gms.maps.model.LatLng;
 
+/**
+ * Model data of map screen
+ * @author nn.tai
+ * @date Dec 18, 2017
+ */
 public class OfficeAddressModel {
 
 	LatLng latlog;

@@ -15,22 +15,12 @@ public class ContractDetailActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contract_detail);
-		initActionBar();
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getViews();
 		initData();
 		setListener();
 	}
 
-	private void initActionBar() {
-		ActionBar actionBAr = getSupportActionBar();
-		
-		actionBAr.setTitle("Chi tiết hợp đồng");
-		actionBAr.setHomeButtonEnabled(true);
-		actionBAr.setDisplayHomeAsUpEnabled(true);
-		actionBAr.setDisplayShowHomeEnabled(true);
-
-		actionBAr.setHomeAsUpIndicator(R.drawable.ic_back_white);
-	}
 
 	private void getViews() {
 		// TODO Auto-generated method stub

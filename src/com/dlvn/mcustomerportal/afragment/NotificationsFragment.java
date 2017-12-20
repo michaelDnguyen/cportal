@@ -81,6 +81,9 @@ public class NotificationsFragment extends Fragment {
 
 			swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
 			lvNotification = (ListView) view.findViewById(R.id.lvNotification);
+			lvNotification.setDividerHeight(7);
+			lvNotification.setDivider(null);
+			
 			tvNotNoti = (TextView) view.findViewById(R.id.tvNotNoti);
 
 			initData();

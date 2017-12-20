@@ -1,10 +1,11 @@
 package com.dlvn.mcustomerportal.services;
 
-import okhttp3.ResponseBody;
+import com.dlvn.mcustomerportal.services.model.BaseRequest;
+import com.dlvn.mcustomerportal.services.model.response.getMapMarkerResponse;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import retrofit2.http.Streaming;
 
 /**
  * @arthor nn.tai
@@ -47,4 +48,7 @@ public interface ServicesRequest {
 //	@Streaming
 //	@POST("GetAttachFile")
 //	Call<ResponseBody> downloadFileAttach(@Body BaseRequest request);
+	
+	@POST("GetMapMarker")
+	Call<getMapMarkerResponse> getMapMarker(@Body BaseRequest request);
 }

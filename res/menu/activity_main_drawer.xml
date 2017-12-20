@@ -10,6 +10,12 @@
             android:id="@+id/nav_infoGeneral"
             android:icon="@drawable/ic_description_black_24dp"
             android:title="@string/nav_infoGeneral" />
+        
+        <item
+            android:id="@+id/nav_infoProduct"
+            android:icon="@drawable/ic_product_24dp"
+            android:title="@string/nav_infoProduct" />
+        
         <item
             android:id="@+id/nav_infoContract"
             android:icon="@drawable/ic_contacts_black_24dp"
@@ -30,12 +36,12 @@
         
         <item
             android:id="@+id/nav_electricBill"
-            android:icon="@drawable/ic_monetization_on_black_24dp"
+            android:icon="@drawable/ic_receipts_24dp"
             android:title="@string/nav_electricBill" />
         
         <item
             android:id="@+id/nav_listOffice"
-            android:icon="@drawable/ic_monetization_on_black_24dp"
+            android:icon="@drawable/ic_place_black_24dp"
             android:title="@string/nav_listOffice" />
 
         <item

@@ -1,5 +1,10 @@
 package com.dlvn.mcustomerportal.adapter.model;
 
+/**
+ * Model data of notification
+ * @author nn.tai
+ * @date Dec 18, 2017
+ */
 public class NotificationModel {
 
 	int ID;

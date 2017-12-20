@@ -54,6 +54,32 @@
                     android:orientation="vertical"
                     android:padding="@dimen/activity_contract_detail_margin" >
 
+                    <!-- Sản phẩm chính -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="@dimen/minwidth_tv120"
+                            android:text="Sản phẩm chính"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tvSanPhamChinh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:padding="5dp"
+                            android:text="An phúc hưng thịnh"
+                            android:textStyle="bold"
+                            android:gravity="right"
+                            android:textSize="@dimen/textsize14" />
+                    </LinearLayout>
+                    
                     <!-- Tinh trang hop dong -->
 
                     <LinearLayout
@@ -107,6 +133,33 @@
                             android:gravity="right"
                             android:textSize="@dimen/textsize14" />
                     </LinearLayout>
+                    
+                    <!-- Ngày đáo hạn -->
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="@dimen/minwidth_tv120"
+                            android:text="Ngày đáo hạn"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tvNgayDaoHan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:padding="5dp"
+                            android:text="18/03/2030"
+                            android:textStyle="bold"
+                            android:gravity="right"
+                            android:textSize="@dimen/textsize14" />
+                    </LinearLayout>
 
                     <!-- Dinh ky dong phi -->
 
@@ -130,6 +183,33 @@
                             android:background="@android:color/transparent"
                             android:padding="5dp"
                             android:text="Quý"
+                            android:textStyle="bold"
+                            android:gravity="right"
+                            android:textSize="@dimen/textsize14" />
+                    </LinearLayout>
+                    
+                    <!-- Số tiền bảo hiểm -->
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="@dimen/minwidth_tv120"
+                            android:text="Số tiền bảo hiểm"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tvSoTienBaoHiem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:padding="5dp"
+                            android:text="1,400,000,000"
                             android:textStyle="bold"
                             android:gravity="right"
                             android:textSize="@dimen/textsize14" />
