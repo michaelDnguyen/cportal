@@ -394,21 +394,23 @@ public class Utilities {
 	 * @param context
 	 */
 	public static void showSettingsAlertGPS(final Context context) {
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-		alertDialog.setTitle("SETTINGS");
-		alertDialog.setMessage("Anh/chị chưa mở GPS, vui lòng vào Setting để mở GPS!");
-		alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-				context.startActivity(intent);
-			}
-		});
-		alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-			}
-		});
-		alertDialog.show();
+		MyCustomDialog.Builder builder = new MyCustomDialog.Builder(context);
+		builder.setMessage("Anh/chị chưa mở GPS, vui lòng vào Setting để mở GPS!")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+						context.startActivity(intent);
+					}
+				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						dialog.dismiss();
+					}
+				});
+		builder.create().show();
 	}
 
 	/**
@@ -434,21 +436,16 @@ public class Utilities {
 	}
 
 	public static void showSettingsAlertConnection(final Context context) {
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-		alertDialog.setTitle("SETTINGS");
-		alertDialog.setMessage("Anh/chị chưa bật kết nối Internet, vui lòng vào Setting để mở kết nối Internet!");
-		alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-				context.startActivity(intent);
-			}
-		});
-		alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-			}
-		});
-		alertDialog.show();
+		MyCustomDialog.Builder builder = new MyCustomDialog.Builder(context);
+		builder.setMessage("Anh/chị chưa bật kết nối Internet, vui lòng vào Setting để mở kết nối Internet!")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+						context.startActivity(intent);
+					}
+				});
+		builder.create().show();
 	}
 
 	public static void showAlert(final Context context, String message) {

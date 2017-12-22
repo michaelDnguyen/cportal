@@ -113,6 +113,7 @@ public class cPortalPref {
 	public static int getUserPoint(Context context) {
 		return CustomPreferences.getInt(context, User.USER_POINT, 0);
 	}
+	
 
 	/**
 	 * Lay API token login

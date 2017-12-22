@@ -1,5 +1,7 @@
 package com.dlvn.mcustomerportal.common;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Constant {
 
 	/************************** MAIN URL API Services *****************************************/
@@ -31,6 +33,26 @@ public class Constant {
 	public static final int PERMISSION_REQUEST_CODE = 2000;
 	public static final int PERMISSION_GRANTED = 2001;
 	public static final int PERMISSION_DENIED = 2002;
+	
+	/**
+	 * key intent for Nop phi/Hoan tra
+	 */
+	public static final String NOPPHI_SOHOPDONG = "NOPPHI_SOHOPDONG";
+	public static final String NOPPHI_PHIBAOHIEM = "NOPPHI_PHIBAOHIEM";
+	public static final String NOPPHI_TAMUNG_DONGPHI = "NOPPHI_TAMUNG_DONGPHI";
+	public static final String NOPPHI_TAMUNG = "NOPPHI_TAMUNG";
+	public static final String NOPPHI_DIEMSUDUNG = "NOPPHI_DIEMSUDUNG";
+	
+	/**
+	 * Type of office
+	 */
+	public static final String OFFICE_TYPE = "DLVN Office";
+	public static final String MEDIC_TYPE = "Medic";
+	
+	/**
+	 * Default location Dai-Ichi_Life VN Head Office
+	 */
+	public static final LatLng defaultLocation = new LatLng(10.794908,106.676367);
 	
 	/**
 	 * enum các kênh thanh toán được hỗ trợ

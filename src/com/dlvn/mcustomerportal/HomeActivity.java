@@ -94,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
 
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
+		getActionBar().setIcon(R.drawable.daiichilife);
 
 		mHandler = new Handler();
 
@@ -129,6 +130,8 @@ public class HomeActivity extends AppCompatActivity {
 					fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
 					fragmentTransaction.addToBackStack(CURRENT_TAG);
 					fragmentTransaction.commitAllowingStateLoss();
+					
+					view.setVisibility(View.GONE);
 				}
 			}
 		});

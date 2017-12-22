@@ -40,6 +40,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTangTruong"
@@ -47,6 +48,14 @@
                 android:text="Tăng trưởng"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize10" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/tv02"
+                android:layout_centerHorizontal="true"
+                android:background="#0000ff" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -69,6 +78,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvPhatTrien"
@@ -76,6 +86,14 @@
                 android:text="Phát triển "
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize10" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/tv01"
+                android:layout_centerHorizontal="true"
+                android:background="#00ffff" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -95,6 +113,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvBaoToan"
@@ -102,6 +121,14 @@
                 android:text="Bảo toàn"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize10" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/tv03"
+                android:layout_centerHorizontal="true"
+                android:background="#ff00ff" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -118,7 +145,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/red"
+        android:background="@color/white"
         android:orientation="vertical" >
 
         <!-- Month -->
@@ -133,11 +160,11 @@
                 android:id="@+id/tvTruoc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:layout_marginLeft="10dp"
                 android:text="&lt;"
-                android:textColor="@color/white"
+                android:textColor="@color/red"
                 android:textStyle="bold" />
 
             <TextView
@@ -146,26 +173,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/red"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvSau"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:layout_marginRight="10dp"
                 android:text=">"
-                android:textColor="@color/white"
+                android:textColor="@color/red"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/chart"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp"
             android:layout_marginTop="20dp"
-            android:layout_height="match_parent" >
+            android:padding="10dp" >
         </lecho.lib.hellocharts.view.LineChartView>
     </LinearLayout>
 

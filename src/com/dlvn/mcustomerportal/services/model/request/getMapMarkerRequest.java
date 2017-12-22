@@ -11,13 +11,13 @@ import com.google.gson.annotations.SerializedName;
  */
 public class getMapMarkerRequest extends JsonDataInput {
 	
-	@SerializedName("AgentId")
+	@SerializedName("AgentID")
 	@Expose
 	private String agentId;
 	@SerializedName("Password")
 	@Expose
 	private String password;
-	@SerializedName("DeviceId")
+	@SerializedName("DeviceID")
 	@Expose
 	private String deviceId;
 	@SerializedName("Lat")

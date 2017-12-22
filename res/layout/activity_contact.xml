@@ -159,10 +159,11 @@
                 <Button
                     android:id="@+id/btnGui"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/state_btn_red"
+                    android:background="@drawable/state_btn_red_radius"
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
                     android:text="Gửi"

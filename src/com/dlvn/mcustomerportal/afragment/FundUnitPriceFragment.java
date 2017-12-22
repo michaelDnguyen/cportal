@@ -55,7 +55,7 @@ public class FundUnitPriceFragment extends Fragment {
 	private int numberOfPoints = 4;
 
 	float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
-	int[] colorLine = { Color.WHITE, Color.CYAN, Color.YELLOW };
+	int[] colorLine = { Color.BLUE, Color.CYAN, Color.MAGENTA };
 
 	private boolean hasAxes = true;
 	private boolean hasAxesNames = true;

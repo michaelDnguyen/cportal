@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- action call phone -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <!-- permission for location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -67,7 +70,8 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
-        <activity android:name=".ContractDetailActivity"
+        <activity
+            android:name=".ContractDetailActivity"
             android:label="@string/activity_title_contract_detail" >
         </activity>
         <activity
@@ -78,8 +82,20 @@
             android:label="@string/title_activity_contact" >
         </activity>
         <activity
-            android:name=".Bonus_NopPhiBHActivity"
+            android:name=".Bonus_NopPhiBH_Step01_Activity"
             android:label="@string/title_activity_bonus__nop_phi_bh" >
+        </activity>
+        <activity
+            android:name=".WebTutorialActivity"
+            android:label="@string/title_activity_web_tutorial" >
+        </activity>
+        <activity
+            android:name=".Bonus_NopPhiBH_Step02_Activity"
+            android:label="@string/title_activity_bonus__nop_phi_bh__step02_" >
+        </activity>
+        <activity
+            android:name=".Bonus_NopPhiBH_Step03_Activity"
+            android:label="@string/title_activity_bonus__nop_phi_bh__step03_" >
         </activity>
     </application>
 

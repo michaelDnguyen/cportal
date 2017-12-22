@@ -1,6 +1,8 @@
 package com.dlvn.mcustomerportal.afragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +17,7 @@ import com.dlvn.mcustomerportal.view.indicator.ScrollerViewPager;
 import com.dlvn.mcustomerportal.view.indicator.SpringIndicator;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,7 +30,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.ValueShape;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.LineChartView;
 
+/**
+ * 
+ * @author nn.tai
+ * @date Dec 21, 2017
+ */
 public class HomeFragment extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,16 +62,40 @@ public class HomeFragment extends Fragment {
 	ImageView imvAds;
 
 	LinearLayout lloHopDong, lloTransaction;
-	RelativeLayout rloThongTinChung;
+	RelativeLayout rloThongTinChung, rloTinTuc;
 	ScrollerViewPager viewPager;
 	SpringIndicator springIndicator;
 	CirclePageIndicator circleIndicator;
 	HomePagerAdapter pagerAdapter;
-	
+
 	TextView tvWelcome, tvDescription;
 
 	List<HomeItemModel> lstData;
 	List<HomePageItemModel> lstPagerData;
+
+	//Chart
+	int year, month;
+
+	private LineChartView chart;
+	private LineChartData data;
+	private int numberOfLines = 3;
+	private int maxNumberOfLines = 4;
+	private int numberOfPoints = 4;
+
+	float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
+	int[] colorLine = { Color.BLUE, Color.CYAN, Color.MAGENTA };
+
+	private boolean hasAxes = true;
+	private boolean hasAxesNames = true;
+	private boolean hasLines = true;
+	private boolean hasPoints = false;
+	private ValueShape shape = ValueShape.CIRCLE;
+	private boolean isFilled = false;
+	private boolean hasLabels = false;
+	private boolean isCubic = false;
+	private boolean hasLabelForSelected = false;
+	private boolean pointsHaveDifferentColor;
+	private boolean hasGradientToTransparent = false;
 
 	public HomeFragment() {
 		// Required empty public constructor
@@ -106,38 +147,43 @@ public class HomeFragment extends Fragment {
 		}
 		return view;
 	}
-	
+
 	/**
 	 * get view from layout
+	 * 
 	 * @author nn.tai
 	 * @date Dec 14, 2017
 	 * @param view
 	 */
-	private void getViews(View view){
-		
+	private void getViews(View view) {
+
 		rloThongTinChung = (RelativeLayout) view.findViewById(R.id.rloThongTinChung);
+		rloTinTuc = (RelativeLayout) view.findViewById(R.id.rloTinTuc);
 		lloHopDong = (LinearLayout) view.findViewById(R.id.lloHopDong);
 		lloTransaction = (LinearLayout) view.findViewById(R.id.lloTransaction);
-		
+
 		viewPager = (ScrollerViewPager) view.findViewById(R.id.view_pager);
-//		springIndicator = (SpringIndicator) view.findViewById(R.id.indicator);
+		// springIndicator = (SpringIndicator)
+		// view.findViewById(R.id.indicator);
 		circleIndicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
-		
+
 		tvWelcome = (TextView) view.findViewById(R.id.tvWelcome);
 		tvDescription = (TextView) view.findViewById(R.id.tvDescription);
 
 		imvAds = (ImageView) view.findViewById(R.id.imv_ads);
 		Glide.with(this).load(R.drawable.daiichii_ads).into(imvAds);
 
+		chart = (LineChartView) view.findViewById(R.id.chart);
 	}
 
 	/**
 	 * init data to views
+	 * 
 	 * @author nn.tai
 	 * @date Dec 14, 2017
 	 */
 	private void initData() {
-		
+
 		if (cPortalPref.haveLogin(getActivity())) {
 			tvWelcome.setText("Chào mừng " + cPortalPref.getUserName(getActivity()));
 			tvDescription.setText(getActivity().getString(R.string.home_welcome_user));
@@ -149,12 +195,15 @@ public class HomeFragment extends Fragment {
 			lloHopDong.setVisibility(View.GONE);
 			lloTransaction.setVisibility(View.GONE);
 		}
-		
-		//init viewpager
+
+		// init viewpager
 		lstPagerData = new ArrayList<>();
-		lstPagerData.add(new HomePageItemModel("00078941","236,500,000","3,200,000","23/12/2017","23/01/2018","39"));
-		lstPagerData.add(new HomePageItemModel("001034198","688,105,024","36,215,500","23/10/2017","22/12/2017","8"));
-		lstPagerData.add(new HomePageItemModel("001036845","56,331,000","2,814,400","02/11/2017","01/01/2018","18"));
+		lstPagerData
+				.add(new HomePageItemModel("00078941", "236,500,000", "3,200,000", "23/12/2017", "23/01/2018", "39"));
+		lstPagerData
+				.add(new HomePageItemModel("001034198", "688,105,024", "36,215,500", "23/10/2017", "22/12/2017", "8"));
+		lstPagerData
+				.add(new HomePageItemModel("001036845", "56,331,000", "2,814,400", "02/11/2017", "01/01/2018", "18"));
 
 		pagerAdapter = new HomePagerAdapter(getActivity(), lstPagerData);
 		viewPager.setAdapter(pagerAdapter);
@@ -162,16 +211,25 @@ public class HomeFragment extends Fragment {
 
 		// just set viewPager
 		circleIndicator.setViewPager(viewPager);
+		
+		//chart
+		generateValues();
+		generateData();
+		// Disable viewport recalculations, see toggleCubic() method for more
+		// info.
+		chart.setViewportCalculationEnabled(false);
+		resetViewport();
 	}
 
 	/**
 	 * function set listener for view
+	 * 
 	 * @author nn.tai
 	 * @date Dec 14, 2017
 	 */
 	private void setListener() {
 		rloThongTinChung.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -184,6 +242,118 @@ public class HomeFragment extends Fragment {
 				}
 			}
 		});
+
+		rloTinTuc.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				InfoGeneralFragment fragment = new InfoGeneralFragment();
+				if (fragment != null) {
+					FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+					fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+					fragmentTransaction.add(R.id.frame, fragment, fragment.getClass().getName());
+					fragmentTransaction.addToBackStack(fragment.getClass().getName());
+					fragmentTransaction.commitAllowingStateLoss();
+				}
+			}
+		});
+	}
+	
+	private void generateValues() {
+		for (int i = 0; i < maxNumberOfLines; ++i) {
+			for (int j = 0; j < numberOfPoints; ++j) {
+				randomNumbersTab[i][j] = (float) Math.random() * 7000f + 10000;
+			}
+		}
+	}
+
+	private void reset() {
+		numberOfLines = 3;
+
+		hasAxes = true;
+		hasAxesNames = true;
+		hasLines = true;
+		hasPoints = true;
+		shape = ValueShape.CIRCLE;
+		isFilled = false;
+		hasLabels = false;
+		isCubic = false;
+		hasLabelForSelected = false;
+		pointsHaveDifferentColor = false;
+
+		chart.setValueSelectionEnabled(hasLabelForSelected);
+		resetViewport();
+	}
+
+	private void resetViewport() {
+		// Reset viewport height range to (0,100)
+		final Viewport v = new Viewport(chart.getMaximumViewport());
+		v.bottom = 10000;
+		v.top = 17000;
+		v.left = 0;
+		v.right = numberOfPoints - 1;
+		chart.setMaximumViewport(v);
+		chart.setCurrentViewport(v);
+	}
+
+	private void generateData() {
+
+		List<Line> lines = new ArrayList<Line>();
+		for (int i = 0; i < numberOfLines; ++i) {
+
+			List<PointValue> values = new ArrayList<PointValue>();
+			for (int j = 0; j < numberOfPoints; ++j) {
+				values.add(new PointValue(j, randomNumbersTab[i][j]));
+			}
+
+			Line line = new Line(values);
+			line.setColor(colorLine[i]);
+			line.setShape(shape);
+			line.setCubic(isCubic);
+			line.setFilled(isFilled);
+			line.setHasLabels(hasLabels);
+			line.setHasLabelsOnlyForSelected(hasLabelForSelected);
+			line.setHasLines(hasLines);
+			line.setHasPoints(hasPoints);
+			if (pointsHaveDifferentColor) {
+				line.setPointColor(ChartUtils.COLORS[(i + 1) % ChartUtils.COLORS.length]);
+			}
+			lines.add(line);
+		}
+
+		data = new LineChartData(lines);
+
+		List<AxisValue> axisValues = new ArrayList<AxisValue>();
+
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		int month = cal.get(Calendar.MONTH);
+		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
+		for (int i = 0; i < 4; i++) {
+			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+			axisValues.add(new AxisValue(i).setLabel(fmt.format(cal.getTime())));
+			cal.add(Calendar.DAY_OF_MONTH, 7);
+		}
+
+		if (hasAxes) {
+			Axis axisX = new Axis(axisValues);
+			Axis axisY = new Axis().setHasLines(true);
+			if (hasAxesNames) {
+				axisX.setName("Kỳ định giá");
+				axisY.setName("Giá đơn vị");
+			}
+			data.setAxisXBottom(axisX);
+			data.setAxisYLeft(axisY);
+		} else {
+			data.setAxisXBottom(null);
+			data.setAxisYLeft(null);
+		}
+
+		data.setBaseValue(Float.NEGATIVE_INFINITY);
+		chart.setLineChartData(data);
+
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

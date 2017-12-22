@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dlvn.mcustomerportal.R;
+import com.dlvn.mcustomerportal.WebTutorialActivity;
 import com.dlvn.mcustomerportal.adapter.HomeListAdapter;
 import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewClickListener;
 import com.dlvn.mcustomerportal.adapter.listener.RecyclerViewTouchListener;
@@ -12,6 +13,7 @@ import com.dlvn.mcustomerportal.view.DividerItemDecoration;
 import com.dlvn.mcustomerportal.view.RecyclerSmoothLayoutManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,7 +39,7 @@ public class InfoGeneralFragment extends Fragment {
 
 	RecyclerView rvContent;
 	HomeListAdapter rvAdapter;
-	
+
 	List<HomeItemModel> lstData;
 
 	public InfoGeneralFragment() {
@@ -117,7 +119,7 @@ public class InfoGeneralFragment extends Fragment {
 		lstData.add(new HomeItemModel("KHẢO SÁT",
 				"Nhằm nâng cao và hoàn thiện hơn nữa chất lượng phục vụ khách hàng, Quý khách vui lòng dành thời gian trả lời ĐẦY ĐỦ nội dung 20 câu hỏi được nêu trong bảng khảo sát dưới đây, ở mức độ chính xác cao nhất có thể. ",
 				"https://viecoi.vn/jobs/jobfullview/userdata/jobs/5273/241216-002.jpg"));
-		
+
 		lstData.add(new HomeItemModel("GIỚI THIỆU TIÊU CHÍ ĐIỂM THƯỞNG",
 				"Điểm thưởng sẽ được cập nhật tự động vào tài khoản điểm thưởng của Quý khách sau khi đáp ứng các tiêu chí thưởng điểm của Chương trình, trong đó 1 (một) điểm thưởng tương đương với 1.000 (một nghìn) đồng. ",
 				"https://www.baohiem-dai-ichi-life.com/wp-content/uploads/2016/05/3phut-tu-van-bao-hiem-nhan-tho-dai-ichi-life-nhat-ban12.png"));
@@ -141,7 +143,7 @@ public class InfoGeneralFragment extends Fragment {
 
 					@Override
 					public void onClick(View view, int position) {
-
+						startActivity(new Intent(getActivity(), WebTutorialActivity.class));
 					}
 				}));
 	}

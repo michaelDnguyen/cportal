@@ -2,6 +2,7 @@ package com.dlvn.mcustomerportal.services;
 
 import com.dlvn.mcustomerportal.services.model.BaseRequest;
 import com.dlvn.mcustomerportal.services.model.response.getMapMarkerResponse;
+import com.dlvn.mcustomerportal.services.model.response.loginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -51,4 +52,7 @@ public interface ServicesRequest {
 	
 	@POST("GetMapMarker")
 	Call<getMapMarkerResponse> getMapMarker(@Body BaseRequest request);
+	
+	@POST("PDLPadAuthLogin")
+	Call<loginResponse> PDLPadAuthLogin(@Body BaseRequest request);
 }

@@ -108,6 +108,7 @@
         android:id="@+id/btnChiTiet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/state_btn_page_home"
         android:paddingLeft="40dp"

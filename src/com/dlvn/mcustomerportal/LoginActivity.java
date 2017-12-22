@@ -6,7 +6,11 @@ import com.dlvn.mcustomerportal.base.BaseActivity;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.services.ServicesGenerator;
 import com.dlvn.mcustomerportal.services.ServicesRequest;
+import com.dlvn.mcustomerportal.services.model.BaseRequest;
 import com.dlvn.mcustomerportal.services.model.User;
+import com.dlvn.mcustomerportal.services.model.request.loginRequest;
+import com.dlvn.mcustomerportal.services.model.response.loginResponse;
+import com.dlvn.mcustomerportal.services.model.response.loginResult;
 import com.dlvn.mcustomerportal.utils.DialogUtils;
 import com.dlvn.mcustomerportal.utils.Utilities;
 
@@ -20,6 +24,9 @@ import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @arthor nn.tai
@@ -102,106 +109,61 @@ public class LoginActivity extends BaseActivity {
 	private void doApprovalLogin(final String userID, final String password) {
 		// showProgressDialog("Login...");
 
-		User user = new User();
-		user.setUserID(userID);
-		user.setPassword("");
-		user.setUserName(userID);
-		user.setAPIToken("dadsa8d7as89");
+		loginRequest data = new loginRequest();
+		data.setAgentId(userID);
+		data.setPassword(password);
+		data.setDeviceId(Utilities.getDeviceID(LoginActivity.this));
+		data.setDeviceToken("");
+		data.setProject("mAGP");
 
-		// random value demo
-		int nhd = 0, tgt = 0, point = 0;
-		Random rand = new Random();
-		user.setNumberContract(rand.nextInt(10) % 10);
-		user.setAmountContract((rand.nextInt(1000) % 1000) * 1000000);
-		user.setPoint(rand.nextInt(10000));
-		user.setProposalNo("000" + rand.nextInt(99999));
+		BaseRequest request = new BaseRequest();
+		request.setJsonDataInput(data);
 
-		cPortalPref.saveUserLogin(LoginActivity.this, user);
-		cPortalPref.setLogin(LoginActivity.this, true);
-		cPortalPref.setRefreshing(LoginActivity.this, true);
+		Call<loginResponse> call = svRequester.PDLPadAuthLogin(request);
+		call.enqueue(new Callback<loginResponse>() {
 
-		Intent i = new Intent(getBaseContext(), HomeActivity.class);
-		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(i);
-		finish();
+			@Override
+			public void onResponse(Call<loginResponse> call, Response<loginResponse> res) {
+				// TODO Auto-generated method stub
+				if (res.isSuccessful()) {
+					loginResponse response = res.body();
+					if (response != null)
+						if (response.getPDLPadAuthLoginResult() != null) {
+							loginResult result = response.getPDLPadAuthLoginResult().get(0);
+							if (result != null) {
+								User user = new User();
+								user.setUserID(userID);
+								user.setPassword(password);
+								user.setUserName(result.getUserName());
+								user.setAPIToken(result.getAPIToken());
+								
+								// random value demo
+								int nhd = 0, tgt = 0, point = 0;
+								Random rand = new Random();
+								user.setNumberContract(rand.nextInt(10) % 10);
+								user.setAmountContract((rand.nextInt(1000) % 1000) * 1000000);
+								user.setPoint(rand.nextInt(10000));
+								user.setProposalNo("000" + rand.nextInt(99999));
 
-		// ApprovalLoginRequest masterData = new ApprovalLoginRequest();
-		// masterData.setUserID(userID);
-		// masterData.setPassword(password);
-		// masterData.setAPIToken(ePaymentPref.getAPIToken(LoginActivity.this));
-		// masterData.setDeviceID(Utilities.getDeviceID(LoginActivity.this));
-		// masterData.setDeviceName(Utilities.getDeviceName());
-		// masterData.setSystemType("");
-		//
-		// BaseRequest request = new BaseRequest();
-		// request.setJsonDataInput(masterData);
-		//
-		// Call<ApprovalLoginResponse> call =
-		// ePaymentApplication.getServicesRequest().ApprovalLogin(request);
-		//
-		// call.enqueue(new Callback<ApprovalLoginResponse>() {
-		//
-		// @Override
-		// public void onResponse(Call<ApprovalLoginResponse> call,
-		// Response<ApprovalLoginResponse> response) {
-		// if (response.isSuccessful()) {
-		// ApprovalLoginResponse result = response.body();
-		// if (result != null) {
-		// if (!TextUtils.isEmpty(result.getApprovalLoginResult().getResult()))
-		// {
-		//
-		// if (result.getApprovalLoginResult().getResult().equals("true")) {
-		//
-		// User user = new User();
-		// user.setUserID(userID);
-		// user.setPassword("");
-		// user.setUserName(result.getApprovalLoginResult().getMessage());
-		// user.setAPIToken(result.getApprovalLoginResult().getNewAPIToken());
-		//
-		// ePaymentPref.saveUserLogin(LoginActivity.this, user);
-		// ePaymentPref.setLogin(LoginActivity.this, true);
-		// ePaymentPref.setRefreshing(LoginActivity.this, true);
-		//
-		// Intent i = new Intent(getBaseContext(), DashboardActivity.class);
-		// startActivity(i);
-		// finish();
-		// } else if
-		// (!TextUtils.isEmpty(result.getApprovalLoginResult().getMessage())) {
-		//
-		// if (result.getApprovalLoginResult().getMessage().equals("Login
-		// Fail")) {
-		// DialogUtils.showAlertDialog(LoginActivity.this,
-		// getString(R.string.message_error_loginfailed));
-		// } else
-		// DialogUtils.showAlertDialog(LoginActivity.this,
-		// result.getApprovalLoginResult().getMessage());
-		// } else
-		// DialogUtils.showAlertDialog(LoginActivity.this,
-		// getString(R.string.message_error_loginfailed));
-		// }
-		// }
-		// } else if (!TextUtils.isEmpty(response.message())) {
-		// DialogUtils.showAlertCustomDialog(LoginActivity.this,
-		// response.message());
-		// }
-		// hideProgressDialog();
-		// }
-		//
-		// @Override
-		// public void onFailure(Call<ApprovalLoginResponse> arg0, Throwable t)
-		// {
-		// if (!TextUtils.isEmpty(t.getMessage())) {
-		// eLog.E("error " + t.getMessage());
-		//
-		// if (t.getMessage().equals(BaseResponse.NO_INTERNET))
-		// DialogUtils.showAlertDialog(LoginActivity.this,
-		// getString(R.string.message_error_no_internet));
-		// else
-		// DialogUtils.showAlertDialog(LoginActivity.this,
-		// getString(R.string.message_error_connect_service));
-		// }
-		// hideProgressDialog();
-		// }
-		// });
+								cPortalPref.saveUserLogin(LoginActivity.this, user);
+								cPortalPref.setLogin(LoginActivity.this, true);
+								cPortalPref.setRefreshing(LoginActivity.this, true);
+
+								Intent i = new Intent(getBaseContext(), HomeActivity.class);
+								i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+								startActivity(i);
+								finish();
+							}
+						}
+				}
+			}
+
+			@Override
+			public void onFailure(Call<loginResponse> call, Throwable t) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 	}
 }

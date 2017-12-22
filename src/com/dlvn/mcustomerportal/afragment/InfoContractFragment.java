@@ -187,8 +187,10 @@ public class InfoContractFragment extends Fragment {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ContractModel item = (ContractModel) parent.getAdapter().getItem(position);
 				
 				Intent intent = new Intent(getActivity(), ContractDetailActivity.class);
+				intent.putExtra("CONTRACT_DETAIL", item);
 				startActivity(intent);
 				
 			}

@@ -6,23 +6,33 @@ import java.util.List;
 
 import com.dlvn.mcustomerportal.adapter.model.OfficeAddressModel;
 import com.dlvn.mcustomerportal.base.BaseActivity;
+import com.dlvn.mcustomerportal.common.Constant;
+import com.dlvn.mcustomerportal.common.cPortalPref;
+import com.dlvn.mcustomerportal.services.CurrentLocationService;
 import com.dlvn.mcustomerportal.services.NetworkUtils;
 import com.dlvn.mcustomerportal.services.ServicesGenerator;
 import com.dlvn.mcustomerportal.services.ServicesRequest;
 import com.dlvn.mcustomerportal.services.model.BaseRequest;
+import com.dlvn.mcustomerportal.services.model.User;
 import com.dlvn.mcustomerportal.services.model.request.getMapMarkerRequest;
 import com.dlvn.mcustomerportal.services.model.response.getMapMarkerResponse;
+import com.dlvn.mcustomerportal.services.model.response.getMapMarkerResult;
 import com.dlvn.mcustomerportal.utils.Utilities;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,7 +44,7 @@ import android.widget.Button;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallback {
+public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallback, OnMyLocationButtonClickListener {
 
 	private static final int MY_LOCATION_PERMISSION_REQUEST_CODE = 1;
 	private static final int LOCATION_LAYER_PERMISSION_REQUEST_CODE = 2;
@@ -49,6 +59,7 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 	List<OfficeAddressModel> lstVanPhong, lstPhongKham;
 	boolean isVanPhong = true;
 
+	private CurrentLocationService currentLocationService;
 	private boolean mLocationPermissionDenied = false;
 
 	@Override
@@ -56,6 +67,7 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_office);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		currentLocationService = new CurrentLocationService(this);
 
 		getViews();
 		initDatas();
@@ -79,22 +91,18 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 		initPhongKham();
 
 		btnVanPhong.setSelected(true);
+
 	}
 
 	private void initVanPhong() {
 		if (lstVanPhong == null)
 			lstVanPhong = new ArrayList<>();
 
-		lstVanPhong.add(new OfficeAddressModel(new LatLng(10.7919258, 106.6811829), "Văn phòng cầu Công Lý",
-				"11 Cầu Công Lý, phường 15, Phú Nhuận, Hồ Chí Minh, Vietnam"));
-		lstVanPhong.add(new OfficeAddressModel(new LatLng(10.7960782, 106.6777852), "Van Phòng Trần Huy Liệu",
-				"100 Trần Huy Liệu, phường 15, Phú Nhuận, Hồ Chí Minh, Vietnam"));
-		lstVanPhong.add(new OfficeAddressModel(new LatLng(10.7906051, 106.6732979), "Văn phòng Lê Văn Sỹ",
-				"42 Lê Văn sỹ p11 quận phú nhuận, Hẻm 55 Lê Văn Sỹ, Phường 11, Phú Nhuận, Hồ Chí Minh, Vietnam"));
-		lstVanPhong.add(new OfficeAddressModel(new LatLng(10.7953181, 106.6723732), "Văn phòng Trương quốc Dung",
-				"74 Trương Quốc Dung, Phường 10, Phú Nhuận, Hồ Chí Minh, Vietnam"));
-		lstVanPhong.add(new OfficeAddressModel(new LatLng(10.7963825, 106.6814277), "Văn phòng Phan Đình Phùng",
-				"241 Phan Đình Phùng, Phường 15, Phú Nhuận, Hồ Chí Minh, Vietnam"));
+		// get List office from api
+		if (lstVanPhong.size() > 0)
+			drawMarKerLocation(lstVanPhong, Constant.OFFICE_TYPE);
+		else
+			doGetMapMarker(Constant.OFFICE_TYPE);
 
 	}
 
@@ -102,18 +110,35 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 		if (lstPhongKham == null)
 			lstPhongKham = new ArrayList<>();
 
-		lstPhongKham.add(new OfficeAddressModel(new LatLng(10.791385, 106.6781849), "Bệnh viện An Sinh",
-				"10 Trần Huy Liệu, Phường 12, Hồ Chí Minh, Vietnam"));
-		lstPhongKham.add(new OfficeAddressModel(new LatLng(10.7958061, 106.674981), "Phòng khám sản phụ khoa",
-				"307/15, Nguyễn Văn Trỗi, Phường 11, Phú Nhuận, Hồ Chí Minh"));
-		lstPhongKham.add(new OfficeAddressModel(new LatLng(10.7950724, 106.6774902), "Phòng khám mắt Hải Yến",
-				"139C Nguyễn Đình Chính, Phường 8, Phú Nhuận, Hồ Chí Minh, Vietnam"));
+		// get List medic from api
+		if (lstPhongKham.size() > 0)
+			drawMarKerLocation(lstPhongKham, Constant.MEDIC_TYPE);
+		else
+			doGetMapMarker(Constant.MEDIC_TYPE);
 
-		lstPhongKham.add(new OfficeAddressModel(new LatLng(10.7938037, 106.6741233), "Trạm Y tế phường 11 Phú Nhuận",
-				"43 Trần Hữu Trang, Phường 11, Hồ Chí Minh, Vietnam"));
-		lstPhongKham.add(new OfficeAddressModel(new LatLng(10.791997, 106.6771837), "Trạm y tế phường 12 Phú Nhuận",
-				"139C Nguyễn Đình Chính, Phường 8, Phú Nhuận, Hồ Chí Minh, Vietnam"));
+	}
 
+	private void getCurrentLocation() {
+		// Detected current location
+		Location location = currentLocationService.getLocation(LocationManager.GPS_PROVIDER);
+		if (location == null)
+			location = currentLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
+
+		// Lay dc toa do hien tai, show map
+		if (location != null) {
+			double latitude = location.getLatitude();
+			double longitude = location.getLongitude();
+			llCurrent = new LatLng(latitude, longitude);
+		} else {
+			// Ko lay dc thi lay toa do mac dinh
+			llCurrent = Constant.defaultLocation;
+
+			// Open service location in Settings
+			final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+				Utilities.showSettingsAlertGPS(ListOfficeActivity.this);
+			}
+		}
 	}
 
 	private void setListener() {
@@ -125,7 +150,7 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 				v.setSelected(true);
 				btnPhongKham.setSelected(false);
 				if (!isVanPhong) {
-					drawMarKerLocation(lstVanPhong);
+					initVanPhong();
 					isVanPhong = true;
 				}
 			}
@@ -138,7 +163,7 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 				v.setSelected(true);
 				btnVanPhong.setSelected(false);
 				if (isVanPhong) {
-					drawMarKerLocation(lstPhongKham);
+					initPhongKham();
 					isVanPhong = false;
 				}
 			}
@@ -155,29 +180,67 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 		agr0.setMyLocationEnabled(true);
 		map = agr0;
 
-		llCurrent = new LatLng(10.794446, 106.6755217);
-		drawMarKerLocation(lstVanPhong);
+		getCurrentLocation();
+		initVanPhong();
+		map.setOnMyLocationButtonClickListener(this);
 	}
 
-	private void drawMarKerLocation(List<OfficeAddressModel> data) {
+	@Override
+	public boolean onMyLocationButtonClick() {
+		getCurrentLocation();
+
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(llCurrent, 15);
+		map.animateCamera(cameraUpdate);
+		return false;
+	}
+
+	/**
+	 * Draw list point location in map
+	 * 
+	 * @author nn.tai
+	 * @date Dec 21, 2017
+	 * @param data
+	 * @param officeType
+	 */
+	private void drawMarKerLocation(List<OfficeAddressModel> data, String officeType) {
 
 		if (map != null) {
 			map.clear();
 
 			if (data != null) {
 				for (OfficeAddressModel item : data) {
-					map.addMarker(new MarkerOptions().position(item.getLatlog()).title(item.getTitle()));
+					if (officeType.equals(Constant.OFFICE_TYPE))
+						map.addMarker(new MarkerOptions()
+								.position(new LatLng(Double.parseDouble(item.getLat()),
+										Double.parseDouble(item.getLng())))
+								.title(item.getName())
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.ico_office_marker)));
+					else
+						map.addMarker(new MarkerOptions()
+								.position(new LatLng(Double.parseDouble(item.getLat()),
+										Double.parseDouble(item.getLng())))
+								.title(item.getName())
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.ico_medic_marker)));
 				}
 			}
 
-			map.addMarker(new MarkerOptions().position(llCurrent).title("You are here."));
+			map.addMarker(new MarkerOptions().position(llCurrent).title("You are here.")
+					.icon(BitmapDescriptorFactory.fromResource(R.drawable.ico_mylocation_marker)));
 			// zoom camera len
 			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(llCurrent, 17);
 			map.animateCamera(cameraUpdate);
 		}
 	}
 
-	private void doGetMapMarker(String officeType) {
+	/**
+	 * get List point in map from APi
+	 * 
+	 * @author nn.tai
+	 * @date Dec 21, 2017
+	 * @param officeType:
+	 *            office or medic
+	 */
+	private void doGetMapMarker(final String officeType) {
 
 		new AsyncTask<Void, Void, Response<getMapMarkerResponse>>() {
 
@@ -188,40 +251,66 @@ public class ListOfficeActivity extends BaseActivity implements OnMapReadyCallba
 						ServicesRequest.class);
 				Response<getMapMarkerResponse> response = null;
 
+//				User user = new User();
+//				user = cPortalPref.getPassword(ListOfficeActivity.this);
+				
 				getMapMarkerRequest data = new getMapMarkerRequest();
-				data.setAgentId("110555");
-				data.setPassword("33333333");
-				data.setDeviceId("");
-				data.setDeviceName("SamSung-A7");
-				data.setAPIToken("");
-				data.setLat("");
-				data.setLng("");
-				data.setTypeOffice("");
+				data.setAgentId(cPortalPref.getUserID(ListOfficeActivity.this));
+				data.setPassword(cPortalPref.getPassword(ListOfficeActivity.this));
+				data.setDeviceId(Utilities.getDeviceID(ListOfficeActivity.this));
+				data.setDeviceName(Utilities.getDeviceName());
+				data.setAPIToken(cPortalPref.getAPIToken(ListOfficeActivity.this));
+				data.setLat("10.794834");
+				data.setLng("106.676285");
+				data.setTypeOffice(officeType);
 
 				BaseRequest base = new BaseRequest();
 				base.setJsonDataInput(data);
 				Call<getMapMarkerResponse> call = service.getMapMarker(base);
 				try {
-					
+
 					response = call.execute();
-					
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				return response;
 			}
-			
+
 			@Override
 			protected void onPostExecute(Response<getMapMarkerResponse> result) {
-				if(result != null && result.isSuccessful()){
-					
+				if (result != null && result.isSuccessful()) {
+					getMapMarkerResponse response = result.body();
+					if (response != null) {
+						getMapMarkerResult rs = response.getGetMapMarkerResult();
+						if (rs != null)
+							if (rs.getResult().equals("true")) {
+								if (rs.getDtProposal().size() > 0) {
+
+									if (officeType.equals(Constant.OFFICE_TYPE)) {
+										lstVanPhong.addAll(rs.getDtProposal());
+										drawMarKerLocation(lstVanPhong, officeType);
+									} else {
+										lstPhongKham.addAll(rs.getDtProposal());
+										drawMarKerLocation(lstPhongKham, officeType);
+									}
+								}
+							}
+					}
 				}
 			};
 
 		}.execute();
 	}
 
+	/**
+	 * Request location permission
+	 * 
+	 * @author nn.tai
+	 * @date Dec 21, 2017
+	 * @param requestCode
+	 */
 	public void requestLocationPermission(int requestCode) {
 		if (ActivityCompat.shouldShowRequestPermissionRationale(this,
 				android.Manifest.permission.ACCESS_FINE_LOCATION)) {

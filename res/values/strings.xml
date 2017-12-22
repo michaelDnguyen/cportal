@@ -66,7 +66,6 @@
     <string name="message_alert_logout">Anh/chị có thật sự muốn thoát khỏi chương trình này không ?.</string>
     <string name="message_alert_download_file">Anh/chị có muốn download tập tin này không ?</string>
     <string name="alert_input_payment">Anh/chị cần phải nhập số tiền và chọn phương thức thanh toán.</string>
-    
     <string name="home_welcome_user">Anh/chị có thể dễ dàng tra cứu thông tin hợp đồng bảo hiểm nhân thọ, thông tin điểm thưởng tích lũy của mình.</string>
     <string name="home_welcome_guest">Đến với cổng thông tin khách hàng của Dai-Ichi-Life Việt Nam, vui lòng đăng nhập để sử dụng đầy đủ chức năng.</string>
     <string name="home_welcom_article">
@@ -93,7 +92,9 @@ Trân trọng kính chào,<br>
     <string name="title_activity_contract_detail">ContractDetailActivity</string>
     <string name="title_activity_contact">Liên hệ</string>
     <string name="title_activity_bonus__nop_phi_bh">Nộp phí/ Hoàn trả</string>
-    
     <string name="non_spinner">Chọn</string>
+    <string name="title_activity_web_tutorial">Hướng dẫn</string>
+    <string name="title_activity_bonus__nop_phi_bh__step02_">Nộp phí/ Hoàn trả</string>
+    <string name="title_activity_bonus__nop_phi_bh__step03_">Nộp phí/ Hoàn trả</string>
 
 </resources>

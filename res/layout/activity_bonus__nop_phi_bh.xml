@@ -36,6 +36,7 @@
                     android:textSize="@dimen/textsize12" />
 
                 <TextView
+                    android:id="@+id/tvTenKhachHang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -61,6 +62,7 @@
                     android:textSize="@dimen/textsize12" />
 
                 <TextView
+                    android:id="@+id/tvMaKhachHang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -98,207 +100,263 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp" >
-
-        <!-- Chọn hợp đồng -->
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal" >
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <!-- Chọn hợp đồng -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Chọn hợp đồng" />
+
+                <Spinner
+                    android:id="@+id/spnHopDong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:prompt="@string/non_spinner"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey" />
+
+            <!-- Phí bảo hiểm định kỳ -->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Chọn hợp đồng" />
-
-            <Spinner
-                android:id="@+id/spnHopDong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="right"
-                android:prompt="@string/non_spinner"
-                android:spinnerMode="dropdown" />
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/grey" />
-
-        <!-- Phí bảo hiểm định kỳ -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Phí bảo hiểm định kỳ" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Phí bảo hiểm định kỳ"
+                android:textColor="@color/red"
                 android:textSize="@dimen/textsize14"
-                android:textStyle="bold"
-                android:text="32,450,000" />
-        </LinearLayout>
+                android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Số tiền phải thanh toán" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="32,450,000 VND"
+                    android:textSize="@dimen/textsize14"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Số tiền thanh toán" />
+
+                <EditText
+                    android:id="@+id/edtPhiBaoHiem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/state_bg_edt_bolder_radius"
+                    android:inputType="number" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="VND" />
+            </LinearLayout>
+
+            <!-- Khoản tạm ứng từ Giá trị hoàn lại để đóng phí -->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:background="@drawable/state_bg_edt_bolder_radius"
-                android:inputType="number" />
-        </LinearLayout>
-
-        <!-- Khoản tạm ứng từ Giá trị hoàn lại để đóng phí -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Khoản tạm ứng từ Giá trị hoàn lại để đóng phí" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_marginTop="10dp"
+                android:text="Khoản tạm ứng từ Giá trị hoàn lại để đóng phí"
+                android:textColor="@color/red"
                 android:textSize="@dimen/textsize14"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:text="0" />
-        </LinearLayout>
+                android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Số tiền phải thanh toán" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="0 VND"
+                    android:textSize="@dimen/textsize14"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Số tiền thanh toán" />
+
+                <EditText
+                    android:id="@+id/edtKhoanTamUng"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/state_bg_edt_bolder_radius"
+                    android:inputType="number" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="VND" />
+            </LinearLayout>
+
+            <!-- Khoản tạm ứng từ Giá trị hoàn lại -->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:background="@drawable/state_bg_edt_bolder_radius"
-                android:inputType="number" />
-        </LinearLayout>
-
-        <!-- Khoản tạm ứng từ Giá trị hoàn lại -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Khoản tạm ứng từ Giá trị hoàn lại " />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Khoản tạm ứng từ Giá trị hoàn lại"
+                android:textColor="@color/red"
                 android:textSize="@dimen/textsize14"
-                android:textStyle="bold"
-                android:text="65,450,000" />
-        </LinearLayout>
+                android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Số tiền phải thanh toán" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="65,450,000 VND"
+                    android:textSize="@dimen/textsize14"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Số tiền thanh toán" />
+
+                <EditText
+                    android:id="@+id/edtGiaTriHoanLai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/state_bg_edt_bolder_radius"
+                    android:inputType="number" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="VND" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_marginTop="10dp"
+                android:text="(*) Giá trị các khoản tạm ứng được tính đến ngày đáo niên hợp đồng vừa qua đối với hợp đồng có sản phẩm bảo hiểm truyền thống. "
+                android:textSize="@dimen/textsize12" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:background="@drawable/state_bg_edt_bolder_radius"
-                android:inputType="number" />
+                android:text="(**) 1 điểm tương ứng với 1.000 đồng"
+                android:textSize="@dimen/textsize12" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey" />
+
+            <Button
+                android:id="@+id/btnTiep"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/state_btn_page_home"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Tiếp"
+                android:textColor="@color/white" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="@dimen/textsize12"
-            android:text="(*) Giá trị các khoản tạm ứng được tính đến ngày đáo niên hợp đồng vừa qua đối với hợp đồng có sản phẩm bảo hiểm truyền thống. " />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textsize12"
-            android:text="(**) 1 điểm tương ứng với 1.000 đồng" />
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/grey" />
-
-    <Button
-        android:id="@+id/btnChiTiet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/state_btn_page_home"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:text="Tiếp"
-        android:textColor="@color/white" />
+    </ScrollView>
 
 </LinearLayout>

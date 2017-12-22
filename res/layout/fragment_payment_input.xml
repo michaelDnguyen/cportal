@@ -190,7 +190,7 @@
                     android:id="@+id/btnThanhToan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/state_btn_red"
+                    android:background="@drawable/state_btn_red_rectangle"
                     android:elevation="3dp"
                     android:minWidth="200dp"
                     android:text="THANH TOÁN"
