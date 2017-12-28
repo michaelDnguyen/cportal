@@ -12,6 +12,13 @@
         android:layout_height="wrap_content"
         android:text="Mã hợp đồng 00076589"
         android:textSize="@dimen/textsize13" />
+    
+    <TextView
+        android:id="@+id/tvTenSanPham"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã hợp đồng 00076589"
+        android:textSize="@dimen/textsize13" />
 
     <TextView
         android:id="@+id/tvTongPhiDaDong"

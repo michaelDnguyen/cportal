@@ -102,10 +102,10 @@ public class ElectricBillFragment extends Fragment {
 		if(lstData == null)
 			lstData = new ArrayList<>();
 		
-		lstData.add(new ElectricBillModel("0987873", "Công ty TNHH An Thịnh Phát", "1,500,000,000", "14/02/2017", "", ""));
-		lstData.add(new ElectricBillModel("0845626", "Công ty TNHH An Thịnh Phát", "1,200,000,000", "16/02/2016", "", ""));
-		lstData.add(new ElectricBillModel("0756398", "Công ty TNHH An Thịnh Phát", "900,000,000", "17/02/2015", "", ""));
-		lstData.add(new ElectricBillModel("0658471", "Công ty TNHH An Thịnh Phát", "750,000,000", "20/02/2014", "", ""));
+		lstData.add(new ElectricBillModel("0987873","00869752", "Công ty TNHH An Thịnh Phát", "1,500,000,000", "14/02/2017", "", ""));
+		lstData.add(new ElectricBillModel("0845626","00369856", "Công ty TNHH An Thịnh Phát", "1,200,000,000", "16/02/2016", "", ""));
+		lstData.add(new ElectricBillModel("0756398","00869752", "Công ty TNHH An Thịnh Phát", "900,000,000", "17/02/2015", "", ""));
+		lstData.add(new ElectricBillModel("0658471","00369856", "Công ty TNHH An Thịnh Phát", "750,000,000", "20/02/2014", "", ""));
 		
 		if(adapter == null)
 			adapter = new ElectricBillListAdapter(getActivity(), lstData);

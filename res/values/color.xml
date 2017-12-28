@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#d32f2f</color>
+    <color name="colorPrimary">@color/red</color>
+    <color name="colorPrimaryDark">@color/red_dark</color>
+    <color name="colorAccent">@color/white</color>
+    
+    <!-- <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#c72c2c</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorAccent">#d32f2f</color> -->
     
     <color name="main_bgtrans85">#D9ffffff</color>
     <color name="main_bgtrans50">#80ffffff</color>
@@ -13,6 +17,8 @@
     <color name="blue_dark">#1976D2</color>
     <color name="blue_light">#42A5F5</color>
     
+    <!-- <color name="red_dark">#c72c2c</color>
+    <color name="red">#d32f2f</color> -->
     <color name="red_dark">#cc1111</color>
     <color name="red">#ee1111</color>
     <color name="red_light">#FF1111</color>
@@ -20,6 +26,7 @@
     <color name="bonusprogram_bg">#B3FF1111</color>
     
     <color name="white">#FFFFFF</color>
+    <color name="white_milk">#f4f3f0</color>
     
     <color name="black">#000000</color>
     

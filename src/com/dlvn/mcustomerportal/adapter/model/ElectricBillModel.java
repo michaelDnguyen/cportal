@@ -2,12 +2,14 @@ package com.dlvn.mcustomerportal.adapter.model;
 
 /**
  * Model data of Hoa Don Dien Tu
+ * 
  * @author nn.tai
  * @date Dec 18, 2017
  */
 public class ElectricBillModel {
 
 	String maHoaDon;
+	String maHopDong;
 	String tenKhachHang;
 	String soTienBH;
 	String ngayLap;
@@ -20,15 +22,24 @@ public class ElectricBillModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ElectricBillModel(String maHoaDon, String tenKhachHang, String soTienBH, String ngayLap, String pathPDF,
-			String pathXML) {
+	public ElectricBillModel(String maHoaDon, String maHopDong, String tenKhachHang, String soTienBH, String ngayLap,
+			String pathPDF, String pathXML) {
 		super();
 		this.maHoaDon = maHoaDon;
+		this.maHopDong = maHopDong;
 		this.tenKhachHang = tenKhachHang;
 		this.soTienBH = soTienBH;
 		this.ngayLap = ngayLap;
 		this.pathPDF = pathPDF;
 		this.pathXML = pathXML;
+	}
+
+	public String getMaHopDong() {
+		return maHopDong;
+	}
+
+	public void setMaHopDong(String maHopDong) {
+		this.maHopDong = maHopDong;
 	}
 
 	public String getMaHoaDon() {

@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
 	List<HomeItemModel> lstData;
 	List<HomePageItemModel> lstPagerData;
 
-	//Chart
+	// Chart
 	int year, month;
 
 	private LineChartView chart;
@@ -198,12 +198,12 @@ public class HomeFragment extends Fragment {
 
 		// init viewpager
 		lstPagerData = new ArrayList<>();
-		lstPagerData
-				.add(new HomePageItemModel("00078941", "236,500,000", "3,200,000", "23/12/2017", "23/01/2018", "39"));
-		lstPagerData
-				.add(new HomePageItemModel("001034198", "688,105,024", "36,215,500", "23/10/2017", "22/12/2017", "8"));
-		lstPagerData
-				.add(new HomePageItemModel("001036845", "56,331,000", "2,814,400", "02/11/2017", "01/01/2018", "18"));
+		lstPagerData.add(new HomePageItemModel("00078941", "An Phúc Hưng Thịnh", "236,500,000", "3,200,000",
+				"23/12/2017", "23/01/2018", "39"));
+		lstPagerData.add(new HomePageItemModel("001034198", "An Thịnh Đầu Tư", "688,105,024", "36,215,500",
+				"23/10/2017", "22/12/2017", "8"));
+		lstPagerData.add(new HomePageItemModel("001036845", "An Tâm Hưng Thịnh", "56,331,000", "2,814,400",
+				"02/11/2017", "01/01/2018", "18"));
 
 		pagerAdapter = new HomePagerAdapter(getActivity(), lstPagerData);
 		viewPager.setAdapter(pagerAdapter);
@@ -211,8 +211,8 @@ public class HomeFragment extends Fragment {
 
 		// just set viewPager
 		circleIndicator.setViewPager(viewPager);
-		
-		//chart
+
+		// chart
 		generateValues();
 		generateData();
 		// Disable viewport recalculations, see toggleCubic() method for more
@@ -259,7 +259,7 @@ public class HomeFragment extends Fragment {
 			}
 		});
 	}
-	
+
 	private void generateValues() {
 		for (int i = 0; i < maxNumberOfLines; ++i) {
 			for (int j = 0; j < numberOfPoints; ++j) {

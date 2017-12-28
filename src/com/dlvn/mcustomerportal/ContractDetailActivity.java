@@ -1,16 +1,23 @@
 package com.dlvn.mcustomerportal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.dlvn.mcustomerportal.adapter.model.ContractModel;
 import com.dlvn.mcustomerportal.base.BaseActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class ContractDetailActivity extends BaseActivity {
 
 	public static final String KEY_PROPOSAL = "";
 
+	Spinner spnHopDong;
+	
 	ContractModel itemHopDong;
 
 	@Override
@@ -25,7 +32,7 @@ public class ContractDetailActivity extends BaseActivity {
 
 	private void getViews() {
 		// TODO Auto-generated method stub
-
+		spnHopDong = (Spinner) findViewById(R.id.spnHopDong);
 	}
 
 	private void initData() {
@@ -35,6 +42,14 @@ public class ContractDetailActivity extends BaseActivity {
 
 		if(itemHopDong != null)
 			setTitle("Chi tiết hợp đồng " + itemHopDong.getSoHopDong());
+		
+		List<String> list = new ArrayList<String>();
+		list.add("00658947");
+		list.add("00864521");
+		list.add("00247846");
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spnHopDong.setAdapter(dataAdapter);
 	}
 
 	private void setListener() {

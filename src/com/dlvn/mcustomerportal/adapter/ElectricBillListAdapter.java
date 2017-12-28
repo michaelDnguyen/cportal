@@ -76,6 +76,7 @@ public class ElectricBillListAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 
 			holder.tvMaSoHD = (TextView) convertView.findViewById(R.id.tvSoHoaDon);
+			holder.tvSoHopDong = (TextView) convertView.findViewById(R.id.tvSoHopDong);
 			holder.tvKhachHang = (TextView) convertView.findViewById(R.id.tvKhachHang);
 			holder.tvSoTien = (TextView) convertView.findViewById(R.id.tvAmount);
 			holder.tvNgayLap = (TextView) convertView.findViewById(R.id.tvNgayLap);
@@ -89,6 +90,7 @@ public class ElectricBillListAdapter extends BaseAdapter {
 
 		if (item != null) {
 			holder.tvMaSoHD.setText("Mã hóa đơn: " + item.getMaHoaDon());
+			holder.tvSoHopDong.setText("Số hợp đồng: " + item.getMaHopDong());
 			holder.tvKhachHang.setText(item.getTenKhachHang());
 			holder.tvSoTien.setText(item.getSoTienBH());
 			holder.tvNgayLap.setText(item.getNgayLap());
@@ -144,7 +146,7 @@ public class ElectricBillListAdapter extends BaseAdapter {
 	}
 
 	private class ViewHolder {
-		TextView tvMaSoHD, tvKhachHang, tvSoTien, tvNgayLap;
+		TextView tvMaSoHD, tvSoHopDong, tvKhachHang, tvSoTien, tvNgayLap;
 		LinearLayout btnPDF, btnXML;
 	}
 }

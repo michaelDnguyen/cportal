@@ -13,6 +13,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Vui lòng gọi cho bộ phận chăm sóc khách hàng: "
+                android:textSize="@dimen/textsize13" />
+
             <!-- layout call -->
 
             <RelativeLayout
@@ -54,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="----- OR -----"
+                android:text="----- HOẶC -----"
                 android:textSize="@dimen/textsize16"
                 android:textStyle="bold" />
 
@@ -152,18 +159,18 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/state_bg_edt_bolder_radius"
                     android:layout_marginTop="5dp"
+                    android:background="@drawable/state_bg_edt_bolder_radius"
                     android:lines="3" />
 
                 <Button
                     android:id="@+id/btnGui"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/state_btn_red_radius"
+                    android:gravity="center"
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
                     android:text="Gửi"

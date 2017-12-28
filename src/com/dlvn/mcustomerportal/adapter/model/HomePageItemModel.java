@@ -2,12 +2,14 @@ package com.dlvn.mcustomerportal.adapter.model;
 
 /**
  * Model data of home item pager view
+ * 
  * @author nn.tai
  * @date Dec 18, 2017
  */
 public class HomePageItemModel {
 
 	String maHopDong;
+	String tenSanPham;
 	String tongPhiDaDong;
 
 	String phiCoBan;
@@ -21,10 +23,11 @@ public class HomePageItemModel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public HomePageItemModel(String maHopDong, String tongGTHienTai, String phiCoBan, String ngayDongPhi,
-			String ngayGiaHan, String ngayConlai) {
+	public HomePageItemModel(String maHopDong, String tenSanPham, String tongGTHienTai, String phiCoBan,
+			String ngayDongPhi, String ngayGiaHan, String ngayConlai) {
 		super();
 		this.maHopDong = maHopDong;
+		this.tenSanPham = tenSanPham;
 		this.tongPhiDaDong = tongGTHienTai;
 		this.phiCoBan = phiCoBan;
 		this.ngayDongPhi = ngayDongPhi;
@@ -38,6 +41,14 @@ public class HomePageItemModel {
 
 	public void setMaHopDong(String maHopDong) {
 		this.maHopDong = maHopDong;
+	}
+
+	public String getTenSanPham() {
+		return tenSanPham;
+	}
+
+	public void setTenSanPham(String tenSanPham) {
+		this.tenSanPham = tenSanPham;
 	}
 
 	public String getTongPhiDaDong() {

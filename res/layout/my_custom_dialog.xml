@@ -80,7 +80,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="Hủy"
-                        android:textColor="@drawable/state_textcolor_blue_red"
+                        android:textColor="@drawable/st_textcolor_blue_red"
                         android:textSize="13sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -107,7 +107,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:text="OK"
-                        android:textColor="@drawable/state_textcolor_blue_red"
+                        android:textColor="@drawable/st_textcolor_blue_red"
                         android:textSize="13sp"
                         android:textStyle="bold" />
                 </RelativeLayout>

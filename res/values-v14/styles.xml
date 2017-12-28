@@ -5,8 +5,20 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- API 14 theme customizations can go here. -->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        
+        <!-- <item name="android:titleTextStyle">@style/MyActionBarTextStyle</item> -->
+
+        <!-- <item name="android:textColorPrimary">@color/red</item> -->
+        <!-- color for text menu -->
+        <!-- <item name="android:textColorSecondary">@color/red</item> -->
+        <!-- color for icon menu -->
     </style>
 
 </resources>

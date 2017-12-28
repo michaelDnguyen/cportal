@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dlvn.mcustomerportal.ContractDetailActivity;
 import com.dlvn.mcustomerportal.R;
+import com.dlvn.mcustomerportal.adapter.model.ContractModel;
 import com.dlvn.mcustomerportal.adapter.model.HomePageItemModel;
 
 import android.content.Context;
@@ -38,7 +39,7 @@ public class HomePagerAdapter extends PagerAdapter {
 	public Object instantiateItem(ViewGroup container, int position) {
 		// get views
 		View v = inflater.inflate(R.layout.item_page_home, null);
-		HomePageItemModel item = data.get(position);
+		final HomePageItemModel item = data.get(position);
 		ViewHolder holder = new ViewHolder();
 
 		holder.tvMaHopDong = (TextView) v.findViewById(R.id.tvMaHopDong);
@@ -62,7 +63,12 @@ public class HomePagerAdapter extends PagerAdapter {
 
 				@Override
 				public void onClick(View v) {
+
+					ContractModel mo = new ContractModel(item.getMaHopDong(), item.getTenSanPham(), true,
+							Long.parseLong(item.getTongPhiDaDong()), item.getNgayDongPhi(), item.getNgayGiaHan());
+
 					Intent intent = new Intent(context, ContractDetailActivity.class);
+					intent.putExtra("CONTRACT_DETAIL", mo);
 					context.startActivity(intent);
 				}
 			});

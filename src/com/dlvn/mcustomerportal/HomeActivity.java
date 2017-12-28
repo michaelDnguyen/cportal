@@ -27,6 +27,7 @@ import com.dlvn.mcustomerportal.view.MyCustomDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +36,8 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -93,8 +96,11 @@ public class HomeActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_home);
 
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar.setNavigationIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.daiichilife));
+		toolbar.setTitleTextColor(Color.RED);
 		setSupportActionBar(toolbar);
-		getActionBar().setIcon(R.drawable.daiichilife);
+
+		// getActionBar().setIcon(R.drawable.daiichilife);
 
 		mHandler = new Handler();
 
@@ -130,7 +136,7 @@ public class HomeActivity extends AppCompatActivity {
 					fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
 					fragmentTransaction.addToBackStack(CURRENT_TAG);
 					fragmentTransaction.commitAllowingStateLoss();
-					
+
 					view.setVisibility(View.GONE);
 				}
 			}
@@ -241,6 +247,9 @@ public class HomeActivity extends AppCompatActivity {
 
 		// set toolbar title
 		setToolbarTitle();
+
+		getSupportActionBar().setHomeAsUpIndicator(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawer_daiichi,HomeActivity.this.getTheme()));
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
 		// if user select the current navigation menu again, don't do anything
 		// just close the navigation drawer
@@ -540,6 +549,10 @@ public class HomeActivity extends AppCompatActivity {
 				super.onDrawerOpened(drawerView);
 			}
 		};
+
+//		actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+//		actionBarDrawerToggle.setHomeAsUpIndicator(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawer_daiichi,
+//				HomeActivity.this.getTheme()));
 
 		// Setting the actionbarToggle to drawer layout
 		drawer.setDrawerListener(actionBarDrawerToggle);
