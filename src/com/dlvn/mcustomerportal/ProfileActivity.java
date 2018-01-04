@@ -10,6 +10,7 @@ import com.dlvn.mcustomerportal.base.BaseActivity;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.utils.myLog;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,13 +21,14 @@ import android.widget.TextView;
 
 /**
  * Profile screen
+ * 
  * @author nn.tai
  * @date Dec 11, 2017
  */
 public class ProfileActivity extends BaseActivity {
 
 	ImageView imvProfile;
-	TextView tvName;
+	TextView tvName, tvThayDoiThongTin, tvLichSuGiaoDich, tvThayDoiPassword;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,9 @@ public class ProfileActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		imvProfile = (ImageView) findViewById(R.id.imvProfile);
 		tvName = (TextView) findViewById(R.id.tvName);
+		tvThayDoiThongTin = (TextView) findViewById(R.id.tvThayDoiThongTin);
+		tvThayDoiPassword = (TextView) findViewById(R.id.tvThayDoiPassword);
+		tvLichSuGiaoDich = (TextView) findViewById(R.id.tvLichSuGiaoDich);
 	}
 
 	private void initData() {
@@ -72,8 +77,34 @@ public class ProfileActivity extends BaseActivity {
 
 	private void setListener() {
 		
+		tvThayDoiThongTin.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(ProfileActivity.this, ChangeProfileActivity.class));
+			}
+		});
+
+		tvThayDoiPassword.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(ProfileActivity.this, ChangePasswordActivity.class));
+			}
+		});
+
+		tvLichSuGiaoDich.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(ProfileActivity.this, TransactionHistoryActivity.class));
+			}
+		});
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will

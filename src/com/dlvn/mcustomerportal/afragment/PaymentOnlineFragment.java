@@ -243,6 +243,7 @@ public class PaymentOnlineFragment extends Fragment {
 								.beginTransaction();
 						fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
 						fragmentTransaction.replace(R.id.frame, paymentInput, paymentInput.getClass().getSimpleName());
+						fragmentTransaction.addToBackStack(null);
 						fragmentTransaction.commitAllowingStateLoss();
 					}
 				}
@@ -261,6 +262,7 @@ public class PaymentOnlineFragment extends Fragment {
 		}
 		return false;
 	}
+	
 
 	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {

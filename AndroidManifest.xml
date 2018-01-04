@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -96,6 +96,26 @@
         <activity
             android:name=".Bonus_NopPhiBH_Step03_Activity"
             android:label="@string/title_activity_bonus__nop_phi_bh__step03_" >
+        </activity>
+        <activity
+            android:name=".ProductDetailActivity"
+            android:label="@string/title_activity_product_detail" >
+        </activity>
+        <activity
+            android:name=".ChangeProfileActivity"
+            android:label="@string/title_activity_change_profile" >
+        </activity>
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/title_activity_change_password" >
+        </activity>
+        <activity
+            android:name=".TransactionHistoryActivity"
+            android:label="@string/title_activity_transaction_history" >
+        </activity>
+        <activity
+            android:name=".TransactionDetailActivity"
+            android:label="@string/title_activity_transaction_detail" >
         </activity>
     </application>
 

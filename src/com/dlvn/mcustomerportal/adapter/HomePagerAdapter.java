@@ -43,6 +43,7 @@ public class HomePagerAdapter extends PagerAdapter {
 		ViewHolder holder = new ViewHolder();
 
 		holder.tvMaHopDong = (TextView) v.findViewById(R.id.tvMaHopDong);
+		holder.tvTenSanPham = (TextView) v.findViewById(R.id.tvTenSanPham);
 		holder.tvTongPhiDaDong = (TextView) v.findViewById(R.id.tvTongPhiDaDong);
 		holder.tvPhiCoBan = (TextView) v.findViewById(R.id.tvPhiCoBan);
 		holder.tvNgayDongPhi = (TextView) v.findViewById(R.id.tvNgayDongPhi);
@@ -53,6 +54,7 @@ public class HomePagerAdapter extends PagerAdapter {
 		// fill data
 		if (item != null) {
 			holder.tvMaHopDong.setText("Mã số hợp đồng: " + item.getMaHopDong());
+			holder.tvTenSanPham.setText(item.getTenSanPham());
 			holder.tvTongPhiDaDong.setText(item.getTongPhiDaDong());
 			holder.tvPhiCoBan.setText(item.getPhiCoBan());
 			holder.tvNgayDongPhi.setText("Ngày thu phí " + item.getNgayDongPhi());
@@ -65,7 +67,7 @@ public class HomePagerAdapter extends PagerAdapter {
 				public void onClick(View v) {
 
 					ContractModel mo = new ContractModel(item.getMaHopDong(), item.getTenSanPham(), true,
-							Long.parseLong(item.getTongPhiDaDong()), item.getNgayDongPhi(), item.getNgayGiaHan());
+							Long.parseLong(item.getTongPhiDaDong().replace(",", "")), item.getNgayDongPhi(), item.getNgayGiaHan());
 
 					Intent intent = new Intent(context, ContractDetailActivity.class);
 					intent.putExtra("CONTRACT_DETAIL", mo);
@@ -107,7 +109,7 @@ public class HomePagerAdapter extends PagerAdapter {
 	}
 
 	private class ViewHolder {
-		TextView tvMaHopDong, tvTongPhiDaDong, tvPhiCoBan, tvNgayDongPhi, tvNgayGiaHan, tvSoNgayConLai;
+		TextView tvMaHopDong, tvTenSanPham, tvTongPhiDaDong, tvPhiCoBan, tvNgayDongPhi, tvNgayGiaHan, tvSoNgayConLai;
 		Button btnChiTiet;
 	}
 }

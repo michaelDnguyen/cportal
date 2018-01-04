@@ -2,13 +2,16 @@ package com.dlvn.mcustomerportal.afragment;
 
 import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.WebNapasActivity;
 import com.dlvn.mcustomerportal.common.Constant;
 import com.dlvn.mcustomerportal.common.cPortalPref;
+import com.dlvn.mcustomerportal.common.Constant.FeeFrequency;
+import com.dlvn.mcustomerportal.utils.myLog;
 import com.dlvn.mcustomerportal.view.MyCustomDialog;
 
 import android.content.Context;
@@ -25,8 +28,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +61,7 @@ public class PaymentInputFragment extends Fragment {
 	TextView tvProposalNo, tvHinhThuc, tvSoTienThanhToan;
 
 	View view;
-
+	Spinner spnDinhKyDP;
 	Button btnThanhToan;
 
 	String uniqueValue = "";
@@ -119,6 +124,8 @@ public class PaymentInputFragment extends Fragment {
 		tvSoTienThanhToan = (TextView) view.findViewById(R.id.tvSoTienThanhToan);
 		tvHinhThuc = (TextView) view.findViewById(R.id.tvHinhThuc);
 
+		spnDinhKyDP = (Spinner) view.findViewById(R.id.spnDinhKyDongPhi);
+		
 		btnThanhToan = (Button) view.findViewById(R.id.btnThanhToan);
 	}
 
@@ -134,6 +141,16 @@ public class PaymentInputFragment extends Fragment {
 		tvProposalNo.setText(cPortalPref.getUserProposal(getActivity()));
 		edtHotenNguoiNop.setText(cPortalPref.getUserName(getActivity()));
 		edtPhoneNumber.setText("0987654123");
+		
+		List<String> list = new ArrayList<String>();
+		list.add(FeeFrequency.YEARLY.toString());
+		list.add(FeeFrequency.HALF_YEARLY.toString());
+		list.add(FeeFrequency.QUARTERLY.toString());
+		list.add(FeeFrequency.MONTHLY.toString());
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spnDinhKyDP.setAdapter(dataAdapter);
+		spnDinhKyDP.setPrompt("Chọn");
 	}
 
 	private void setListener() {
@@ -144,11 +161,14 @@ public class PaymentInputFragment extends Fragment {
 
 				try {
 					if (validatePayment()) {
+						
+						String feeFrequency = FeeFrequency.fromName((String)spnDinhKyDP.getSelectedItem()).getStringValue();
+						myLog.E("FeeFrequency = " + feeFrequency);
 
 						String url;
 						url = initPaymentRequest(tvProposalNo.getText().toString(),
 								edtHotenNguoiNop.getText().toString(), edtPhoneNumber.getText().toString(),
-								edtBMBH.getText().toString(), tvSoTienThanhToan.getText().toString().replace(",", ""));
+								edtBMBH.getText().toString(), tvSoTienThanhToan.getText().toString().replace(",", ""), feeFrequency);
 
 						Intent napas = new Intent(getActivity(), WebNapasActivity.class);
 						napas.putExtra(KEY_NAPAS_PAYMENT_URL, url);
@@ -190,7 +210,7 @@ public class PaymentInputFragment extends Fragment {
 		});
 	}
 
-	private String initPaymentRequest(String proposalNo, String payer, String phone, String poName, String amount)
+	private String initPaymentRequest(String proposalNo, String payer, String phone, String poName, String amount, String feeFrequency)
 			throws UnsupportedEncodingException {
 
 		StringBuffer buf = new StringBuffer();
@@ -213,6 +233,9 @@ public class PaymentInputFragment extends Fragment {
 		buf.append("sAgentName=" + Base64.encodeToString("Nguyen Van Teo".getBytes("UTF-8"), Base64.DEFAULT));
 		buf.append("&");
 		buf.append("sAgentType=" + Base64.encodeToString("BM".getBytes("UTF-8"), Base64.DEFAULT));
+		//Add fee frequency
+		buf.append("&");
+		buf.append("sFeeFrequency=" + Base64.encodeToString(feeFrequency.getBytes("UTF-8"), Base64.DEFAULT));
 		return buf.toString();
 	}
 

@@ -156,6 +156,25 @@
                         android:textSize="@dimen/textsize_normal_keyin"
                         android:textStyle="bold" />
 
+                    <!-- Định kỳ đóng phí -->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Định kỳ đóng phí"
+                        android:textSize="@dimen/textsize_normal_keyin_title" />
+
+                    <Spinner
+                        android:id="@+id/spnDinhKyDongPhi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:background="@drawable/state_bg_edt_bolder_radius"
+                        android:layout_marginTop="5dp" />
+
+                    <!-- Hình thức thanh toán -->
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -189,8 +208,8 @@
                 <Button
                     android:id="@+id/btnThanhToan"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/state_btn_red_rectangle"
+                    android:layout_height="40dp"
+                    android:background="@drawable/state_btn_red_radius"
                     android:elevation="3dp"
                     android:minWidth="200dp"
                     android:text="THANH TOÁN"

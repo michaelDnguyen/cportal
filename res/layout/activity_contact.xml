@@ -16,8 +16,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Vui lòng gọi cho bộ phận chăm sóc khách hàng: "
+                android:text="Vui lòng liên lạc với bộ phận chăm sóc khách hàng để được phục vụ tốt hơn qua số đường dây nóng: "
                 android:textSize="@dimen/textsize13" />
 
             <!-- layout call -->
@@ -54,6 +55,14 @@
                 </LinearLayout>
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="bấm phím số 1"
+                android:textStyle="bold"
+                android:textSize="@dimen/textsize14" />
+
             <!-- layout contact form -->
 
             <TextView
@@ -64,6 +73,14 @@
                 android:text="----- HOẶC -----"
                 android:textSize="@dimen/textsize16"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="gửi email về cho chúng tôi"
+                android:textSize="@dimen/textsize13" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,6 +149,33 @@
                     android:background="@drawable/state_bg_edt_bolder_radius"
                     android:inputType="phone"
                     android:singleLine="true" />
+
+                <!-- Loại liên hệ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:padding="5dp"
+                        android:text="Loại liên hệ:"
+                        android:textColor="@color/red"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spnLoaiLienHe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:gravity="right"
+                        android:prompt="@string/non_spinner"
+                        android:spinnerMode="dropdown" />
+                </LinearLayout>
 
                 <!-- Content -->
 

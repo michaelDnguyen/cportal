@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="đ"
+                android:text="VND"
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/textsize18"
                 android:textStyle="bold" />
@@ -67,6 +67,7 @@
 
         <Button
             android:id="@+id/btnCash"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -83,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
+            android:visibility="gone"
             android:background="@color/light_grey" />
 
         <Button
@@ -136,12 +138,14 @@
             android:elevation="3dp"
             android:gravity="left|center_vertical"
             android:padding="5dp"
+            android:visibility="gone"
             android:scaleType="centerInside"
             android:text="mPos" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:layout_marginTop="5dp"
             android:background="@color/light_grey" />
     </LinearLayout>

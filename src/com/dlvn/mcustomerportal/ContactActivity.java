@@ -1,6 +1,10 @@
 package com.dlvn.mcustomerportal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.dlvn.mcustomerportal.base.BaseActivity;
+import com.dlvn.mcustomerportal.common.Constant;
 import com.dlvn.mcustomerportal.utils.Utilities;
 
 import android.os.Bundle;
@@ -8,12 +12,16 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 public class ContactActivity extends BaseActivity {
 
 	LinearLayout lloCall;
+	
+	Spinner spnLoaiLienHe;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +37,17 @@ public class ContactActivity extends BaseActivity {
 	private void getViews() {
 		// TODO Auto-generated method stub
 		lloCall = (LinearLayout) findViewById(R.id.lloCall);
+		spnLoaiLienHe = (Spinner) findViewById(R.id.spnLoaiLienHe);
 	}
 
 	private void initDatas() {
 		// TODO Auto-generated method stub
-		
+		List<String> list = new ArrayList<String>();
+		list.add("Yêu cầu thu phí");
+		list.add("Yêu cầu thay đổi địa chỉ");
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spnLoaiLienHe.setAdapter(dataAdapter);
 	}
 
 	private void setListener() {
@@ -42,7 +56,7 @@ public class ContactActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Utilities.actionCallPhoneNumber(ContactActivity.this, "02838100888");
+				Utilities.actionCallPhoneNumber(ContactActivity.this, Constant.PHONE_CUSTOMER_SERVICE);
 			}
 		});
 	}

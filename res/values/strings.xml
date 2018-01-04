@@ -96,5 +96,10 @@ Trân trọng kính chào,<br>
     <string name="title_activity_web_tutorial">Hướng dẫn</string>
     <string name="title_activity_bonus__nop_phi_bh__step02_">Nộp phí/ Hoàn trả</string>
     <string name="title_activity_bonus__nop_phi_bh__step03_">Nộp phí/ Hoàn trả</string>
+    <string name="title_activity_product_detail">Chi tiết sản phẩm</string>
+    <string name="title_activity_change_profile">Thay đổi thông tin</string>
+    <string name="title_activity_change_password">Thay đổi mật khẩu</string>
+    <string name="title_activity_transaction_history">Lịch sử giao dịch</string>
+    <string name="title_activity_transaction_detail">Chi tiết giao dịch</string>
 
 </resources>

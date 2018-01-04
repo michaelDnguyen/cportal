@@ -2,23 +2,16 @@ package com.dlvn.mcustomerportal;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.Random;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.dlvn.mcustomerportal.afragment.BonusProgramFragment;
 import com.dlvn.mcustomerportal.afragment.ElectricBillFragment;
 import com.dlvn.mcustomerportal.afragment.FundUnitPriceFragment;
 import com.dlvn.mcustomerportal.afragment.HomeFragment;
 import com.dlvn.mcustomerportal.afragment.InfoContractFragment;
 import com.dlvn.mcustomerportal.afragment.InfoGeneralFragment;
-import com.dlvn.mcustomerportal.afragment.ProductInfoFragment;
 import com.dlvn.mcustomerportal.afragment.NotificationsFragment;
-import com.dlvn.mcustomerportal.afragment.PaymentOnlineFragment;
+import com.dlvn.mcustomerportal.afragment.PaymentPolicyFragment;
+import com.dlvn.mcustomerportal.afragment.ProductInfoFragment;
 import com.dlvn.mcustomerportal.afragment.SettingsFragment;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 import com.dlvn.mcustomerportal.utils.myLog;
@@ -28,12 +21,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -200,27 +191,24 @@ public class HomeActivity extends AppCompatActivity {
 		 * progress.setVisibility(View.GONE); myLog.E("Load Image Ready!");
 		 * return false; } }).into(imgNavHeaderBg);
 		 */
-		imgNavHeaderBg.setBackgroundColor(Color.parseColor("#d32f2f"));
+		// imgNavHeaderBg.setBackgroundColor(Color.parseColor("#d32f2f"));
 
 		// Loading profile image
-		Glide.with(this).load(R.drawable.avatar_user).thumbnail(0.5f).apply(RequestOptions.circleCropTransform())
-				.listener(new RequestListener<Drawable>() {
-
-					@Override
-					public boolean onLoadFailed(GlideException arg0, Object arg1, Target<Drawable> arg2, boolean arg3) {
-						// progress.setVisibility(View.GONE);
-						myLog.E("Load Image Failed!");
-						return false;
-					}
-
-					@Override
-					public boolean onResourceReady(Drawable arg0, Object arg1, Target<Drawable> arg2, DataSource arg3,
-							boolean arg4) {
-						// progress.setVisibility(View.GONE);
-						myLog.E("Load Image Ready!");
-						return false;
-					}
-				}).into(imgProfile);
+		/*
+		 * Glide.with(this).load(R.drawable.daiichilife).thumbnail(0.5f).apply(
+		 * RequestOptions.circleCropTransform()) .listener(new
+		 * RequestListener<Drawable>() {
+		 * 
+		 * @Override public boolean onLoadFailed(GlideException arg0, Object
+		 * arg1, Target<Drawable> arg2, boolean arg3) { //
+		 * progress.setVisibility(View.GONE); myLog.E("Load Image Failed!");
+		 * return false; }
+		 * 
+		 * @Override public boolean onResourceReady(Drawable arg0, Object arg1,
+		 * Target<Drawable> arg2, DataSource arg3, boolean arg4) { //
+		 * progress.setVisibility(View.GONE); myLog.E("Load Image Ready!");
+		 * return false; } }).into(imgProfile);
+		 */
 
 		imgProfile.setOnClickListener(new OnClickListener() {
 
@@ -248,7 +236,8 @@ public class HomeActivity extends AppCompatActivity {
 		// set toolbar title
 		setToolbarTitle();
 
-		getSupportActionBar().setHomeAsUpIndicator(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawer_daiichi,HomeActivity.this.getTheme()));
+		getSupportActionBar().setHomeAsUpIndicator(ResourcesCompat.getDrawable(getResources(),
+				R.drawable.ic_drawer_daiichi, HomeActivity.this.getTheme()));
 		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
 		// if user select the current navigation menu again, don't do anything
@@ -318,7 +307,7 @@ public class HomeActivity extends AppCompatActivity {
 			FundUnitPriceFragment fundFragment = new FundUnitPriceFragment();
 			return fundFragment;
 		case 6:
-			PaymentOnlineFragment paymentFragment = new PaymentOnlineFragment();
+			PaymentPolicyFragment paymentFragment = new PaymentPolicyFragment();
 			return paymentFragment;
 
 		case 7:
@@ -550,9 +539,10 @@ public class HomeActivity extends AppCompatActivity {
 			}
 		};
 
-//		actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
-//		actionBarDrawerToggle.setHomeAsUpIndicator(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_drawer_daiichi,
-//				HomeActivity.this.getTheme()));
+		// actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+		// actionBarDrawerToggle.setHomeAsUpIndicator(ResourcesCompat.getDrawable(getResources(),
+		// R.drawable.ic_drawer_daiichi,
+		// HomeActivity.this.getTheme()));
 
 		// Setting the actionbarToggle to drawer layout
 		drawer.setDrawerListener(actionBarDrawerToggle);
@@ -574,12 +564,17 @@ public class HomeActivity extends AppCompatActivity {
 		if (shouldLoadHomeFragOnBackPress) {
 			// checking if user is on other navigation menu
 			// rather than home
-			if (navItemIndex != 0) {
-				navItemIndex = 0;
-				CURRENT_TAG = TAG_HOME;
-				loadHomeFragment();
-				return;
-			}
+//			if (getFragmentManager().getBackStackEntryCount() > 0) {
+//				getFragmentManager().popBackStackImmediate();
+//				return;
+//			} else {
+				if (navItemIndex != 0) {
+					navItemIndex = 0;
+					CURRENT_TAG = TAG_HOME;
+					loadHomeFragment();
+					return;
+				}
+//			}
 		}
 
 		super.onBackPressed();

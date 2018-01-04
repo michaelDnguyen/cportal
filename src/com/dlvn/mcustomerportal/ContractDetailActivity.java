@@ -7,8 +7,12 @@ import com.dlvn.mcustomerportal.adapter.model.ContractModel;
 import com.dlvn.mcustomerportal.base.BaseActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -41,7 +45,7 @@ public class ContractDetailActivity extends BaseActivity {
 			itemHopDong = getIntent().getParcelableExtra("CONTRACT_DETAIL");
 
 		if(itemHopDong != null)
-			setTitle("Chi tiết hợp đồng " + itemHopDong.getSoHopDong());
+			setTitle("Chi tiết HĐ " + itemHopDong.getSoHopDong());
 		
 		List<String> list = new ArrayList<String>();
 		list.add("00658947");
@@ -54,7 +58,22 @@ public class ContractDetailActivity extends BaseActivity {
 
 	private void setListener() {
 		// TODO Auto-generated method stub
+		spnHopDong.setOnItemSelectedListener(new OnItemSelectedListener() {
 
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				String itemSelected = (String) parent.getAdapter().getItem(position);
+				if(!TextUtils.isEmpty(itemSelected))
+					setTitle("Chi tiết HĐ " + itemSelected);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	@Override

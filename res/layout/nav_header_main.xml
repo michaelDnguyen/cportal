@@ -14,7 +14,7 @@
         android:id="@+id/img_header_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_light"
+        android:background="#F5F5F5"
         android:scaleType="fitXY" />
 
     <LinearLayout
@@ -36,6 +36,7 @@
                 android:id="@+id/img_profile"
                 android:layout_width="@dimen/profile_width"
                 android:layout_height="@dimen/profile_height"
+                android:src="@drawable/daiichilife"
                 app:srcCompat="@android:drawable/sym_def_app_icon" />
 
             <TextView
@@ -43,6 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
@@ -62,6 +65,7 @@
         <LinearLayout
             android:id="@+id/lloProfile"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone" >
@@ -78,7 +82,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="2dp"
                     android:text="250"
-                    android:textColor="@color/white"
+                    android:textColor="@color/red"
                     android:textStyle="bold"
                     android:textSize="16sp" />
 
@@ -88,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvHopDong"
                     android:layout_centerHorizontal="true"
+                    android:textColor="@color/grey_dark"
                     android:text="Hợp đồng "
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -112,7 +117,7 @@
                     android:layout_marginTop="2dp"
                     android:singleLine="true"
                     android:text="300"
-                    android:textColor="@color/white"
+                    android:textColor="@color/red"
                     android:textStyle="bold"
                     android:textSize="16sp" />
 
@@ -122,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvTongGiaTri"
                     android:layout_centerHorizontal="true"
+                    android:textColor="@color/grey_dark"
                     android:text="Tổng giá trị HĐ "
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -143,7 +149,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="2dp"
                     android:text="400"
-                    android:textColor="@color/white"
+                    android:textColor="@color/red"
                     android:textStyle="bold"
                     android:textSize="16sp" />
 
@@ -151,6 +157,7 @@
                     android:id="@+id/labelFollolwing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/grey_dark"
                     android:layout_below="@id/tvPoint"
                     android:layout_centerHorizontal="true"
                     android:text="Điểm"

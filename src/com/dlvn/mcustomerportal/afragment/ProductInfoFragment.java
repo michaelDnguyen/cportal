@@ -3,6 +3,7 @@ package com.dlvn.mcustomerportal.afragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dlvn.mcustomerportal.ProductDetailActivity;
 import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.adapter.HomeListAdapter;
 import com.dlvn.mcustomerportal.adapter.ProductListAdapter;
@@ -13,6 +14,7 @@ import com.dlvn.mcustomerportal.view.DividerItemDecoration;
 import com.dlvn.mcustomerportal.view.RecyclerSmoothLayoutManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -160,6 +162,11 @@ public class ProductInfoFragment extends Fragment {
 					@Override
 					public void onClick(View view, int position) {
 
+						Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+						intent.putExtra("title", lstData.get(position).get_title());
+						intent.putExtra("content", lstData.get(position).get_content());
+						intent.putExtra("pathImage", lstData.get(position).getImgPath());
+						startActivity(intent);
 					}
 				}));
 	}
