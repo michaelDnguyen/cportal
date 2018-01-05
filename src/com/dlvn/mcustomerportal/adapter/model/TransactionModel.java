@@ -45,7 +45,8 @@ public class TransactionModel implements Parcelable {
 		ngayGD = in.readString();
 
 		lstDetail = new ArrayList<>();
-		in.readList(lstDetail, null);
+		in.readList(lstDetail, TransactionDetailModel.class.getClassLoader());
+//		lstDetail = in.readArrayList(TransactionModel.class.getClassLoader());
 	}
 
 	public static final Creator<TransactionModel> CREATOR = new Creator<TransactionModel>() {

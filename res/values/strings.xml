@@ -87,7 +87,7 @@ Trân trọng kính chào,<br>
     </string>
     <string name="title_activity_notification">NotificationActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_web_napas">WebNapasActivity</string>
+    <string name="title_activity_web_napas">Thanh toán trực tuyến</string>
     <string name="title_activity_profile">Thông tin cá nhân</string>
     <string name="title_activity_contract_detail">ContractDetailActivity</string>
     <string name="title_activity_contact">Liên hệ</string>

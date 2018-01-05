@@ -36,6 +36,7 @@
     <color name="gray">#D4D4D4</color>
     
     <color name="contract_detail_header_bg">#E0E0E0</color>
+    <color name="row_list_color_other">#FCE4EC</color>
     
     <color name="orange">#FF5722</color>
     <color name="orange_dark">#E64A19</color>

@@ -1,13 +1,14 @@
 package com.dlvn.mcustomerportal.afragment;
 
+import com.dlvn.mcustomerportal.PaymentMethodActivity;
 import com.dlvn.mcustomerportal.R;
 import com.dlvn.mcustomerportal.common.cPortalPref;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -117,16 +118,7 @@ public class PaymentPolicyFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (ctvAccept.isChecked()) {
-					PaymentOnlineFragment fragment = new PaymentOnlineFragment();
-					if (fragment != null) {
-						FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager()
-								.beginTransaction();
-						fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-						fragmentTransaction.replace(R.id.frame, fragment, fragment.getClass().getSimpleName());
-						fragmentTransaction.addToBackStack(null);
-						fragmentTransaction.commitAllowingStateLoss();
-						
-					}
+					startActivity(new Intent(getActivity(), PaymentMethodActivity.class));
 				}
 			}
 		});

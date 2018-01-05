@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -79,14 +80,20 @@ public class TransactionDetailListAdapter extends BaseAdapter {
 			holder.tvLoaiGD = (TextView) convertView.findViewById(R.id.tvLoaiGD);
 			holder.tvTrangThai = (TextView) convertView.findViewById(R.id.tvTinhTrang);
 			holder.tvNgayGD = (TextView) convertView.findViewById(R.id.tvNgayGiaoDich);
+			holder.lloParent = (LinearLayout) convertView.findViewById(R.id.lloParent);
 
 			convertView.setTag(holder);
 		} else
 			holder = (ViewHolder) convertView.getTag();
+		
+		if(position%2 == 0)
+			holder.lloParent.setBackgroundResource(R.color.row_list_color_other);
+		else
+			holder.lloParent.setBackgroundResource(R.color.white);
 
 		if (item != null) {
 
-			holder.tvSoHD.setText(soHopDong);
+			holder.tvSoHD.setText("Số hợp đồng " + soHopDong);
 			holder.tvLoaiGD.setText(item.getLoaiGD());
 			holder.tvSoTien.setText(item.getSoTien());
 			holder.tvTrangThai.setText(item.getTrangThai());
@@ -98,5 +105,6 @@ public class TransactionDetailListAdapter extends BaseAdapter {
 
 	private class ViewHolder {
 		TextView tvSoHD, tvLoaiGD, tvSoTien, tvTrangThai, tvNgayGD;
+		LinearLayout lloParent;
 	}
 }

@@ -1,7 +1,5 @@
 package com.dlvn.mcustomerportal;
 
-import com.dlvn.mcustomerportal.afragment.PaymentInputFragment;
-import com.dlvn.mcustomerportal.afragment.PaymentOnlineFragment;
 import com.dlvn.mcustomerportal.base.BaseActivity;
 import com.dlvn.mcustomerportal.common.Constant;
 import com.dlvn.mcustomerportal.utils.Utilities;
@@ -13,11 +11,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -36,8 +32,8 @@ public class WebNapasActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_napas);
-		initActionBar();
-
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		webview = (WebView) findViewById(R.id.webview);
 
 		initData();
@@ -60,8 +56,8 @@ public class WebNapasActivity extends BaseActivity {
 		// webview.loadUrl("http://khuat.dai-ichi-life.com.vn:8090/mpayment.aspx");
 
 		if (getIntent().getExtras() != null) {
-			if (getIntent().getExtras().containsKey(PaymentInputFragment.KEY_NAPAS_PAYMENT_URL)) {
-				String url = getIntent().getExtras().getString(PaymentInputFragment.KEY_NAPAS_PAYMENT_URL);
+			if (getIntent().getExtras().containsKey(PaymentInputActivity.KEY_NAPAS_PAYMENT_URL)) {
+				String url = getIntent().getExtras().getString(PaymentInputActivity.KEY_NAPAS_PAYMENT_URL);
 				webview.loadUrl(url);
 			}
 
@@ -93,13 +89,13 @@ public class WebNapasActivity extends BaseActivity {
 					if (url.contains("vpc_ResponseCode=0")) {
 
 						Intent data = new Intent();
-						data.putExtra(PaymentInputFragment.KEY_NAPAS_PAYMENT_TRANSID, transactionID);
-						setResult(PaymentInputFragment.RESULTCODE_PAYMENT_SUCCESS, data);
+						data.putExtra(PaymentInputActivity.KEY_NAPAS_PAYMENT_TRANSID, transactionID);
+						setResult(PaymentInputActivity.RESULTCODE_PAYMENT_SUCCESS, data);
 						finish();
 					} else {
 						Intent data = new Intent();
-						data.putExtra(PaymentInputFragment.KEY_NAPAS_PAYMENT_TRANSID, transactionID);
-						setResult(PaymentInputFragment.RESULTCODE_PAYMENT_FALSE, data);
+						data.putExtra(PaymentInputActivity.KEY_NAPAS_PAYMENT_TRANSID, transactionID);
+						setResult(PaymentInputActivity.RESULTCODE_PAYMENT_FALSE, data);
 						finish();
 					}
 				}
@@ -157,29 +153,6 @@ public class WebNapasActivity extends BaseActivity {
 				builder.create().show();
 			}
 		});
-	}
-
-	public void initActionBar() {
-
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		// toolbar.setVisibility(View.GONE);
-
-		if (toolbar != null) {
-			toolbar.setTitle("Thông tin thanh toán");
-
-			setSupportActionBar(toolbar);
-			getSupportActionBar().setDisplayShowTitleEnabled(false);
-			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-			getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-			toolbar.setNavigationOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					finish();
-				}
-			});
-		}
 	}
 
 	@Override

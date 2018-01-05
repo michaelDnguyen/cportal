@@ -99,7 +99,15 @@
         </activity>
         <activity
             android:name=".ProductDetailActivity"
-            android:label="@string/title_activity_product_detail" >
+            android:label="@string/title_activity_web_napas" >
+        </activity>
+        <activity
+            android:name=".PaymentMethodActivity"
+            android:label="@string/title_activity_web_napas" >
+        </activity>
+        <activity
+            android:name=".PaymentInputActivity"
+            android:label="@string/title_activity_change_profile" >
         </activity>
         <activity
             android:name=".ChangeProfileActivity"

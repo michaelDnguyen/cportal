@@ -8,26 +8,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
-            android:text="Số hợp đồng" />
+            android:text="Mã giao dịch" />
 
         <TextView
-            android:id="@+id/tvSoHD"
+            android:id="@+id/tvMaGD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:layout_weight="0.4" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -45,9 +47,8 @@
 
     <ListView
         android:id="@+id/lvData"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

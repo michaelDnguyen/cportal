@@ -116,16 +116,15 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
+        android:paddingLeft="-10dp"
+        android:paddingRight="-10dp"
         android:layout_height="match_parent" >
 
         <ListView
             android:id="@+id/lvTransaction"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/st_bg_page_home"
-            android:padding="10dp" />
+            android:background="@drawable/st_bg_page_home" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -167,7 +167,7 @@ public class HomeActivity extends AppCompatActivity {
 			lloProfile.setVisibility(View.VISIBLE);
 
 			tvHopDong.setText(cPortalPref.getUserContract(this) + "");
-			tvGTHD.setText(NumberFormat.getNumberInstance(Locale.US).format(cPortalPref.getUserAmount(this)) + " vnđ");
+			tvGTHD.setText(NumberFormat.getNumberInstance(Locale.US).format(cPortalPref.getUserAmount(this)) + " VND");
 			tvPoint.setText(cPortalPref.getUserPoint(this) + "");
 
 		} else {
@@ -237,7 +237,9 @@ public class HomeActivity extends AppCompatActivity {
 		setToolbarTitle();
 
 		getSupportActionBar().setHomeAsUpIndicator(ResourcesCompat.getDrawable(getResources(),
-				R.drawable.ic_drawer_daiichi, HomeActivity.this.getTheme()));
+				R.drawable.ico_drawer_daiichi_menu2, HomeActivity.this.getTheme()));
+//		getSupportActionBar().setLogo(ResourcesCompat.getDrawable(getResources(),
+//				R.drawable.ic_drawer_daiichi, HomeActivity.this.getTheme()));
 		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
 		// if user select the current navigation menu again, don't do anything
