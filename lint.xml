@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="NewApi" severity="ignore">
+        <ignore path="src/com/dlvn/mcustomerportal/HomeActivity.java" />
+        <ignore path="src/com/dlvn/mcustomerportal/base/AbstractActivity.java" />
+        <ignore path="src/com/dlvn/mcustomerportal/base/BaseFragment.java" />
+        <ignore path="src/com/dlvn/mcustomerportal/utils/CustomPreferences.java" />
+        <ignore path="src/com/dlvn/mcustomerportal/utils/DialogUtils.java" />
+        <ignore path="src/com/dlvn/mcustomerportal/utils/Utilities.java" />
+    </issue>
+</lint>
